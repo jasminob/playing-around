@@ -18,23 +18,23 @@ public class Application {
         Human player3 = new Human("Iroha", 5, 2);
 
         Car auto = new Car();
+        player1.getPos().setX(4);
+        player1.getPos().setY(4);
+        player1.getPos().setZ(3);
+
+        player2.getPos().setX(4);
+        player2.getPos().setY(4);
+        player2.getPos().setZ(3);
+
+        player3.getPos().setX(10);
+        player3.getPos().setY(4);
+        player3.getPos().setZ(3);
+
+       try {
 
 
-        try {
 
-            player1.getPos().setX(4);
-            player1.getPos().setY(4);
-            player1.getPos().setZ(3);
-
-            player2.getPos().setX(4);
-            player2.getPos().setY(4);
-            player2.getPos().setZ(3);
-
-            player3.getPos().setX(10);
-            player3.getPos().setY(4);
-            player3.getPos().setZ(3);
-
-            field.ZapocniIgru(player1, player2, player3);
+            field.ZapocniIgru();
             // field.Driver(auto, player1);
 
 
@@ -250,11 +250,7 @@ class Polje {
         return Objects.hash(player1, player2, player3);
     }
 
-    public void ZapocniIgru(Human player1, Human player2, Human player3) throws SamePos {
-
-     this.player3 = player3;
-        this.player2 = player2;
-        this.player1 = player1;
+    public void ZapocniIgru() throws SamePos {
 
         if (player1.getPos().equals(player2.getPos()) ||
             player1.getPos().equals(player3.getPos()) ||
@@ -290,31 +286,28 @@ class Polje {
         } else {
             System.out.println("Player 2 and 3 are the closest to each other");
         }
-
-
     }
 
-
+    public String Calc(Vector3 x, Vector3 y){
+        return " X : " + (x.getX()-y.getX()) + " Y : " + (x.getY()-y.getY()) + " Z : " + (x.getZ()-y.getZ());
+    }
 
     public void Step(Human player1, Human player2, Human player3) {
         this.player1 = player1;
         this.player2 = player2;
         this.player3 = player3;
 
-
-
         System.out.println("Player 1 se nalazi na poziciji, X: " + player1.getPos().getX() + " Y: " + player1.getPos().getY() + " Z: " + player1.getPos().getZ()
-                + ", a udaljen je od Player 2 za, X: " + (player1.getPos().getX() - player2.getPos().getX()) + " Y: " + (player1.getPos().getY() - player2.getPos().getY()) + " Z: " + (player1.getPos().getZ() - player2.getPos().getZ())
-                + ", a  od Player 3 za, X: " + (player1.getPos().getX() - player3.getPos().getX()) + " Y: " + (player1.getPos().getY() - player3.getPos().getY()) + " Z: " + (player1.getPos().getZ() - player3.getPos().getZ()));
+                + ", a udaljen je od Player 2 za," + Calc(player1.getPos(), player2.getPos())
+                + ", a  od Player 3 za,: " + Calc(player1.getPos(), player3.getPos()));
 
         System.out.println("Player 2 se nalazi na poziciji, X: " + player2.getPos().getX() + " Y: " + player2.getPos().getY() + " Z: " + player2.getPos().getZ()
-                + ", a udaljen je od Player 1 za, X: " + (player2.getPos().getX() - player1.getPos().getX()) + " Y: " + (player2.getPos().getY() - player1.getPos().getY()) + " Z: " + (player2.getPos().getZ() - player1.getPos().getZ())
-                + ", a od Player 3 za, X: " + (player2.getPos().getX() - player3.getPos().getX()) + " Y: " + (player2.getPos().getY() - player3.getPos().getY()) + " Z: " + (player2.getPos().getZ() - player3.getPos().getZ()));
+                + ", a udaljen je od Player 1 za" + Calc(player2.getPos(), player1.getPos())
+                + ", a od Player 3 za," + Calc(player2.getPos(), player3.getPos()));
 
         System.out.println("Player 3 se nalazi na poziciji, X: " + player3.getPos().getX() + " Y: " + player3.getPos().getY() + " Z: " + player3.getPos().getZ()
-                + ", a udaljen je od Player 1 za, X: " + (player3.getPos().getX() - player1.getPos().getX()) + " Y: " + (player3.getPos().getY() - player1.getPos().getY()) + " Z: " + (player3.getPos().getZ() - player1.getPos().getZ())
-                + ", a od Player 2 za, X: " + (player3.getPos().getX() - player2.getPos().getX()) + " Y: " + (player3.getPos().getY() - player2.getPos().getY()) + " Z: " + (player3.getPos().getZ() - player2.getPos().getZ()));
-        // dasda
+                + ", a udaljen je od Player 1 za" + Calc(player3.getPos(), player1.getPos())
+                + ", a od Player 2 za," + Calc(player3.getPos(), player2.getPos()));
     }
 
 }
