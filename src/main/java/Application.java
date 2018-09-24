@@ -44,7 +44,7 @@ public class Application {
 
             field.zapocniIgru();
 
-            field.close(player1, player2, player3);
+            field.close();
             field.step();
           //  Vector3 t = new Vector3(1, 0, 0);
          //   player1.move(t);
@@ -289,15 +289,14 @@ class Polje {
         }
     }
 
+
     public double distance(Human player1, Human player2) {
         return sqrt(pow(player1.getPos().getX() - player2.getPos().getX(), 2) +
                 pow(player1.getPos().getY() - player2.getPos().getY(), 2) + pow(player1.getPos().getZ() - player2.getPos().getZ(), 2));
     }
 
-    public void close(Human player1, Human player2, Human player3) {
-        this.player3 = player3;
-        this.player2 = player2;
-        this.player1 = player1;
+    public void close() {
+
 
 
         Double d1, d2, d3;
