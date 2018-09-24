@@ -271,14 +271,12 @@ class Polje {
         return " X : " + (x.getX()-y.getX()) + " Y : " + (x.getY()-y.getY()) + " Z : " + (x.getZ()-y.getZ());
     }
 
-    public void step(Human player1, Human player2, Human player3) {
-        this.player1 = player1;
-        this.player2 = player2;
-        this.player3 = player3;
+    public void step() {
 
-        System.out.println("Player 1 se nalazi na poziciji, X: " + player1.getPos().getX() + " Y: " + player1.getPos().getY() + " Z: " + player1.getPos().getZ()
+
+        System.out.println(String.format("Player 1 se nalazi na poziciji, X: " + player1.getPos().getX() + " Y: " + player1.getPos().getY() + " Z: " + player1.getPos().getZ()
                 + ", a udaljen je od Player 2 za," + Calc(player1.getPos(), player2.getPos())
-                + ", a  od Player 3 za,: " + Calc(player1.getPos(), player3.getPos()));
+                + ", a  od Player 3 za,: " + Calc(player1.getPos(), player3.getPos())));
 
         System.out.println("Player 2 se nalazi na poziciji, X: " + player2.getPos().getX() + " Y: " + player2.getPos().getY() + " Z: " + player2.getPos().getZ()
                 + ", a udaljen je od Player 1 za" + Calc(player2.getPos(), player1.getPos())
@@ -287,6 +285,10 @@ class Polje {
         System.out.println("Player 3 se nalazi na poziciji, X: " + player3.getPos().getX() + " Y: " + player3.getPos().getY() + " Z: " + player3.getPos().getZ()
                 + ", a udaljen je od Player 1 za" + Calc(player3.getPos(), player1.getPos())
                 + ", a od Player 2 za," + Calc(player3.getPos(), player2.getPos()));
+    }
+
+    public boolean jeAuto(Vector3 loc){
+        //Auto,  sa metodom bool jeAuto(Vector3){DA LI SE NALAZI TU AUTO}
     }
 
 }
