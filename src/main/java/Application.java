@@ -15,32 +15,34 @@ public class Application {
         Human player2 = new Human("Makoto", 5, 2);
         Human player3 = new Human("Iroha", 5, 2);
 
+        //Movement
+        Vector3 x = new Vector3(1, 0, 0);
+        Vector3 y = new Vector3(0, 1, 0);
+        Vector3 z = new Vector3(0, 0, 1);
+
         Car auto = new Car();
 
         field.setPlayer1(player1);
         field.setPlayer2(player2);
         field.setPlayer3(player3);
+        field.setAuto(auto);
 
 
-        player1.getPos().setX(5);
-        player1.getPos().setY(4);
-        player1.getPos().setZ(3);
+        player1.setPolje(field);
+        player2.setPolje(field);
+        player3.setPolje(field);
+        auto.setPolje(field);
 
-        player2.getPos().setX(4);
-        player2.getPos().setY(4);
-        player2.getPos().setZ(3);
+        player1.move(x);
+        player2.move(y);
+        player3.move(z);
 
-        player3.getPos().setX(10);
-        player3.getPos().setY(4);
-        player3.getPos().setZ(3);
 
-       try {
+      try {
 
 
 
             field.zapocniIgru();
-            // field.Driver(auto, player1);
-
 
             field.close(player1, player2, player3);
             field.step();
@@ -143,7 +145,17 @@ class Sobject extends Entity {
 
 abstract class Actor extends Entity {
     private String name;
-    Polje field = new Polje();
+    private Polje polje = new Polje();
+
+    public Polje getPolje() {
+        return polje;
+    }
+
+    public void setPolje(Polje polje) {
+        this.polje = polje;
+    }
+
+
 
     Actor() {
         this.name = "No Name";
@@ -273,6 +285,7 @@ class Polje {
         } else {
             System.out.println("Sve dure");
 
+
         }
     }
 
@@ -306,11 +319,20 @@ class Polje {
             return " X : " + (x.getX()-y.getX()) + " Y : " + (x.getY()-y.getY()) + " Z : " + (x.getZ()-y.getZ());
     }
 
+    public String sablon(Actor x){
+
+            return String.format("%s%s : %d, %s : %d, %s : %d", x.getName(), " se nalazi na poziciji X", x.getPos().getX(), "Y", x.getPos().getY(), "Z", x.getPos().getZ());
+
+    }
+
+
     public void step() {
 
 
             System.out.println(String.format("%s : %d, %s : %d, %s : %d, %s%s, %s%s", "Player 1 se nalazi na poziciji X", player1.getPos().getX(), "Y", player1.getPos().getY(), "Z", player1.getPos().getZ(),
                     "a udaljen je od Player 2 za,", calc(player1.getPos(), player2.getPos()), "a od Player 3 za,", calc(player1.getPos(), player3.getPos())));
+
+          //  System.out.println(sablon(player1));
 
              System.out.println(String.format("%s : %d, %s : %d, %s : %d, %s%s, %s%s", "Player 2 se nalazi na poziciji X", player2.getPos().getX(), "Y", player2.getPos().getY(), "Z", player2.getPos().getZ(),
                 "a udaljen je od Player 1 za,", calc(player2.getPos(), player1.getPos()), "a od Player 3 za,", calc(player2.getPos(), player3.getPos())));
@@ -318,11 +340,21 @@ class Polje {
              System.out.println(String.format("%s : %d, %s : %d, %s : %d, %s%s, %s%s", "Player 3 se nalazi na poziciji X", player3.getPos().getX(), "Y", player3.getPos().getY(), "Z", player3.getPos().getZ(),
                 "a udaljen je od Player 1 za,", calc(player3.getPos(), player1.getPos()), "a od Player 3 za,", calc(player3.getPos(), player1.getPos())));
 
+
+             System.out.println(sablon(auto));
+
+        //System.out.println(String.format("%s : %d, %s : %d, %s : %d", "Auto se nalazi na poziciji X", auto.getPos().getX(), "Y", auto.getPos().getY(), "Z", auto.getPos().getZ()));
+
     }
 
     public boolean jeAuto(Vector3 loc){
         //Auto,  sa metodom bool jeAuto(Vector3){DA LI SE NALAZI TU AUTO}
-        return true;
+        if(loc.equals(auto.getPos())) {
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
 }
@@ -378,6 +410,10 @@ auto ce se pomjerati tkao sto isto kao human, ali ce paziti da li je udario neko
 class Car extends Actor {
 
     private Human human;
+
+    public Car(){
+        super("Auto");
+    }
 
     public Human getHuman() {
         return human;
