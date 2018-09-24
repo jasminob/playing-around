@@ -144,8 +144,6 @@ abstract class Actor extends Entity {
     }
 
     public abstract void move(Vector3 p);
-
-
 }
 
 class Human extends Actor {
@@ -190,8 +188,6 @@ class Human extends Actor {
     public void setDmg(int dmg) {
         this.dmg = dmg;
     }
-
-
 }
 
 class Polje {
@@ -234,21 +230,6 @@ class Polje {
         JeAuto = jeAuto;
     }
 
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Polje polje = (Polje) o;
-        return Objects.equals(player1, polje.player1) &&
-                Objects.equals(player2, polje.player2) &&
-                Objects.equals(player3, polje.player3);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(player1, player2, player3);
-    }
 
     public void ZapocniIgru() throws SamePos {
 
@@ -354,6 +335,4 @@ class Car extends Actor {
     public void move(Vector3 p) {
 
     }
-
-
 }
