@@ -1,6 +1,4 @@
-import java.io.*;
 import java.util.Objects;
-import java.util.Scanner;
 
 import static java.lang.Math.pow;
 import static java.lang.Math.sqrt;
@@ -18,7 +16,13 @@ public class Application {
         Human player3 = new Human("Iroha", 5, 2);
 
         Car auto = new Car();
-        player1.getPos().setX(4);
+
+        field.setPlayer1(player1);
+        field.setPlayer2(player2);
+        field.setPlayer3(player3);
+
+
+        player1.getPos().setX(5);
         player1.getPos().setY(4);
         player1.getPos().setZ(3);
 
@@ -39,7 +43,7 @@ public class Application {
 
 
             field.close(player1, player2, player3);
-            field.step(player1, player2, player3);
+            field.step();
           //  Vector3 t = new Vector3(1, 0, 0);
          //   player1.move(t);
 
@@ -94,6 +98,21 @@ class Vector3 {
         this.z = z;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Vector3 vector3 = (Vector3) o;
+        return x == vector3.x &&
+                y == vector3.y &&
+                z == vector3.z;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y, z);
+    }
+
     public int getX() {
         return x;
     }
@@ -124,7 +143,7 @@ class Sobject extends Entity {
 
 abstract class Actor extends Entity {
     private String name;
-
+    Polje field = new Polje();
 
     Actor() {
         this.name = "No Name";
@@ -229,6 +248,22 @@ class Polje {
         this.auto = auto;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Polje polje = (Polje) o;
+        return Objects.equals(player1, polje.player1) &&
+                Objects.equals(player2, polje.player2) &&
+                Objects.equals(player3, polje.player3);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(player1, player2, player3);
+    }
+
+
     public void zapocniIgru() throws SamePos {
 
         if (player1.getPos().equals(player2.getPos()) ||
@@ -267,28 +302,27 @@ class Polje {
         }
     }
 
-    public String Calc(Vector3 x, Vector3 y){
-        return " X : " + (x.getX()-y.getX()) + " Y : " + (x.getY()-y.getY()) + " Z : " + (x.getZ()-y.getZ());
+    public String calc(Vector3 x, Vector3 y){
+            return " X : " + (x.getX()-y.getX()) + " Y : " + (x.getY()-y.getY()) + " Z : " + (x.getZ()-y.getZ());
     }
 
     public void step() {
 
 
-        System.out.println(String.format("Player 1 se nalazi na poziciji, X: " + player1.getPos().getX() + " Y: " + player1.getPos().getY() + " Z: " + player1.getPos().getZ()
-                + ", a udaljen je od Player 2 za," + Calc(player1.getPos(), player2.getPos())
-                + ", a  od Player 3 za,: " + Calc(player1.getPos(), player3.getPos())));
+            System.out.println(String.format("%s : %d, %s : %d, %s : %d, %s%s, %s%s", "Player 1 se nalazi na poziciji X", player1.getPos().getX(), "Y", player1.getPos().getY(), "Z", player1.getPos().getZ(),
+                    "a udaljen je od Player 2 za,", calc(player1.getPos(), player2.getPos()), "a od Player 3 za,", calc(player1.getPos(), player3.getPos())));
 
-        System.out.println("Player 2 se nalazi na poziciji, X: " + player2.getPos().getX() + " Y: " + player2.getPos().getY() + " Z: " + player2.getPos().getZ()
-                + ", a udaljen je od Player 1 za" + Calc(player2.getPos(), player1.getPos())
-                + ", a od Player 3 za," + Calc(player2.getPos(), player3.getPos()));
+             System.out.println(String.format("%s : %d, %s : %d, %s : %d, %s%s, %s%s", "Player 2 se nalazi na poziciji X", player2.getPos().getX(), "Y", player2.getPos().getY(), "Z", player2.getPos().getZ(),
+                "a udaljen je od Player 1 za,", calc(player2.getPos(), player1.getPos()), "a od Player 3 za,", calc(player2.getPos(), player3.getPos())));
 
-        System.out.println("Player 3 se nalazi na poziciji, X: " + player3.getPos().getX() + " Y: " + player3.getPos().getY() + " Z: " + player3.getPos().getZ()
-                + ", a udaljen je od Player 1 za" + Calc(player3.getPos(), player1.getPos())
-                + ", a od Player 2 za," + Calc(player3.getPos(), player2.getPos()));
+             System.out.println(String.format("%s : %d, %s : %d, %s : %d, %s%s, %s%s", "Player 3 se nalazi na poziciji X", player3.getPos().getX(), "Y", player3.getPos().getY(), "Z", player3.getPos().getZ(),
+                "a udaljen je od Player 1 za,", calc(player3.getPos(), player1.getPos()), "a od Player 3 za,", calc(player3.getPos(), player1.getPos())));
+
     }
 
     public boolean jeAuto(Vector3 loc){
         //Auto,  sa metodom bool jeAuto(Vector3){DA LI SE NALAZI TU AUTO}
+        return true;
     }
 
 }
