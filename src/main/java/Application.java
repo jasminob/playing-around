@@ -34,12 +34,12 @@ public class Application {
 
 
 
-            field.ZapocniIgru();
+            field.zapocniIgru();
             // field.Driver(auto, player1);
 
 
-            field.Close(player1, player2, player3);
-            field.Step(player1, player2, player3);
+            field.close(player1, player2, player3);
+            field.step(player1, player2, player3);
           //  Vector3 t = new Vector3(1, 0, 0);
          //   player1.move(t);
 
@@ -195,7 +195,7 @@ class Polje {
     private Human player1;
     private Human player2;
     private Human player3;
-    private Car JeAuto;
+    private Car auto;
 
     public Human getPlayer1() {
         return player1;
@@ -221,17 +221,15 @@ class Polje {
         this.player3 = player3;
     }
 
-
-    public Car getJeAuto() {
-        return JeAuto;
+    public Car getAuto() {
+        return auto;
     }
 
-    public void setJeAuto(Car jeAuto) {
-        JeAuto = jeAuto;
+    public void setAuto(Car auto) {
+        this.auto = auto;
     }
 
-
-    public void ZapocniIgru() throws SamePos {
+    public void zapocniIgru() throws SamePos {
 
         if (player1.getPos().equals(player2.getPos()) ||
             player1.getPos().equals(player3.getPos()) ||
@@ -243,12 +241,12 @@ class Polje {
         }
     }
 
-    public double Distance(Human player1, Human player2) {
+    public double distance(Human player1, Human player2) {
         return sqrt(pow(player1.getPos().getX() - player2.getPos().getX(), 2) +
                 pow(player1.getPos().getY() - player2.getPos().getY(), 2) + pow(player1.getPos().getZ() - player2.getPos().getZ(), 2));
     }
 
-    public void Close(Human player1, Human player2, Human player3) {
+    public void close(Human player1, Human player2, Human player3) {
         this.player3 = player3;
         this.player2 = player2;
         this.player1 = player1;
@@ -256,9 +254,9 @@ class Polje {
 
         Double d1, d2, d3;
 
-        d1 = Distance(player1, player2);
-        d2 = Distance(player1, player3);
-        d3 = Distance(player2, player3);
+        d1 = distance(player1, player2);
+        d2 = distance(player1, player3);
+        d3 = distance(player2, player3);
 
         if (d1 < d2 && d1 < d3) {
             System.out.println("Player 1 and 2 are the closest to each other");
@@ -273,7 +271,7 @@ class Polje {
         return " X : " + (x.getX()-y.getX()) + " Y : " + (x.getY()-y.getY()) + " Z : " + (x.getZ()-y.getZ());
     }
 
-    public void Step(Human player1, Human player2, Human player3) {
+    public void step(Human player1, Human player2, Human player3) {
         this.player1 = player1;
         this.player2 = player2;
         this.player3 = player3;
@@ -318,6 +316,27 @@ u klasu Polje dodaj atribut JeAuto, getter setter
  */
 /*
 kod ispisa u Polju u autu se nalazi ili niko se ne nalazi u autu ispisati
+
+
+disance(vector v1 i v2){}
+distance(human h1, h2){}
+refaktorisati imena fun lowerCamel
+Polje = setplayer
+
+step(izbaci argumente)
+{
+System.pou.printly(String format())
+}
+
+Auto,  sa metodom bool jeAuto(Vector3){DA LI SE NALAZI TU AUTO}
+
+
+
+kretanje auta,
+
+U actor dodati referencu na polje, i pri po cetku igre ko kad svog actora ce se pozvati setpolje
+auto ce se pomjerati tkao sto isto kao human, ali ce paziti da li je udario nekoga, i ispisati na ekran ako udari
+
  */
 
 class Car extends Actor {
