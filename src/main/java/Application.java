@@ -17,7 +17,7 @@ public class Application {
 
         //Movement
         Vector3 x = new Vector3(1, 0, 0);
-        Vector3 y = new Vector3(0, 1, 0);
+        Vector3 y = new Vector3(10, 5, 0);
         Vector3 z = new Vector3(0, 0, 1);
 
         Car auto = new Car();
@@ -33,7 +33,7 @@ public class Application {
         auto.setPolje(field);
 */
 
-        Vector3 c = new Vector3(3, 4, 4);
+        Vector3 c = new Vector3(10, 5, 0);
 
 
         player1.move(x);
@@ -382,10 +382,10 @@ class Polje {
             return player1;
         }
         else if(v.equals(player2.getPos())){
-            return auto;
+            return player2;
         }
         else if(v.equals(player3.getPos())){
-            return auto;
+            return player3;
         }
         else if(v.equals(auto.getPos())){
             return auto;
@@ -474,20 +474,29 @@ class Car extends Actor {
         @Override
     public void move(Vector3 p){
             Vector3 newPos = getPos();
+            Vector3 oldPos = new Vector3();
 
             for(int i=0; i<p.getX(); i++){
-                newPos.setX(getPos().getX() + i);
-                System.out.println(polje.actorAtPosition(newPos));
+
+                oldPos.setX(newPos.getX()+1);
+                System.out.println(polje.actorAtPosition(oldPos));
+                newPos.setX(getPos().getX() + 1);
+
             }
 
             for(int i=0; i<p.getY(); i++){
-                newPos.setY(getPos().getY() + i);
-                System.out.println(polje.actorAtPosition(newPos));
+
+
+               oldPos.setY(newPos.getY()+1);
+                System.out.println(polje.actorAtPosition(oldPos));
+                newPos.setY(getPos().getY() + 1);
             }
 
             for(int i=0; i<p.getZ(); i++){
-                newPos.setZ(getPos().getZ() + i);
-                System.out.println(polje.actorAtPosition(newPos));
+
+                oldPos.setZ(newPos.getZ()+1);
+                System.out.println(polje.actorAtPosition(oldPos));
+                newPos.setZ(getPos().getZ() + 1);
             }
             setPos(newPos);
 
@@ -495,7 +504,7 @@ class Car extends Actor {
 
 }
 
-//Zavrsiti to
+//Zavrsiti to CHECK
 //iznad svake petlje za xyz negativne brojeve i+=inc na plus ili minus 1
 //kad se player pomjera da li je mjesto zauzeto, ako je tu human nece se omjeriti vec cce napraviti dmg
 //
