@@ -25,15 +25,13 @@ public class Application {
         field.setPlayer1(player1);
         field.setPlayer2(player2);
         field.setPlayer3(player3);
-
         field.setAuto(auto);
-
-
 
         player1.setPolje(field);
         player2.setPolje(field);
         player3.setPolje(field);
         auto.setPolje(field);
+
 
         player1.move(x);
         player2.move(y);
@@ -48,8 +46,7 @@ public class Application {
 
             field.close();
             field.step();
-          //  Vector3 t = new Vector3(1, 0, 0);
-         //   player1.move(t);
+
 
         } catch (SamePos samePos) {
             System.out.println("Nesto nije dure. " + samePos.getMessage());
@@ -309,6 +306,8 @@ class Polje {
             System.out.println("Player 1 and 2 are the closest to each other");
         } else if (d2 < d3 && d2 < d1) {
             System.out.println("Player 1 and 3 are the closest to each other");
+        } else if(d2.equals(d3) && d2.equals(d1)){
+            System.out.println("Same distance");
         } else {
             System.out.println("Player 2 and 3 are the closest to each other");
         }
