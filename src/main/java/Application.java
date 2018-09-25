@@ -38,10 +38,7 @@ public class Application {
         player1.move(x);
         player2.move(y);
         player3.move(z);
-        auto.move(x);
-
-        field.hit();
-
+        auto.move(y);
 
 
 
@@ -362,16 +359,16 @@ class Polje {
     public void hit(){
 
         if(jeAuto(getPlayer1().getPos())){
-            System.out.println(String.format("%s %s", getPlayer1().getName(), "has been hit"));
+            System.out.println(String.format("%s %s", getPlayer1().getName(), "was hit"));
         }
         else if(jeAuto(getPlayer2().getPos())){
-            System.out.println(String.format("%s %s", getPlayer2().getName(), "has been hit"));
+            System.out.println(String.format("%s %s", getPlayer2().getName(), "was hit"));
         }
         else if(jeAuto(getPlayer3().getPos())){
-            System.out.println(String.format("%s %s", getPlayer3().getName(), "has been hit"));
+            System.out.println(String.format("%s %s", getPlayer3().getName(), "was hit"));
         }
         else {
-            System.out.println("nista");
+            System.out.println("Nobody was hit");
         }
 
     }
@@ -429,19 +426,17 @@ auto ce se pomjerati tkao sto isto kao human, ali ce paziti da li je udario neko
 class Car extends Actor {
 
     private Human human;
-    private Car auto;
-
     private Polje polje;
 
-    public Car getAuto() {
-        return auto;
+    @Override
+    public Polje getPolje() {
+        return polje;
     }
 
-    public void setAuto(Car auto) {
-        this.auto = auto;
+    @Override
+    public void setPolje(Polje polje) {
+        this.polje = polje;
     }
-
-
 
     public Car(){
         super("Auto");
@@ -463,9 +458,9 @@ class Car extends Actor {
         newPos.setY(getPos().getY() + p.getY());
         newPos.setZ(getPos().getZ() + p.getZ());
         setPos(newPos);
+        getPolje().hit();
+
     }
-
-
 
 
 
