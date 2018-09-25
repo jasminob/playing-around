@@ -25,7 +25,9 @@ public class Application {
         field.setPlayer1(player1);
         field.setPlayer2(player2);
         field.setPlayer3(player3);
+
         field.setAuto(auto);
+
 
 
         player1.setPolje(field);
@@ -36,12 +38,15 @@ public class Application {
         player1.move(x);
         player2.move(y);
         player3.move(z);
+        auto.move(x);
+
+        field.hit();
+
+
 
 
       try {
 
-
-            System.out.println(field.jeAuto(player1.getPos()));
             field.zapocniIgru();
 
             field.close();
@@ -145,18 +150,18 @@ class Sobject extends Entity {
 
 
 abstract class Actor extends Entity {
+
     private String name;
     private Polje polje = new Polje();
 
     public Polje getPolje() {
         return polje;
+
     }
 
     public void setPolje(Polje polje) {
         this.polje = polje;
     }
-
-
 
     Actor() {
         this.name = "No Name";
@@ -285,20 +290,17 @@ class Polje {
             throw new SamePos();
         } else {
             System.out.println("Sve dure");
-
-
         }
     }
 
 
     public double distance(Human player1, Human player2) {
-        return sqrt(pow(player1.getPos().getX() - player2.getPos().getX(), 2) +
-                pow(player1.getPos().getY() - player2.getPos().getY(), 2) + pow(player1.getPos().getZ() - player2.getPos().getZ(), 2));
+        return sqrt(pow(player1.getPos().getX() - player2.getPos().getX(), 2)
+                + pow(player1.getPos().getY() - player2.getPos().getY(), 2)
+                + pow(player1.getPos().getZ() - player2.getPos().getZ(), 2));
     }
 
     public void close() {
-
-
 
         Double d1, d2, d3;
 
@@ -357,6 +359,23 @@ class Polje {
         }
     }
 
+    public void hit(){
+
+        if(jeAuto(getPlayer1().getPos())){
+            System.out.println(String.format("%s %s", getPlayer1().getName(), "has been hit"));
+        }
+        else if(jeAuto(getPlayer2().getPos())){
+            System.out.println(String.format("%s %s", getPlayer2().getName(), "has been hit"));
+        }
+        else if(jeAuto(getPlayer3().getPos())){
+            System.out.println(String.format("%s %s", getPlayer3().getName(), "has been hit"));
+        }
+        else {
+            System.out.println("nista");
+        }
+
+    }
+
 }
 
 //Main fun , inicijalizira tri coeka sa banalnim imeno, i klasu Polje, ta klasa polje ce u sebi imati
@@ -410,6 +429,19 @@ auto ce se pomjerati tkao sto isto kao human, ali ce paziti da li je udario neko
 class Car extends Actor {
 
     private Human human;
+    private Car auto;
+
+    private Polje polje;
+
+    public Car getAuto() {
+        return auto;
+    }
+
+    public void setAuto(Car auto) {
+        this.auto = auto;
+    }
+
+
 
     public Car(){
         super("Auto");
@@ -424,9 +456,15 @@ class Car extends Actor {
     }
 
 
+    @Override
     public void move(Vector3 p) {
-
+        Vector3 newPos = new Vector3();
+        newPos.setX(getPos().getX() + p.getX());
+        newPos.setY(getPos().getY() + p.getY());
+        newPos.setZ(getPos().getZ() + p.getZ());
+        setPos(newPos);
     }
+
 
 
 
