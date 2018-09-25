@@ -41,7 +41,7 @@ public class Application {
       try {
 
 
-
+            System.out.println(field.jeAuto(player1.getPos()));
             field.zapocniIgru();
 
             field.close();
@@ -142,6 +142,7 @@ class Vector3 {
 
 class Sobject extends Entity {
 }
+
 
 abstract class Actor extends Entity {
     private String name;
@@ -422,7 +423,12 @@ class Car extends Actor {
         this.human = human;
     }
 
+
     public void move(Vector3 p) {
 
     }
+
+
+
+
 }
