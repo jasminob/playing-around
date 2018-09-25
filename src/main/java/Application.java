@@ -289,8 +289,8 @@ class Polje {
     }
 
 /*
-distance(vector v1 i v2){}
-distance(human h1, h2){}
+distance(Vector v1 i v2){}
+distance(Human h1, h2){}
  */
     public double distances(Vector3 v1, Vector3 v2){
         return sqrt(pow(v1.getX() - v2.getX(), 2)
@@ -328,21 +328,20 @@ distance(human h1, h2){}
     }
 
     public String sablon(Actor x){
-            return String.format("%s%s : %d, %s : %d, %s : %d", x.getName(), " se nalazi na poziciji X", x.getPos().getX(), "Y", x.getPos().getY(), "Z", x.getPos().getZ());
+            return String.format("%s se nalazi na poziciji : %d, Y : %d, Z : %d", x.getName(), x.getPos().getX(), x.getPos().getY(), x.getPos().getZ());
     }
 
 
     public void step() {
 
+            System.out.println(String.format("Player 1 se nalazi na poziciji X : %d, Y : %d, Z : %d, a udaljen je od Player 2 za,%s, a od Player 3 za,%s", player1.getPos().getX(), player1.getPos().getY(),player1.getPos().getZ(),
+                    calc(player1.getPos(), player2.getPos()), calc(player1.getPos(), player3.getPos())));
 
-            System.out.println(String.format("%s : %d, %s : %d, %s : %d, %s%s, %s%s", "Player 1 se nalazi na poziciji X", player1.getPos().getX(), "Y", player1.getPos().getY(), "Z", player1.getPos().getZ(),
-                    "a udaljen je od Player 2 za,", calc(player1.getPos(), player2.getPos()), "a od Player 3 za,", calc(player1.getPos(), player3.getPos())));
+             System.out.println(String.format("Player 2 se nalazi na poziciji X : %d, Y : %d, Z : %d, a udaljen je od Player 1 za,%s, a od Player 3 za,%s", player2.getPos().getX(), player2.getPos().getY(), player2.getPos().getZ(),
+                calc(player2.getPos(), player1.getPos()), calc(player2.getPos(), player3.getPos())));
 
-             System.out.println(String.format("%s : %d, %s : %d, %s : %d, %s%s, %s%s", "Player 2 se nalazi na poziciji X", player2.getPos().getX(), "Y", player2.getPos().getY(), "Z", player2.getPos().getZ(),
-                "a udaljen je od Player 1 za,", calc(player2.getPos(), player1.getPos()), "a od Player 3 za,", calc(player2.getPos(), player3.getPos())));
-
-             System.out.println(String.format("%s : %d, %s : %d, %s : %d, %s%s, %s%s", "Player 3 se nalazi na poziciji X", player3.getPos().getX(), "Y", player3.getPos().getY(), "Z", player3.getPos().getZ(),
-                "a udaljen je od Player 1 za,", calc(player3.getPos(), player1.getPos()), "a od Player 3 za,", calc(player3.getPos(), player1.getPos())));
+             System.out.println(String.format("Player 3 se nalazi na poziciji X : %d, Y : %d, Z : %d, a udaljen je od Player 1 za,%s, a od Player 3 za,%s", player3.getPos().getX(), player3.getPos().getY(), player3.getPos().getZ(),
+                calc(player3.getPos(), player1.getPos()), calc(player3.getPos(), player1.getPos())));
 
              System.out.println(sablon(auto));
 
