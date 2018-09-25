@@ -36,15 +36,16 @@ public class Application {
         player1.move(x);
         player2.move(y);
         player3.move(z);
-        auto.move(y);
-
+        auto.move(z);
 
 
       try {
 
             field.zapocniIgru();
 
+
             field.close();
+
             field.step();
 
 
@@ -287,12 +288,21 @@ class Polje {
         }
     }
 
-
-    public double distance(Human player1, Human player2) {
-        return sqrt(pow(player1.getPos().getX() - player2.getPos().getX(), 2)
-                + pow(player1.getPos().getY() - player2.getPos().getY(), 2)
-                + pow(player1.getPos().getZ() - player2.getPos().getZ(), 2));
+/*
+distance(vector v1 i v2){}
+distance(human h1, h2){}
+ */
+    public double distances(Vector3 v1, Vector3 v2){
+        return sqrt(pow(v1.getX() - v2.getX(), 2)
+                + pow(v1.getY() - v2.getY(), 2)
+                + pow(v1.getZ() - v2.getZ(), 2));
     }
+
+
+    public double distance(Human h1, Human h2) {
+        return distances(h1.getPos(), h2.getPos());
+    }
+
 
     public void close() {
 
@@ -318,9 +328,7 @@ class Polje {
     }
 
     public String sablon(Actor x){
-
             return String.format("%s%s : %d, %s : %d, %s : %d", x.getName(), " se nalazi na poziciji X", x.getPos().getX(), "Y", x.getPos().getY(), "Z", x.getPos().getZ());
-
     }
 
 
@@ -330,18 +338,13 @@ class Polje {
             System.out.println(String.format("%s : %d, %s : %d, %s : %d, %s%s, %s%s", "Player 1 se nalazi na poziciji X", player1.getPos().getX(), "Y", player1.getPos().getY(), "Z", player1.getPos().getZ(),
                     "a udaljen je od Player 2 za,", calc(player1.getPos(), player2.getPos()), "a od Player 3 za,", calc(player1.getPos(), player3.getPos())));
 
-          //  System.out.println(sablon(player1));
-
              System.out.println(String.format("%s : %d, %s : %d, %s : %d, %s%s, %s%s", "Player 2 se nalazi na poziciji X", player2.getPos().getX(), "Y", player2.getPos().getY(), "Z", player2.getPos().getZ(),
                 "a udaljen je od Player 1 za,", calc(player2.getPos(), player1.getPos()), "a od Player 3 za,", calc(player2.getPos(), player3.getPos())));
 
              System.out.println(String.format("%s : %d, %s : %d, %s : %d, %s%s, %s%s", "Player 3 se nalazi na poziciji X", player3.getPos().getX(), "Y", player3.getPos().getY(), "Z", player3.getPos().getZ(),
                 "a udaljen je od Player 1 za,", calc(player3.getPos(), player1.getPos()), "a od Player 3 za,", calc(player3.getPos(), player1.getPos())));
 
-
              System.out.println(sablon(auto));
-
-        //System.out.println(String.format("%s : %d, %s : %d, %s : %d", "Auto se nalazi na poziciji X", auto.getPos().getX(), "Y", auto.getPos().getY(), "Z", auto.getPos().getZ()));
 
     }
 
@@ -427,12 +430,12 @@ class Car extends Actor {
     private Human human;
     private Polje polje;
 
-    @Override
+
     public Polje getPolje() {
         return polje;
     }
 
-    @Override
+
     public void setPolje(Polje polje) {
         this.polje = polje;
     }
@@ -460,7 +463,6 @@ class Car extends Actor {
         getPolje().hit();
 
     }
-
 
 
 }
