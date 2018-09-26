@@ -37,9 +37,11 @@ public class Application {
 
 
         player1.move(x);
-        player2.move(y);
+        player2.move(x);
         player3.move(z);
         auto.move(c);
+
+        field.step();
 
 
         try {
@@ -53,6 +55,8 @@ public class Application {
         } catch (SamePos samePos) {
             System.out.println("Nesto nije dure. " + samePos.getMessage());
         }
+
+
 
 
     }
@@ -183,6 +187,17 @@ class Human extends Actor {
 
     private int hp;
     private int dmg;
+    private Polje polje;
+
+    @Override
+    public Polje getPolje() {
+        return polje;
+    }
+
+    @Override
+    public void setPolje(Polje polje) {
+        this.polje = polje;
+    }
 
     Human() {
         super("No Name");
@@ -199,11 +214,24 @@ class Human extends Actor {
     @Override
     public void move(Vector3 p) {
         Vector3 newPos = new Vector3();
+
+        Vector3 oldPos = new Vector3();
+        oldPos.setX(getPos().getX());
+        oldPos.setY(getPos().getY());
+        oldPos.setZ(getPos().getZ());
+
         newPos.setX(getPos().getX() + p.getX());
         newPos.setY(getPos().getY() + p.getY());
         newPos.setZ(getPos().getZ() + p.getZ());
-        setPos(newPos);
 
+        if(polje.playerAtPosition(newPos)){
+            setPos(oldPos);
+        }
+        else{
+            setPos(newPos);
+        }
+
+        //System.out.println(polje.dmg(newPos));
     }
 
     public int getHp() {
@@ -229,7 +257,7 @@ class Polje {
     private Human player2;
     private Human player3;
     private Car auto;
-    private Actor actor;
+
 
     public Human getPlayer1() {
         return player1;
@@ -375,6 +403,41 @@ class Polje {
     }
 
 
+  /*  public int dmg(Vector3 v){
+        if(v.equals(player1.getPos())){
+            return  player1.getHp()-2;
+        }
+        else if(v.equals(player2.getPos())){
+            return player2.getHp()-2;
+        }
+        else if(v.equals(player3.getPos())){
+            return player3.getHp()-2;
+        }
+        else {
+            return 5;
+        }
+    }
+*/
+
+    public boolean playerAtPosition(Vector3 v){
+
+        if(v.equals(player1.getPos())){
+
+            player1.setHp(player1.getHp() - player2.getDmg());
+            System.out.println(String.format("Player 1 took %d damage, and now has %dhp", player2.getDmg(), player1.getHp()));
+            return true;
+        }
+        else if(v.equals(player2.getPos())){
+            player2.setHp(player2.getHp()-player1.getDmg());
+            return true;
+        }
+        else if(v.equals(player3.getPos())){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 
 
     public Actor actorAtPosition(Vector3 v){
@@ -475,6 +538,7 @@ class Car extends Actor {
     public void move(Vector3 p){
             Vector3 newPos = getPos();
             Vector3 oldPos = new Vector3();
+
 
             for(int i=0; i<p.getX(); i++){
 
