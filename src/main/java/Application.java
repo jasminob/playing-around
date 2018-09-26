@@ -17,7 +17,7 @@ public class Application {
 
         //Movement
         Vector3 x = new Vector3(1, 0, 0);
-        Vector3 y = new Vector3(10, 5, 0);
+        Vector3 y = new Vector3(1, 0, 0);
         Vector3 z = new Vector3(0, 0, 1);
 
         Car auto = new Car();
@@ -41,8 +41,6 @@ public class Application {
         player3.move(z);
         auto.move(c);
         field.isAlive();
-
-        System.out.println(player1.getHp());
 
         field.step();
 
@@ -225,6 +223,7 @@ class Human extends Actor {
         newPos.setY(getPos().getY() + p.getY());
         newPos.setZ(getPos().getZ() + p.getZ());
 
+
         if (polje.playerAtPosition(newPos)) {
             setPos(oldPos);
             polje.isAlive();
@@ -365,9 +364,9 @@ class Polje {
                 System.out.println("Player 1 and 2 are the closest to each other");
             } else if (d2 < d3 && d2 < d1) {
                 System.out.println("Player 1 and 3 are the closest to each other");
-            } else if (d2.equals(d3) && d2.equals(d1)) {
+            } else if ( d1.equals(d2) || d2.equals(d3) || d3.equals(d1)) {
                 System.out.println("Same distance");
-            } else {
+            } else if(d3 < d2 && d3<d1){
                 System.out.println("Player 2 and 3 are the closest to each other");
             }
         }
@@ -454,14 +453,21 @@ class Polje {
 
     }
 
+
+
+
     public boolean isAlive() {
-        if (player1.getHp() < 1) {
+        if (player1.getHp() < 1 && player1!=null) {
+            System.out.println(String.format("%s is dead", player1.getName()));
             player1 = null;
             return false;
-        } else if (player2.getHp() < 1) {
+        } else if (player2.getHp() < 1 && player2!=null) {
+            player2 = null;
+            System.out.println(String.format("%s is dead", player2.getName()));
             player2 = null;
             return false;
-        } else if (player3.getHp() < 1) {
+        } else if (player3.getHp() < 1 && player3!=null) {
+            System.out.println(String.format("%s is dead", player3.getName()));
             player3 = null;
             return false;
         } else {
@@ -469,22 +475,6 @@ class Polje {
         }
     }
 
-
-  /*  public int dmg(Vector3 v){
-        if(v.equals(player1.getPos())){
-            return  player1.getHp()-2;
-        }
-        else if(v.equals(player2.getPos())){
-            return player2.getHp()-2;
-        }
-        else if(v.equals(player3.getPos())){
-            return player3.getHp()-2;
-        }
-        else {
-            return 5;
-        }
-    }
-*/
 
     public boolean playerAtPosition(Vector3 v) {
 
@@ -611,11 +601,18 @@ class Car extends Actor {
         Vector3 oldPos = new Vector3();
 
 
-        for (int i = 0; i < p.getX(); i++) {
+        for (int i = 0; i < sqrt(pow( p.getX(), 2 )); i++) {
 
-            oldPos.setX(newPos.getX() + 1);
-            System.out.println(polje.actorAtPosition(oldPos));
-            newPos.setX(getPos().getX() + 1);
+            if(p.getX()<0){
+                oldPos.setX(newPos.getX() - 1);
+                System.out.println(polje.actorAtPosition(oldPos));
+                newPos.setX(getPos().getX() - 1);
+            }
+            else {
+                oldPos.setX(newPos.getX() + 1);
+                System.out.println(polje.actorAtPosition(oldPos));
+                newPos.setX(getPos().getX() + 1);
+            }
 
         }
 
