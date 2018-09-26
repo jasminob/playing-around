@@ -232,7 +232,7 @@ class Human extends Actor {
             setPos(newPos);
         }
 
-        //System.out.println(polje.dmg(newPos));
+
     }
 
     public int getHp() {
@@ -328,10 +328,7 @@ class Polje {
         }
     }
 
-    /*
-    distance(Vector v1 i v2){}
-    distance(Human h1, h2){}
-    */
+
 
     public double distance(Vector3 v1, Vector3 v2) {
         return sqrt(pow(v1.getX() - v2.getX(), 2)
@@ -476,19 +473,26 @@ class Polje {
     }
 
 
+    //pretpostavljam da sam trebao staviti player.setHp(player.getHp - someotherplayer.getDmg());
+    public void dmg(Human player){
+        player.setHp(player.getHp() - 2);
+        System.out.println(String.format("%s took %d damage, and now has %dhp", player.getName(), 2, player.getHp()));
+    }
+
+
     public boolean playerAtPosition(Vector3 v) {
 
         if (player1 == null || player2 == null || player3 == null) {
             return false;
         } else {
             if (v.equals(player1.getPos())) {
-                player1.setHp(player1.getHp() - player2.getDmg());
-                System.out.println(String.format("Player 1 took %d damage, and now has %dhp", player2.getDmg(), player1.getHp()));
+                dmg(player1);
                 return true;
             } else if (v.equals(player2.getPos())) {
-                player2.setHp(player2.getHp() - player1.getDmg());
+                dmg(player2);
                 return true;
             } else if (v.equals(player3.getPos())) {
+                dmg(player3);
                 return true;
             } else {
                 return false;
@@ -504,12 +508,15 @@ class Polje {
         } else {
             if (v.equals(player1.getPos())) {
                 player1.setHp(0);
+
                 return player1;
             } else if (v.equals(player2.getPos())) {
                 player2.setHp(0);
+
                 return player2;
             } else if (v.equals(player3.getPos())) {
                 player3.setHp(0);
+
                 return player3;
             } else if (v.equals(auto.getPos())) {
                 return auto;
@@ -600,7 +607,7 @@ class Car extends Actor {
         Vector3 newPos = getPos();
         Vector3 oldPos = new Vector3();
 
-
+//Ovo sam ja za testing sa negativnim X
         for (int i = 0; i < sqrt(pow( p.getX(), 2 )); i++) {
 
             if(p.getX()<0){
@@ -617,7 +624,6 @@ class Car extends Actor {
         }
 
         for (int i = 0; i < p.getY(); i++) {
-
 
             oldPos.setY(newPos.getY() + 1);
             System.out.println(polje.actorAtPosition(oldPos));
