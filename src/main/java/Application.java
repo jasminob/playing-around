@@ -38,6 +38,8 @@ public class Application {
 
         player1.move(x);
         player2.move(x);
+        player2.move(x);
+        player2.move(x);
         player3.move(z);
         auto.move(c);
 
@@ -226,6 +228,8 @@ class Human extends Actor {
 
         if(polje.playerAtPosition(newPos)){
             setPos(oldPos);
+            polje.isAlive();
+
         }
         else{
             setPos(newPos);
@@ -314,12 +318,16 @@ class Polje {
 
     public void zapocniIgru() throws SamePos {
 
-        if (player1.getPos().equals(player2.getPos()) ||
-                player1.getPos().equals(player3.getPos()) ||
-                player2.getPos().equals(player3.getPos())) {
-            throw new SamePos();
-        } else {
-            System.out.println("Sve dure");
+        if(player1 == null || player2 == null || player3 == null){
+
+        }else {
+            if (player1.getPos().equals(player2.getPos()) ||
+                    player1.getPos().equals(player3.getPos()) ||
+                    player2.getPos().equals(player3.getPos())) {
+                throw new SamePos();
+            } else {
+                System.out.println("Sve dure");
+            }
         }
     }
 
@@ -340,19 +348,23 @@ class Polje {
     public void close() {
 
         Double d1, d2, d3;
+        if(player1 == null || player2 == null || player3 == null){
 
-        d1 = distance(player1, player2);
-        d2 = distance(player1, player3);
-        d3 = distance(player2, player3);
+        }
+        else{
+            d1 = distance(player1, player2);
+            d2 = distance(player1, player3);
+            d3 = distance(player2, player3);
 
-        if (d1 < d2 && d1 < d3) {
-            System.out.println("Player 1 and 2 are the closest to each other");
-        } else if (d2 < d3 && d2 < d1) {
-            System.out.println("Player 1 and 3 are the closest to each other");
-        } else if (d2.equals(d3) && d2.equals(d1)) {
-            System.out.println("Same distance");
-        } else {
-            System.out.println("Player 2 and 3 are the closest to each other");
+            if (d1 < d2 && d1 < d3) {
+                System.out.println("Player 1 and 2 are the closest to each other");
+            } else if (d2 < d3 && d2 < d1) {
+                System.out.println("Player 1 and 3 are the closest to each other");
+            } else if (d2.equals(d3) && d2.equals(d1)) {
+                System.out.println("Same distance");
+            } else {
+                System.out.println("Player 2 and 3 are the closest to each other");
+            }
         }
     }
 
@@ -367,17 +379,38 @@ class Polje {
 
     public void step() {
 
-        System.out.println(String.format("Player 1 se nalazi na poziciji X : %d, Y : %d, Z : %d, a udaljen je od Player 2 za,%s, a od Player 3 za,%s", player1.getPos().getX(), player1.getPos().getY(), player1.getPos().getZ(),
-                calc(player1.getPos(), player2.getPos()), calc(player1.getPos(), player3.getPos())));
+        if(player1 == null || player2 == null ||  player3 == null){
 
-        System.out.println(String.format("Player 2 se nalazi na poziciji X : %d, Y : %d, Z : %d, a udaljen je od Player 1 za,%s, a od Player 3 za,%s", player2.getPos().getX(), player2.getPos().getY(), player2.getPos().getZ(),
-                calc(player2.getPos(), player1.getPos()), calc(player2.getPos(), player3.getPos())));
+        } else {
 
-        System.out.println(String.format("Player 3 se nalazi na poziciji X : %d, Y : %d, Z : %d, a udaljen je od Player 1 za,%s, a od Player 3 za,%s", player3.getPos().getX(), player3.getPos().getY(), player3.getPos().getZ(),
-                calc(player3.getPos(), player1.getPos()), calc(player3.getPos(), player1.getPos())));
+            System.out.println(String.format("Player 1 se nalazi na poziciji X : %d, Y : %d, Z : %d, a udaljen je od Player 2 za,%s, a od Player 3 za,%s", player1.getPos().getX(), player1.getPos().getY(), player1.getPos().getZ(),
+                    calc(player1.getPos(), player2.getPos()), calc(player1.getPos(), player3.getPos())));
 
-        System.out.println(sablon(auto));
+            System.out.println(String.format("Player 3 se nalazi na poziciji X : %d, Y : %d, Z : %d, a udaljen je od Player 1 za,%s, a od Player 3 za,%s", player3.getPos().getX(), player3.getPos().getY(), player3.getPos().getZ(),
+                    calc(player3.getPos(), player1.getPos()), calc(player3.getPos(), player1.getPos())));
 
+            System.out.println(sablon(auto));
+
+            System.out.println(String.format("Player 1 se nalazi na poziciji X : %d, Y : %d, Z : %d, a udaljen je od Player 2 za,%s, a od Player 3 za,%s", player1.getPos().getX(), player1.getPos().getY(), player1.getPos().getZ(),
+                    calc(player1.getPos(), player2.getPos()), calc(player1.getPos(), player3.getPos())));
+
+            System.out.println(String.format("Player 2 se nalazi na poziciji X : %d, Y : %d, Z : %d, a udaljen je od Player 1 za,%s, a od Player 3 za,%s", player2.getPos().getX(), player2.getPos().getY(), player2.getPos().getZ(),
+                    calc(player2.getPos(), player1.getPos()), calc(player2.getPos(), player3.getPos())));
+
+            System.out.println(sablon(auto));
+
+            System.out.println(String.format("Player 1 se nalazi na poziciji X : %d, Y : %d, Z : %d, a udaljen je od Player 2 za,%s, a od Player 3 za,%s", player1.getPos().getX(), player1.getPos().getY(), player1.getPos().getZ(),
+                    calc(player1.getPos(), player2.getPos()), calc(player1.getPos(), player3.getPos())));
+
+            System.out.println(String.format("Player 2 se nalazi na poziciji X : %d, Y : %d, Z : %d, a udaljen je od Player 1 za,%s, a od Player 3 za,%s", player2.getPos().getX(), player2.getPos().getY(), player2.getPos().getZ(),
+                    calc(player2.getPos(), player1.getPos()), calc(player2.getPos(), player3.getPos())));
+
+            System.out.println(String.format("Player 3 se nalazi na poziciji X : %d, Y : %d, Z : %d, a udaljen je od Player 1 za,%s, a od Player 3 za,%s", player3.getPos().getX(), player3.getPos().getY(), player3.getPos().getZ(),
+                    calc(player3.getPos(), player1.getPos()), calc(player3.getPos(), player1.getPos())));
+
+            System.out.println(sablon(auto));
+
+        }
     }
 
     public boolean jeAuto(Vector3 loc) {
@@ -402,6 +435,24 @@ class Polje {
 
     }
 
+    public boolean isAlive(){
+        if(player1.getHp() <= 0){
+           player1 = null;
+            return false;
+        }
+        else if(player2.getHp() <= 0){
+            player2 = null;
+            return false;
+        }
+        else if(player3.getHp() <= 0){
+            player3 = null;
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+
 
   /*  public int dmg(Vector3 v){
         if(v.equals(player1.getPos())){
@@ -421,40 +472,46 @@ class Polje {
 
     public boolean playerAtPosition(Vector3 v){
 
-        if(v.equals(player1.getPos())){
-
-            player1.setHp(player1.getHp() - player2.getDmg());
-            System.out.println(String.format("Player 1 took %d damage, and now has %dhp", player2.getDmg(), player1.getHp()));
-            return true;
-        }
-        else if(v.equals(player2.getPos())){
-            player2.setHp(player2.getHp()-player1.getDmg());
-            return true;
-        }
-        else if(v.equals(player3.getPos())){
-            return true;
+        if(player1 == null || player2 == null || player3 ==null){
+            return false;
         }
         else {
-            return false;
+            if (v.equals(player1.getPos())) {
+                player1.setHp(player1.getHp() - player2.getDmg());
+                System.out.println(String.format("Player 1 took %d damage, and now has %dhp", player2.getDmg(), player1.getHp()));
+                return true;
+            } else if (v.equals(player2.getPos())) {
+                player2.setHp(player2.getHp() - player1.getDmg());
+                return true;
+            } else if (v.equals(player3.getPos())) {
+                return true;
+            } else {
+                return false;
+            }
         }
     }
 
 
     public Actor actorAtPosition(Vector3 v){
-        if(v.equals(player1.getPos())){
-            return player1;
-        }
-        else if(v.equals(player2.getPos())){
-            return player2;
-        }
-        else if(v.equals(player3.getPos())){
-            return player3;
-        }
-        else if(v.equals(auto.getPos())){
-            return auto;
-        }
-        else{
+
+        if(player1 == null || player2 == null || player3 ==null){
             return null;
+        }
+        else {
+            if (v.equals(player1.getPos())) {
+                player1.setHp(0);
+                return player1;
+            } else if (v.equals(player2.getPos())) {
+                player2.setHp(0);
+                return player2;
+            } else if (v.equals(player3.getPos())) {
+                player3.setHp(0);
+                return player3;
+            } else if (v.equals(auto.getPos())) {
+                return auto;
+            } else {
+                return null;
+            }
         }
     }
 
