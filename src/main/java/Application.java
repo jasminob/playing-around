@@ -329,7 +329,6 @@ class Polje {
     }
 
 
-
     public double distance(Vector3 v1, Vector3 v2) {
         return sqrt(pow(v1.getX() - v2.getX(), 2)
                 + pow(v1.getY() - v2.getY(), 2)
@@ -345,14 +344,11 @@ class Polje {
         Double d1, d2, d3;
         if (player1 == null) {
             System.out.println("Player 2 and 3 are the closest to each other");
-        }
-        else if(player2 == null){
+        } else if (player2 == null) {
             System.out.println("Player 1 and 3 are the closest to each other");
-        }
-        else if(player3 == null){
+        } else if (player3 == null) {
             System.out.println("Player 1 and 2 are the closest to each other");
-        }
-        else  {
+        } else {
             d1 = distance(player1, player2);
             d2 = distance(player1, player3);
             d3 = distance(player2, player3);
@@ -361,9 +357,9 @@ class Polje {
                 System.out.println("Player 1 and 2 are the closest to each other");
             } else if (d2 < d3 && d2 < d1) {
                 System.out.println("Player 1 and 3 are the closest to each other");
-            } else if ( d1.equals(d2) || d2.equals(d3) || d3.equals(d1)) {
+            } else if (d1.equals(d2) || d2.equals(d3) || d3.equals(d1)) {
                 System.out.println("Same distance");
-            } else if(d3 < d2 && d3<d1){
+            } else if (d3 < d2 && d3 < d1) {
                 System.out.println("Player 2 and 3 are the closest to each other");
             }
         }
@@ -377,7 +373,7 @@ class Polje {
         return String.format("%s se nalazi na poziciji : %d, Y : %d, Z : %d", x.getName(), x.getPos().getX(), x.getPos().getY(), x.getPos().getZ());
     }
 
-    public String sablon(Human hum, Human hum1){
+    public String sablon(Human hum, Human hum1) {
         return String.format("%s se nalazi na poziciji X : %d, Y : %d, Z : %d, a udaljen je od igraca %s za,%s", hum.getName(), hum.getPos().getX(), hum.getPos().getY(), hum.getPos().getZ(), hum1.getName(), calc(hum.getPos(), hum1.getPos()));
     }
 
@@ -393,7 +389,7 @@ class Polje {
             System.out.println(sablonAuto(auto));
 
 
-        } else if(player2 == null){
+        } else if (player2 == null) {
 
             System.out.println(sablon(player1, player3));
 
@@ -401,8 +397,7 @@ class Polje {
 
             System.out.println(sablonAuto(auto));
 
-        }
-        else if(player3 == null){
+        } else if (player3 == null) {
 
             System.out.println(sablon(player1, player2));
 
@@ -410,8 +405,7 @@ class Polje {
 
             System.out.println(sablonAuto(auto));
 
-        }
-        else {
+        } else {
 
             System.out.println(String.format("Player 1 se nalazi na poziciji X : %d, Y : %d, Z : %d, a udaljen je od Player 2 za,%s, a od Player 3 za,%s", player1.getPos().getX(), player1.getPos().getY(), player1.getPos().getZ(),
                     calc(player1.getPos(), player2.getPos()), calc(player1.getPos(), player3.getPos())));
@@ -451,19 +445,17 @@ class Polje {
     }
 
 
-
-
     public boolean isAlive() {
-        if (player1.getHp() < 1 && player1!=null) {
+        if (player1.getHp() < 1 && player1 != null) {
             System.out.println(String.format("%s is dead", player1.getName()));
             player1 = null;
             return false;
-        } else if (player2.getHp() < 1 && player2!=null) {
+        } else if (player2.getHp() < 1 && player2 != null) {
             player2 = null;
             System.out.println(String.format("%s is dead", player2.getName()));
             player2 = null;
             return false;
-        } else if (player3.getHp() < 1 && player3!=null) {
+        } else if (player3.getHp() < 1 && player3 != null) {
             System.out.println(String.format("%s is dead", player3.getName()));
             player3 = null;
             return false;
@@ -474,7 +466,7 @@ class Polje {
 
 
     //pretpostavljam da sam trebao staviti player.setHp(player.getHp - someotherplayer.getDmg());
-    public void dmg(Human player){
+    public void dmg(Human player) {
         player.setHp(player.getHp() - 2);
         System.out.println(String.format("%s took %d damage, and now has %dhp", player.getName(), 2, player.getHp()));
     }
@@ -608,14 +600,13 @@ class Car extends Actor {
         Vector3 oldPos = new Vector3();
 
 //Ovo sam ja za testing sa negativnim X
-        for (int i = 0; i < sqrt(pow( p.getX(), 2 )); i++) {
+        for (int i = 0; i < sqrt(pow(p.getX(), 2)); i++) {
 
-            if(p.getX()<0){
+            if (p.getX() < 0) {
                 oldPos.setX(newPos.getX() - 1);
                 System.out.println(polje.actorAtPosition(oldPos));
                 newPos.setX(getPos().getX() - 1);
-            }
-            else {
+            } else {
                 oldPos.setX(newPos.getX() + 1);
                 System.out.println(polje.actorAtPosition(oldPos));
                 newPos.setX(getPos().getX() + 1);
