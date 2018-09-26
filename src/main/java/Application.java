@@ -33,15 +33,16 @@ public class Application {
         auto.setPolje(field);
 */
 
-        Vector3 c = new Vector3(10, 5, 0);
+        Vector3 c = new Vector3(1, 0, 0);
 
 
         player1.move(x);
-        player2.move(x);
-        player2.move(x);
-        player2.move(x);
+        player2.move(y);
         player3.move(z);
         auto.move(c);
+        field.isAlive();
+
+        System.out.println(player1.getHp());
 
         field.step();
 
@@ -454,13 +455,13 @@ class Polje {
     }
 
     public boolean isAlive() {
-        if (player1.getHp() <= 0) {
+        if (player1.getHp() < 1) {
             player1 = null;
             return false;
-        } else if (player2.getHp() <= 0) {
+        } else if (player2.getHp() < 1) {
             player2 = null;
             return false;
-        } else if (player3.getHp() <= 0) {
+        } else if (player3.getHp() < 1) {
             player3 = null;
             return false;
         } else {
