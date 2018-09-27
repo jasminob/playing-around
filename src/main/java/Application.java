@@ -33,14 +33,15 @@ public class Application {
         auto.setPolje(field);
 */
 
-        Vector3 c = new Vector3(1, 0, 0);
+        Vector3 c = new Vector3(-4, 0, 0);
 
 
         player1.move(x);
         player2.move(y);
         player3.move(z);
+
         auto.move(c);
-        field.isAlive();
+        field.setHp();
 
         field.step();
 
@@ -188,6 +189,7 @@ class Human extends Actor {
     private int dmg;
     private Polje polje;
 
+
     @Override
     public Polje getPolje() {
         return polje;
@@ -226,7 +228,7 @@ class Human extends Actor {
 
         if (polje.playerAtPosition(newPos)) {
             setPos(oldPos);
-            polje.isAlive();
+            polje.setHp();
 
         } else {
             setPos(newPos);
@@ -249,6 +251,18 @@ class Human extends Actor {
 
     public void setDmg(int dmg) {
         this.dmg = dmg;
+    }
+
+    public boolean isAlive(){
+        if (polje.getPlayer1().getHp() < 1 && polje.getPlayer1() != null) {
+            return false;
+        } else if (polje.getPlayer2().getHp() < 1 && polje.getPlayer2() != null) {
+            return false;
+        } else if (polje.getPlayer3().getHp() < 1 && polje.getPlayer3() != null) {
+            return false;
+        } else {
+            return true;
+        }
     }
 }
 
@@ -445,22 +459,19 @@ class Polje {
     }
 
 
-    public boolean isAlive() {
-        if (player1.getHp() < 1 && player1 != null) {
+    public void setHp() {
+        if (!player1.isAlive()) {
             System.out.println(String.format("%s is dead", player1.getName()));
             player1 = null;
-            return false;
-        } else if (player2.getHp() < 1 && player2 != null) {
+
+        } else if (!player2.isAlive()) {
             player2 = null;
             System.out.println(String.format("%s is dead", player2.getName()));
-            player2 = null;
-            return false;
-        } else if (player3.getHp() < 1 && player3 != null) {
+
+        } else if (!player3.isAlive()) {
             System.out.println(String.format("%s is dead", player3.getName()));
             player3 = null;
-            return false;
-        } else {
-            return true;
+
         }
     }
 
@@ -474,39 +485,35 @@ class Polje {
 
     public boolean playerAtPosition(Vector3 v) {
 
-        if (player1 == null || player2 == null || player3 == null) {
-            return false;
-        } else {
-            if (v.equals(player1.getPos())) {
+
+            if (v.equals(player1.getPos()) && player1 != null) {
                 dmg(player1);
                 return true;
-            } else if (v.equals(player2.getPos())) {
+            } else if (v.equals(player2.getPos()) && player2 != null) {
                 dmg(player2);
                 return true;
-            } else if (v.equals(player3.getPos())) {
+            } else if (v.equals(player3.getPos()) && player3 != null) {
                 dmg(player3);
                 return true;
             } else {
                 return false;
             }
-        }
+
     }
 
 
     public Actor actorAtPosition(Vector3 v) {
 
-        if (player1 == null || player2 == null || player3 == null) {
-            return null;
-        } else {
-            if (v.equals(player1.getPos())) {
+
+            if (v.equals(player1.getPos()) && player1 != null) {
                 player1.setHp(0);
 
                 return player1;
-            } else if (v.equals(player2.getPos())) {
+            } else if (v.equals(player2.getPos()) && player2 != null) {
                 player2.setHp(0);
 
                 return player2;
-            } else if (v.equals(player3.getPos())) {
+            } else if (v.equals(player3.getPos()) && player3 != null) {
                 player3.setHp(0);
 
                 return player3;
@@ -515,7 +522,7 @@ class Polje {
             } else {
                 return null;
             }
-        }
+
     }
 
 
@@ -600,32 +607,28 @@ class Car extends Actor {
         Vector3 oldPos = new Vector3();
 
 //Ovo sam ja za testing sa negativnim X
-        for (int i = 0; i < sqrt(pow(p.getX(), 2)); i++) {
+        int incrementorX = p.getX() < 0 ? -1 : 1;
+        for (int i = 0; i != p.getX(); i+=incrementorX) {
 
-            if (p.getX() < 0) {
-                oldPos.setX(newPos.getX() - 1);
+                oldPos.setX(newPos.getX() + incrementorX);
                 System.out.println(polje.actorAtPosition(oldPos));
-                newPos.setX(getPos().getX() - 1);
-            } else {
-                oldPos.setX(newPos.getX() + 1);
-                System.out.println(polje.actorAtPosition(oldPos));
-                newPos.setX(getPos().getX() + 1);
-            }
+                newPos.setX(getPos().getX() + incrementorX);
+
 
         }
+        int incrementorY = p.getY() < 0 ? -1 : 1;
+        for (int i = 0; i != p.getY(); i+=incrementorY) {
 
-        for (int i = 0; i < p.getY(); i++) {
-
-            oldPos.setY(newPos.getY() + 1);
+            oldPos.setY(newPos.getY() + incrementorY);
             System.out.println(polje.actorAtPosition(oldPos));
-            newPos.setY(getPos().getY() + 1);
+            newPos.setY(getPos().getY() + incrementorY);
         }
+        int incrementorZ = p.getZ() < 0 ? -1 : 1;
+        for (int i = 0; i != p.getZ(); i+=incrementorZ) {
 
-        for (int i = 0; i < p.getZ(); i++) {
-
-            oldPos.setZ(newPos.getZ() + 1);
+            oldPos.setZ(newPos.getZ() + incrementorZ);
             System.out.println(polje.actorAtPosition(oldPos));
-            newPos.setZ(getPos().getZ() + 1);
+            newPos.setZ(getPos().getZ() + incrementorZ);
         }
         setPos(newPos);
 
