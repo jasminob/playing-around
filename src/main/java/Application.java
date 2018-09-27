@@ -33,7 +33,7 @@ public class Application {
         auto.setPolje(field);
 */
 
-        Vector3 c = new Vector3(-4, 0, 0);
+        Vector3 c = new Vector3(1, 0, 0);
 
 
         player1.move(x);
@@ -44,8 +44,9 @@ public class Application {
         player3.move(z);
 
         auto.move(c);
-        field.setHp();
+        field.kill();
 
+        field.carHit();
         field.step();
 
 
@@ -229,9 +230,10 @@ class Human extends Actor {
         newPos.setZ(getPos().getZ() + p.getZ());
 
 
-        if (polje.playerAtPosition(newPos)) {
+        if (polje.isPlayerAtPosition(newPos)) {
             setPos(oldPos);
-            polje.setHp();
+            polje.playerHit();
+            polje.kill();
 
         } else {
             setPos(newPos);
@@ -448,33 +450,53 @@ class Polje {
         }
     }
 
-    public void hit() {
+    public void carHit() {
 
-        if (jeAuto(getPlayer1().getPos())) {
-            System.out.println(String.format("%s %s", getPlayer1().getName(), "was hit"));
-        } else if (jeAuto(getPlayer2().getPos())) {
-            System.out.println(String.format("%s %s", getPlayer2().getName(), "was hit"));
-        } else if (jeAuto(getPlayer3().getPos())) {
-            System.out.println(String.format("%s %s", getPlayer3().getName(), "was hit"));
+        if (player1 != null && jeAuto(getPlayer1().getPos())) {
+            System.out.println(String.format("%s was run over", getPlayer1().getName()));
+            player1.setHp(0);
+            kill();
+        } else if (player3 != null && jeAuto(getPlayer2().getPos())) {
+            System.out.println(String.format("%s was run over", getPlayer2().getName()));
+            player2.setHp(0);
+            kill();
+        } else if (player3 != null && jeAuto(getPlayer3().getPos())) {
+            System.out.println(String.format("%s was run over", getPlayer3().getName()));
+            player3.setHp(0);
+            kill();
         }
-
 
     }
 
 
-    public void setHp() {
+    public void playerHit() {
+
+        if (player1 != null && isPlayerAtPosition(player1.getPos())) {
+            dmg(player1);
+            player1.isAlive();
+        } else if (player2 != null && isPlayerAtPosition(player2.getPos())) {
+            dmg(player2);
+            player2.isAlive();
+        } else if (player3 != null && isPlayerAtPosition(player3.getPos())) {
+            dmg(player3);
+            player3.isAlive();
+        }
+    }
+
+
+    public void kill() {
         if (player1 != null && !player1.isAlive()) {
 
-            System.out.println(String.format("%s is dead", player1.getName()));
+            System.out.println(String.format("%s was killed", player1.getName()));
             player1 = null;
 
         } else if (player2 != null && !player2.isAlive()) {
 
-            System.out.println(String.format("%s is dead", player2.getName()));
+            System.out.println(String.format("%s was killed", player2.getName()));
             player2 = null;
 
         } else if (player3 != null && !player3.isAlive()) {
-            System.out.println(String.format("%s is dead", player3.getName()));
+            System.out.println(String.format("%s was killed", player3.getName()));
             player3 = null;
 
         }
@@ -488,20 +510,17 @@ class Polje {
     }
 
 
-    public boolean playerAtPosition(Vector3 v) {
+    public boolean isPlayerAtPosition(Vector3 v) {
 
 
         if (player1 != null && v.equals(player1.getPos())) {
-            dmg(player1);
-            player1.isAlive();
+
             return true;
         } else if (player2 != null && v.equals(player2.getPos())) {
-            dmg(player2);
-            player2.isAlive();
+
             return true;
         } else if (player3 != null && v.equals(player3.getPos())) {
-            dmg(player3);
-            player3.isAlive();
+
             return true;
         } else {
             return false;
@@ -514,15 +533,14 @@ class Polje {
 
 
         if (player1 != null && v.equals(player1.getPos())) {
-            player1.setHp(0);
 
             return player1;
         } else if (player2 != null && v.equals(player2.getPos())) {
-            player2.setHp(0);
+
 
             return player2;
         } else if (player3 != null && v.equals(player3.getPos())) {
-            player3.setHp(0);
+
 
             return player3;
         } else if (v.equals(auto.getPos())) {
@@ -605,7 +623,7 @@ class Car extends Actor {
            newPos.setY(getPos().getY() + p.getY());
            newPos.setZ(getPos().getZ() + p.getZ());
            setPos(newPos);
-           getPolje().hit();
+           getPolje().carHit();
 
        }
    */
