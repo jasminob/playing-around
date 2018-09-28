@@ -388,12 +388,12 @@ class Polje {
         return " X : " + (x.getX() - y.getX()) + " Y : " + (x.getY() - y.getY()) + " Z : " + (x.getZ() - y.getZ());
     }
 
-    public String sablonAuto(Actor x) {
-        return String.format("%s se nalazi na poziciji : %d, Y : %d, Z : %d", x.getName(), x.getPos().getX(), x.getPos().getY(), x.getPos().getZ());
+    public String actorLocation(Actor actor) {
+        return String.format("%s se nalazi na poziciji : %d, Y : %d, Z : %d", actor.getName(), actor.getPos().getX(), actor.getPos().getY(), actor.getPos().getZ());
     }
 
-    public String sablon(Human hum, Human hum1) {
-        return String.format("%s se nalazi na poziciji X : %d, Y : %d, Z : %d, a udaljen je od igraca %s za,%s", hum.getName(), hum.getPos().getX(), hum.getPos().getY(), hum.getPos().getZ(), hum1.getName(), calc(hum.getPos(), hum1.getPos()));
+    public String humanLocation(Human p1, Human p2) {
+        return String.format("%s se nalazi na poziciji X : %d, Y : %d, Z : %d, a udaljen je od igraca %s za,%s", p1.getName(), p1.getPos().getX(), p1.getPos().getY(), p1.getPos().getZ(), p2.getName(), calc(p1.getPos(), p2.getPos()));
     }
 
 
@@ -401,28 +401,28 @@ class Polje {
 
         if (player1 == null) {
 
-            System.out.println(sablon(player2, player3));
+            System.out.println(humanLocation(player2, player3));
 
-            System.out.println(sablon(player3, player2));
+            System.out.println(humanLocation(player3, player2));
 
-            System.out.println(sablonAuto(auto));
+            System.out.println(actorLocation(auto));
 
 
         } else if (player2 == null) {
 
-            System.out.println(sablon(player1, player3));
+            System.out.println(humanLocation(player1, player3));
 
-            System.out.println(sablon(player3, player1));
+            System.out.println(humanLocation(player3, player1));
 
-            System.out.println(sablonAuto(auto));
+            System.out.println(actorLocation(auto));
 
         } else if (player3 == null) {
 
-            System.out.println(sablon(player1, player2));
+            System.out.println(humanLocation(player1, player2));
 
-            System.out.println(sablon(player2, player1));
+            System.out.println(humanLocation(player2, player1));
 
-            System.out.println(sablonAuto(auto));
+            System.out.println(actorLocation(auto));
 
         } else {
 
@@ -435,7 +435,7 @@ class Polje {
             System.out.println(String.format("Player 3 se nalazi na poziciji X : %d, Y : %d, Z : %d, a udaljen je od Player 1 za,%s, a od Player 3 za,%s", player3.getPos().getX(), player3.getPos().getY(), player3.getPos().getZ(),
                     calc(player3.getPos(), player1.getPos()), calc(player3.getPos(), player1.getPos())));
 
-            System.out.println(sablonAuto(auto));
+            System.out.println(actorLocation(auto));
 
 
         }
