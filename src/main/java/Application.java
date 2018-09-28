@@ -247,8 +247,13 @@ class Human extends Actor {
     }
 
     public void setHp(int hp) {
-        this.hp = hp;
-    }
+        if(hp<1){
+            this.hp=0;
+        }else {
+            this.hp = hp;
+        }
+
+        }
 
     public int getDmg() {
         return dmg;
@@ -632,29 +637,29 @@ class Car extends Actor {
         Vector3 newPos = getPos();
         Vector3 oldPos = new Vector3();
 
-//Ovo sam ja za testing sa negativnim X
-        int incrementorX = p.getX() < 0 ? -1 : 1;
-        for (int i = 0; i != p.getX(); i += incrementorX) {
 
-            oldPos.setX(newPos.getX() + incrementorX);
+        int incrementor = p.getX() < 0 ? -1 : 1;
+        for (int i = 0; i != p.getX(); i += incrementor) {
+
+            oldPos.setX(newPos.getX() + incrementor);
             System.out.println(polje.actorAtPosition(oldPos));
-            newPos.setX(getPos().getX() + incrementorX);
+            newPos.setX(getPos().getX() + incrementor);
 
 
         }
-        int incrementorY = p.getY() < 0 ? -1 : 1;
-        for (int i = 0; i != p.getY(); i += incrementorY) {
+        incrementor = p.getY() < 0 ? -1 : 1;
+        for (int i = 0; i != p.getY(); i += incrementor) {
 
-            oldPos.setY(newPos.getY() + incrementorY);
+            oldPos.setY(newPos.getY() + incrementor);
             System.out.println(polje.actorAtPosition(oldPos));
-            newPos.setY(getPos().getY() + incrementorY);
+            newPos.setY(getPos().getY() + incrementor);
         }
-        int incrementorZ = p.getZ() < 0 ? -1 : 1;
-        for (int i = 0; i != p.getZ(); i += incrementorZ) {
+        incrementor = p.getZ() < 0 ? -1 : 1;
+        for (int i = 0; i != p.getZ(); i += incrementor) {
 
-            oldPos.setZ(newPos.getZ() + incrementorZ);
+            oldPos.setZ(newPos.getZ() + incrementor);
             System.out.println(polje.actorAtPosition(oldPos));
-            newPos.setZ(getPos().getZ() + incrementorZ);
+            newPos.setZ(getPos().getZ() + incrementor);
         }
         setPos(newPos);
 
