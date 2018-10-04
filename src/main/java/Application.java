@@ -220,6 +220,20 @@ class Human extends Actor {
         this.dmg = dmg;
     }
 
+    public boolean isHit(Vector3 vector3){
+        if(polje.isPlayerAtPosition(vector3)){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    public void checkStatus(){
+        polje.playerHit();
+        polje.kill();
+    }
+
     @Override
     public void move(Vector3 p) {
         Vector3 newPos = new Vector3();
@@ -234,10 +248,9 @@ class Human extends Actor {
         newPos.setZ(getPos().getZ() + p.getZ());
 
 
-        if (polje.isPlayerAtPosition(newPos)) {
+        if (isHit(newPos)) {
             setPos(newPos);
-            polje.playerHit();
-            polje.kill();
+            checkStatus();
             setPos(oldPos);
 
         } else {
