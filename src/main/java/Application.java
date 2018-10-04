@@ -20,12 +20,17 @@ public class Application {
         Vector3 y = new Vector3(1, 0, 0);
         Vector3 z = new Vector3(0, 0, 1);
 
+        Vector3 w = new Vector3(-1, -1, -1);
         Car auto = new Car();
+        field.setAuto(auto);
+        auto.move(w);
+
 
         field.setPlayer1(player1);
         field.setPlayer2(player2);
         field.setPlayer3(player3);
-        field.setAuto(auto);
+
+
 /*
         player1.setPolje(field);
         player2.setPolje(field);
@@ -33,17 +38,16 @@ public class Application {
         auto.setPolje(field);
 */
 
-        Vector3 c = new Vector3(1, 0, 0);
+
 
 
         player1.move(x);
-        player2.move(y);
-        player2.move(y);
-        player2.move(y);
+        player2.move(z);
 
-        player3.move(z);
+        player3.move(y);
+        player3.move(y);
 
-        auto.move(c);
+
         field.kill();
 
         field.carHit();
@@ -231,9 +235,10 @@ class Human extends Actor {
 
 
         if (polje.isPlayerAtPosition(newPos)) {
-            setPos(oldPos);
+            setPos(newPos);
             polje.playerHit();
             polje.kill();
+            setPos(oldPos);
 
         } else {
             setPos(newPos);
@@ -473,18 +478,31 @@ class Polje {
 
     }
 
+    public void checkDmg(Human player){
+
+        if(player!=player1 && player1.getPos().equals(player.getPos())){
+            dmg(player, player1);
+            player.isAlive();
+        }
+        else if(player!= player2 && player2.getPos().equals(player.getPos())){
+            dmg(player, player2);
+            player.isAlive();
+        }
+        else if(player!= player3 && player3.getPos().equals(player.getPos())){
+            dmg(player, player3);
+            player.isAlive();
+        }
+
+    }
 
     public void playerHit() {
 
         if (player1 != null && isPlayerAtPosition(player1.getPos())) {
-            dmg(player1);
-            player1.isAlive();
+            checkDmg(player1);
         } else if (player2 != null && isPlayerAtPosition(player2.getPos())) {
-            dmg(player2);
-            player2.isAlive();
+            checkDmg(player2);
         } else if (player3 != null && isPlayerAtPosition(player3.getPos())) {
-            dmg(player3);
-            player3.isAlive();
+            checkDmg(player3);
         }
     }
 
@@ -509,9 +527,9 @@ class Polje {
 
 
     //pretpostavljam da sam trebao staviti player.setHp(player.getHp - someotherplayer.getDmg());
-    public void dmg(Human player) {
-        player.setHp(player.getHp() - 2);
-        System.out.println(String.format("%s took %d damage, and now has %dhp", player.getName(), 2, player.getHp()));
+    public void dmg(Human victim, Human aggressor) {
+        victim.setHp(victim.getHp() - aggressor.getDmg());
+        System.out.println(String.format("%s took %d damage from %s, and now has %dhp", victim.getName(), 2, aggressor.getName(), victim.getHp()));
     }
 
 
