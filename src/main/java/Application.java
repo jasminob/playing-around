@@ -1,8 +1,6 @@
 import java.util.Objects;
 
 
-
-
 public class Application {
 
 
@@ -12,7 +10,7 @@ public class Application {
     }
 }
 
-class Coordiantes{
+class Coordiantes {
     int x, y;
 
     public int getX() {
@@ -31,14 +29,15 @@ class Coordiantes{
         this.y = y;
     }
 }
-class Ship{
+
+class Ship {
 
     private Coordiantes pos;
     private int length;
     private int direction;
 
-    public Ship(int length){
-        this.length=length;
+    public Ship(int length) {
+        this.length = length;
     }
 
     public Coordiantes getPos() {
@@ -50,29 +49,29 @@ class Ship{
     }
 }
 
-class Player{
+class Player {
     private int[] shipLength = {1, 2, 3};
     private int numberShips = 3;
 
     private Ship[] ship;
 
-    public Player(){
+    public Player() {
 
-        for(int i = 0; i<numberShips; i++){
+        for (int i = 0; i < numberShips; i++) {
 
             Ship shipBucket = new Ship(shipLength[i]);
-            ship[i]= shipBucket;
+            ship[i] = shipBucket;
         }
     }
 
 }
 
-class Board{
+class Board {
     private int x = 10;
     private int y = 10;
 
 
-    public void setShip(Ship ship){
+    public void setShip(Ship ship) {
 
     }
 
