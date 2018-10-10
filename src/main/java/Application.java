@@ -1,78 +1,125 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
-
+import java.util.Scanner;
 
 public class Application {
+
+    public static List<Integer> IzdvojiSimetricneTernarne(List<Integer> vektorCijelih, Boolean val) {
+
+        List<Integer> newList = new ArrayList<>();
+        Boolean checker = false;
+        int factor = 1;
+
+
+
+
+
+        List<Integer> ternaryLoop = new ArrayList<>();
+        List<Integer> result = new ArrayList<>();
+
+
+        if (val) {
+
+            for (int j = 0; j < vektorCijelih.size(); j++) {
+                for (int i = 2; i <= vektorCijelih.get(j) / 2; ++i) {
+                    if (vektorCijelih.get(j) % i == 0) {
+                        checker = true;
+                    }
+                }
+                if (!checker) {
+                    newList.add(vektorCijelih.get(j));
+
+                }
+                    checker = false;
+                }
+            } else {
+            for (int j = 0; j < vektorCijelih.size(); j++) {
+                for (int i = 2; i <= vektorCijelih.get(j) / 2; ++i) {
+                    if (vektorCijelih.get(j) % i == 0) {
+                        checker = true;
+                    }
+                }
+                if (checker) {
+                    newList.add(vektorCijelih.get(j));
+
+                }
+                checker = false;
+            }
+
+        }
+
+
+       /* int c = 0;
+
+        for(int l = 0; l<newList.size(); l++) {
+            int b = newList.get(l);
+
+
+           while(b > 0) {
+
+                c += b % 3 * factor;
+                b = b / 3;
+                factor = factor * 10;
+
+
+            }
+
+            result.add(c);
+
+        }
+*/
+
+        System.out.println(result);
+        return newList;
+    }
+
+    public static long Ternary(int input) {
+        long result = 0, factor = 1;
+        while (input > 0) {
+            result += input % 3 * factor;
+            input = input / 3;
+            factor = factor * 10;
+        }
+        return result;
+    }
+
+    public static void Palindrome(int input) {
+        int reversedInt = 0, rem, oldInt;
+
+        oldInt = input;
+
+        for (; input != 0; input /= 10) {
+            rem = input % 10;
+            reversedInt = reversedInt * 10 + rem;
+        }
+
+        if (oldInt == reversedInt) {
+            //Palindrome
+
+        } else {
+            //
+        }
+
+    }
 
 
     public static void main(String[] args) {
 
+        List<Integer> x = new ArrayList<>();
+
+        x.add(2);
+        x.add(3);
+        x.add(4);
+        x.add(5);
+        x.add(6);
+        x.add(7);
+        x.add(8);
+
+
+        System.out.println(IzdvojiSimetricneTernarne(x, true));
 
     }
 }
 
-class Coordiantes {
-    int x, y;
 
-    public int getX() {
-        return x;
-    }
-
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public void setY(int y) {
-        this.y = y;
-    }
-}
-
-class Ship {
-
-    private Coordiantes pos;
-    private int length;
-    private int direction;
-
-    public Ship(int length) {
-        this.length = length;
-    }
-
-    public Coordiantes getPos() {
-        return pos;
-    }
-
-    public void setPos(Coordiantes pos) {
-        this.pos = pos;
-    }
-}
-
-class Player {
-    private int[] shipLength = {1, 2, 3};
-    private int numberShips = 3;
-
-    private Ship[] ship;
-
-    public Player() {
-
-        for (int i = 0; i < numberShips; i++) {
-
-            Ship shipBucket = new Ship(shipLength[i]);
-            ship[i] = shipBucket;
-        }
-    }
-
-}
-
-class Board {
-    private int x = 10;
-    private int y = 10;
-
-
-    public void setShip(Ship ship) {
-
-    }
-
-}
