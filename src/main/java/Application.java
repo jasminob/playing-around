@@ -25,8 +25,10 @@ public class Application {
                     }
                 }
                 if (!checker) {
-                    newList.add(vektorCijelih.get(j));
-                    System.out.println(Palindrome(vektorCijelih.get(j)));
+
+                    if (Palindrome(Ternary(vektorCijelih.get(j)))) {
+                        newList.add(vektorCijelih.get(j));
+                    }
 
                 }
                 checker = false;
@@ -39,8 +41,11 @@ public class Application {
                     }
                 }
                 if (checker) {
-                    newList.add(vektorCijelih.get(j));
-                    System.out.println(Palindrome(vektorCijelih.get(j)));
+
+                    if (Palindrome(Ternary(vektorCijelih.get(j)))) {
+                        newList.add(vektorCijelih.get(j));
+                    }
+
 
                 }
                 checker = false;
@@ -49,39 +54,30 @@ public class Application {
         }
 
 
-       /* int c = 0;
-       int factor = 1;
-
-        for(int l = 0; l<newList.size(); l++) {
-            int b = newList.get(l);
-
-
-           while(b > 0) {
-
-                c += b % 3 * factor;
-                b = b / 3;
-                factor = factor * 10;
-
-
-            }
-
-            result.add(c);
-
-        }
-*/
-
-
         return newList;
     }
 
-    public static long Ternary(int input) {
-        long result = 0, factor = 1;
+    public static int Ternary(int input) {
+        int result = 0, factor = 1;
+        boolean positive = true;
+
+        if (input < 0) {
+            input = Math.abs(input);
+            positive = false;
+        }
+
         while (input > 0) {
             result += input % 3 * factor;
             input = input / 3;
             factor = factor * 10;
         }
-        return result;
+
+        if (positive) {
+            return result;
+        } else {
+            return result * -1;
+        }
+
     }
 
     public static boolean Palindrome(int input) {
@@ -104,6 +100,20 @@ public class Application {
 
     }
 
+    /* int c = 0;
+       int factor = 1;
+        for(int l = 0; l<newList.size(); l++) {
+            int b = newList.get(l);
+           while(b > 0) {
+                c += b % 3 * factor;
+                b = b / 3;
+                factor = factor * 10;
+
+            }
+            result.add(c);
+        }
+*/
+
 
     public static void main(String[] args) {
 
@@ -114,13 +124,13 @@ public class Application {
         x.add(4);
         x.add(5);
         x.add(6);
-        x.add(7);
+        x.add(13);
         x.add(8);
         x.add(-454);
         x.add(-18);
 
 
-        System.out.println(IzdvojiSimetricneTernarne(x, false));
+        System.out.println(IzdvojiSimetricneTernarne(x, true));
 
     }
 }
