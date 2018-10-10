@@ -100,19 +100,7 @@ public class Application {
 
     }
 
-    /* int c = 0;
-       int factor = 1;
-        for(int l = 0; l<newList.size(); l++) {
-            int b = newList.get(l);
-           while(b > 0) {
-                c += b % 3 * factor;
-                b = b / 3;
-                factor = factor * 10;
 
-            }
-            result.add(c);
-        }
-*/
 
 
     public static void main(String[] args) {
