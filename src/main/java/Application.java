@@ -12,10 +12,6 @@ public class Application {
         Boolean checker = false;
 
 
-        List<Integer> ternaryLoop = new ArrayList<>();
-        List<Integer> result = new ArrayList<>();
-
-
         if (val) {
 
             for (int j = 0; j < vektorCijelih.size(); j++) {
@@ -26,12 +22,9 @@ public class Application {
                 }
                 if (!checker) {
 
-                    if (Palindrome(Ternary(vektorCijelih.get(j)))) {
+                    if (!newList.contains(vektorCijelih.get(j)) && Palindrome(Ternary(vektorCijelih.get(j)))) {
 
-                        if (!newList.contains(vektorCijelih.get(j))) {
                             newList.add(vektorCijelih.get(j));
-                        }
-
                     }
 
                 }
@@ -46,8 +39,9 @@ public class Application {
                 }
                 if (checker) {
 
-                    if (Palindrome(Ternary(vektorCijelih.get(j)))) {
-                        newList.add(vektorCijelih.get(j));
+                    if (!newList.contains(vektorCijelih.get(j)) && Palindrome(Ternary(vektorCijelih.get(j)))) {
+
+                            newList.add(vektorCijelih.get(j));
                     }
 
 
@@ -112,6 +106,7 @@ public class Application {
         x.add(2);
         x.add(3);
         x.add(4);
+        x.add(4);
         x.add(5);
         x.add(6);
         x.add(13);
@@ -122,7 +117,7 @@ public class Application {
         x.add(-18);
 
 
-        System.out.println(IzdvojiSimetricneTernarne(x, true));
+        System.out.println(IzdvojiSimetricneTernarne(x, false));
 
     }
 }
