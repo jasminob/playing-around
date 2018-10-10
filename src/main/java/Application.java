@@ -26,6 +26,7 @@ public class Application {
                 }
                 if (!checker) {
                     newList.add(vektorCijelih.get(j));
+                    System.out.println(Palindrome(vektorCijelih.get(j)));
 
                 }
                 checker = false;
@@ -68,7 +69,7 @@ public class Application {
         }
 */
 
-        System.out.println(result);
+
         return newList;
     }
 
@@ -82,7 +83,7 @@ public class Application {
         return result;
     }
 
-    public static void Palindrome(int input) {
+    public static boolean Palindrome(int input) {
         int reversedInt = 0, rem, oldInt;
 
         oldInt = input;
@@ -93,10 +94,11 @@ public class Application {
         }
 
         if (oldInt == reversedInt) {
-            //Palindrome
+
+            return true;
 
         } else {
-            //
+            return false;
         }
 
     }
@@ -113,6 +115,8 @@ public class Application {
         x.add(6);
         x.add(7);
         x.add(8);
+        x.add(56);
+        x.add(17);
 
 
         System.out.println(IzdvojiSimetricneTernarne(x, true));
