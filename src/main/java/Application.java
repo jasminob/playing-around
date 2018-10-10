@@ -12,9 +12,6 @@ public class Application {
         int factor = 1;
 
 
-
-
-
         List<Integer> ternaryLoop = new ArrayList<>();
         List<Integer> result = new ArrayList<>();
 
@@ -31,9 +28,9 @@ public class Application {
                     newList.add(vektorCijelih.get(j));
 
                 }
-                    checker = false;
-                }
-            } else {
+                checker = false;
+            }
+        } else {
             for (int j = 0; j < vektorCijelih.size(); j++) {
                 for (int i = 2; i <= vektorCijelih.get(j) / 2; ++i) {
                     if (vektorCijelih.get(j) % i == 0) {
