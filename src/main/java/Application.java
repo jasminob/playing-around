@@ -27,7 +27,11 @@ public class Application {
                 if (!checker) {
 
                     if (Palindrome(Ternary(vektorCijelih.get(j)))) {
-                        newList.add(vektorCijelih.get(j));
+
+                        if (!newList.contains(vektorCijelih.get(j))) {
+                            newList.add(vektorCijelih.get(j));
+                        }
+
                     }
 
                 }
@@ -101,8 +105,6 @@ public class Application {
     }
 
 
-
-
     public static void main(String[] args) {
 
         List<Integer> x = new ArrayList<>();
@@ -113,6 +115,8 @@ public class Application {
         x.add(5);
         x.add(6);
         x.add(13);
+        x.add(13);
+        x.add(2);
         x.add(8);
         x.add(-454);
         x.add(-18);
