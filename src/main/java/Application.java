@@ -19,7 +19,7 @@ public class Application {
         if (val) {
 
             for (int j = 0; j < vektorCijelih.size(); j++) {
-                for (int i = 2; i <= vektorCijelih.get(j) / 2; ++i) {
+                for (int i = 2; i <= Math.abs(vektorCijelih.get(j)) / 2; ++i) {
                     if (vektorCijelih.get(j) % i == 0) {
                         checker = true;
                     }
@@ -33,13 +33,14 @@ public class Application {
             }
         } else {
             for (int j = 0; j < vektorCijelih.size(); j++) {
-                for (int i = 2; i <= vektorCijelih.get(j) / 2; ++i) {
+                for (int i = 2; i <= Math.abs(vektorCijelih.get(j)) / 2; ++i) {
                     if (vektorCijelih.get(j) % i == 0) {
                         checker = true;
                     }
                 }
                 if (checker) {
                     newList.add(Math.abs(vektorCijelih.get(j)));
+                    System.out.println(Palindrome(Math.abs(vektorCijelih.get(j))));
 
                 }
                 checker = false;
@@ -116,10 +117,10 @@ public class Application {
         x.add(7);
         x.add(8);
         x.add(56);
-        x.add(-17);
+        x.add(-18);
 
 
-        System.out.println(IzdvojiSimetricneTernarne(x, true));
+        System.out.println(IzdvojiSimetricneTernarne(x, false));
 
     }
 }
