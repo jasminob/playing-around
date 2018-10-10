@@ -24,7 +24,7 @@ public class Application {
 
                     if (!newList.contains(vektorCijelih.get(j)) && Palindrome(Ternary(vektorCijelih.get(j)))) {
 
-                            newList.add(vektorCijelih.get(j));
+                        newList.add(vektorCijelih.get(j));
                     }
 
                 }
@@ -41,7 +41,7 @@ public class Application {
 
                     if (!newList.contains(vektorCijelih.get(j)) && Palindrome(Ternary(vektorCijelih.get(j)))) {
 
-                            newList.add(vektorCijelih.get(j));
+                        newList.add(vektorCijelih.get(j));
                     }
 
 
