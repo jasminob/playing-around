@@ -25,8 +25,8 @@ public class Application {
                     }
                 }
                 if (!checker) {
-                    newList.add(Math.abs(vektorCijelih.get(j)));
-                    System.out.println(Palindrome(Math.abs(vektorCijelih.get(j))));
+                    newList.add(vektorCijelih.get(j));
+                    System.out.println(Palindrome(vektorCijelih.get(j)));
 
                 }
                 checker = false;
@@ -39,8 +39,8 @@ public class Application {
                     }
                 }
                 if (checker) {
-                    newList.add(Math.abs(vektorCijelih.get(j)));
-                    System.out.println(Palindrome(Math.abs(vektorCijelih.get(j))));
+                    newList.add(vektorCijelih.get(j));
+                    System.out.println(Palindrome(vektorCijelih.get(j)));
 
                 }
                 checker = false;
@@ -85,12 +85,12 @@ public class Application {
     }
 
     public static boolean Palindrome(int input) {
-        int reversedInt = 0, rem, oldInt;
+        int reversedInt = 0, rem, oldInt, newInt;
+        newInt = Math.abs(input);
+        oldInt = Math.abs(input);
 
-        oldInt = input;
-
-        for (; input != 0; input /= 10) {
-            rem = input % 10;
+        for (; newInt != 0; newInt /= 10) {
+            rem = newInt % 10;
             reversedInt = reversedInt * 10 + rem;
         }
 
@@ -116,7 +116,7 @@ public class Application {
         x.add(6);
         x.add(7);
         x.add(8);
-        x.add(56);
+        x.add(-454);
         x.add(-18);
 
 
