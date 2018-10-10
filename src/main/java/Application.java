@@ -85,12 +85,12 @@ public class Application {
     }
 
     public static boolean Palindrome(int input) {
-        int reversedInt = 0, rem, oldInt, newInt;
-        newInt = Math.abs(input);
+        int reversedInt = 0, rem, oldInt;
+        input = Math.abs(input);
         oldInt = Math.abs(input);
 
-        for (; newInt != 0; newInt /= 10) {
-            rem = newInt % 10;
+        for (; input != 0; input /= 10) {
+            rem = input % 10;
             reversedInt = reversedInt * 10 + rem;
         }
 
