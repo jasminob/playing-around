@@ -3,13 +3,13 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
+
 public class Application {
 
     public static List<Integer> IzdvojiSimetricneTernarne(List<Integer> vektorCijelih, Boolean val) {
 
         List<Integer> newList = new ArrayList<>();
         Boolean checker = false;
-
 
 
         List<Integer> ternaryLoop = new ArrayList<>();
@@ -25,8 +25,8 @@ public class Application {
                     }
                 }
                 if (!checker) {
-                    newList.add(vektorCijelih.get(j));
-                    System.out.println(Palindrome(vektorCijelih.get(j)));
+                    newList.add(Math.abs(vektorCijelih.get(j)));
+                    System.out.println(Palindrome(Math.abs(vektorCijelih.get(j))));
 
                 }
                 checker = false;
@@ -39,7 +39,7 @@ public class Application {
                     }
                 }
                 if (checker) {
-                    newList.add(vektorCijelih.get(j));
+                    newList.add(Math.abs(vektorCijelih.get(j)));
 
                 }
                 checker = false;
@@ -116,7 +116,7 @@ public class Application {
         x.add(7);
         x.add(8);
         x.add(56);
-        x.add(17);
+        x.add(-17);
 
 
         System.out.println(IzdvojiSimetricneTernarne(x, true));
