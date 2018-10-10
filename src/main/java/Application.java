@@ -9,7 +9,7 @@ public class Application {
 
         List<Integer> newList = new ArrayList<>();
         Boolean checker = false;
-        int factor = 1;
+
 
 
         List<Integer> ternaryLoop = new ArrayList<>();
@@ -48,6 +48,7 @@ public class Application {
 
 
        /* int c = 0;
+       int factor = 1;
 
         for(int l = 0; l<newList.size(); l++) {
             int b = newList.get(l);
