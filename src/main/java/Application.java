@@ -1,125 +1,185 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Scanner;
+import java.lang.reflect.Array;
+import java.util.*;
 
+/*
+Koristeći IntelliJ IDEA napraviti projekat pod nazivom "rpr-t1-z2".
+Napravite program koji naekranu ispisuje sve brojeve između 1 i n koji su djeljivi sa sumom svojih cifara, pri čemu se ​nunosi sa tastature.
+U programu se obavezno treba nalaziti funkcija ​sumaCifara​​.
+Po završetkuzadatak treba postaviti na GitHub koristeći isključivo funkcionalnosti IntelliJ IDEA okruženja
+ */
 
 public class Application {
 
-    public static List<Integer> IzdvojiSimetricneTernarne(List<Integer> vektorCijelih, Boolean val) {
+    public static void kreiranjeNovogPredmeta() {
+        Predmet p = new Predmet("Bla", 544, 10);
+    }
 
-        List<Integer> newList = new ArrayList<>();
-        Boolean checker = false;
+    public static void kreiranjeNovogStudenta() {
+        Student s = new Student("Bla", "Blasic", 500);
+    }
 
+    public static void upisStudentaNaPredmet(Student s, Predmet p) {
+        p.upisi(s);
+    }
 
-        if (val) {
+    public static void ispisStudentaSaPredmeta(Student s, Predmet p) {
+        p.ispisi(s);
+    }
 
-            for (int j = 0; j < vektorCijelih.size(); j++) {
-                for (int i = 2; i <= Math.abs(vektorCijelih.get(j)) / 2; ++i) {
-                    if (vektorCijelih.get(j) % i == 0) {
-                        checker = true;
-                    }
-                }
-                if (!checker) {
+    public static void brisanjeStudenta(Student s, Predmet p) {
 
-                    if (!newList.contains(vektorCijelih.get(j)) && Palindrome(Ternary(vektorCijelih.get(j)))) {
-
-                        newList.add(vektorCijelih.get(j));
-                    }
-
-                }
-                checker = false;
+        Student[] noviNiz = new Student[p.getStudents().length - 1];
+        int index = -1;
+        for (int i = 0; i < p.getStudents().length; i++) {
+            if (p.getStudents()[i] == s) {
+                index = i;
             }
-        } else {
-            for (int j = 0; j < vektorCijelih.size(); j++) {
-                for (int i = 2; i <= Math.abs(vektorCijelih.get(j)) / 2; ++i) {
-                    if (vektorCijelih.get(j) % i == 0) {
-                        checker = true;
-                    }
-                }
-                if (checker) {
-
-                    if (!newList.contains(vektorCijelih.get(j)) && Palindrome(Ternary(vektorCijelih.get(j)))) {
-
-                        newList.add(vektorCijelih.get(j));
-                    }
-
-
-                }
-                checker = false;
+        }
+        int j = 0;
+        for (int i = 0; i < p.getStudents().length; i++) {
+            if (index != -1) {
+                noviNiz[j] = p.getStudents()[i];
+                j++;
             }
-
         }
 
-
-        return newList;
-    }
-
-    public static int Ternary(int input) {
-        int result = 0, factor = 1;
-        boolean positive = true;
-
-        if (input < 0) {
-            input = Math.abs(input);
-            positive = false;
-        }
-
-        while (input > 0) {
-            result += input % 3 * factor;
-            input = input / 3;
-            factor = factor * 10;
-        }
-
-        if (positive) {
-            return result;
-        } else {
-            return result * -1;
-        }
 
     }
 
-    public static boolean Palindrome(int input) {
-        int reversedInt = 0, rem, oldInt;
-        input = Math.abs(input);
-        oldInt = Math.abs(input);
-
-        for (; input != 0; input /= 10) {
-            rem = input % 10;
-            reversedInt = reversedInt * 10 + rem;
-        }
-
-        if (oldInt == reversedInt) {
-
-            return true;
-
-        } else {
-            return false;
-        }
-
+    public static void brisanjePredmeta() {
     }
 
+    public static void spisakStudentaNaPredmetu() {
+
+    }
 
     public static void main(String[] args) {
 
-        List<Integer> x = new ArrayList<>();
-
-        x.add(2);
-        x.add(3);
-        x.add(4);
-        x.add(4);
-        x.add(5);
-        x.add(6);
-        x.add(13);
-        x.add(13);
-        x.add(2);
-        x.add(8);
-        x.add(-454);
-        x.add(-18);
-
-
-        System.out.println(IzdvojiSimetricneTernarne(x, false));
 
     }
+}
+
+class Student {
+    private String firstName;
+    private String lastName;
+    private int indexNumber;
+
+    public Student(String firstName, String lastName, int indexNumber) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.indexNumber = indexNumber;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public int getIndexNumber() {
+        return indexNumber;
+    }
+
+    public void setIndexNumber(int indexNumber) {
+        this.indexNumber = indexNumber;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s %s (%d)", lastName, firstName, indexNumber);
+    }
+
+}
+
+
+class Predmet {
+    private Student[] students;
+    private String nazivPredmeta;
+    private int sifraPredmeta;
+    private int maxBrojStudenata;
+
+
+    public Predmet(String nazivPredmeta, int sifraPredmeta, int maxBrojStudenata) {
+        this.nazivPredmeta = nazivPredmeta;
+        this.sifraPredmeta = sifraPredmeta;
+        this.maxBrojStudenata = maxBrojStudenata;
+    }
+
+    public Student[] getStudents() {
+        return students;
+    }
+
+    public String getNazivPredmeta() {
+        return nazivPredmeta;
+    }
+
+    public void setNazivPredmeta(String nazivPredmeta) {
+        this.nazivPredmeta = nazivPredmeta;
+    }
+
+    public int getSifraPredmeta() {
+        return sifraPredmeta;
+    }
+
+    public void setSifraPredmeta(int sifraPredmeta) {
+        this.sifraPredmeta = sifraPredmeta;
+    }
+
+    public int getMaxBrojStudenata() {
+        return maxBrojStudenata;
+    }
+
+
+    public void upisi(Student student) {
+
+        Student[] noviNiz = new Student[students.length + 1];
+        if (students.length == maxBrojStudenata) {
+            return;
+        }
+
+        for (int i = 0; i < students.length; i++) {
+            noviNiz[i] = students[i];
+        }
+
+        noviNiz[students.length] = student;
+
+        students = noviNiz;
+    }
+
+
+    public void ispisi(Student student) {
+        Student[] noviNiz = new Student[students.length - 1];
+        int index = -1;
+
+        for (int i = 0; i < students.length; i++) {
+            if (students[i] == student) {
+                index = i;
+            }
+        }
+        int j = 0;
+        if (index == -1) {
+            return;
+        }
+        for (int i = 0; i < students.length; i++) {
+            if (index != i) {
+                noviNiz[j] = students[i];
+                j++;
+            }
+        }
+        students = noviNiz;
+    }
+
+
 }
 
 
