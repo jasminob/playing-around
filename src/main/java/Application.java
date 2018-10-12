@@ -23,7 +23,7 @@ public class Application {
 
     public static Predmet kreiranjeNovogPredmeta() {
 
-        return new Predmet(new Student[]{}, "Whatever", 5, 3);
+        return new Predmet(new Student[]{}, "Whatever", 5, 3, 1);
 
     }
 
@@ -69,7 +69,7 @@ public class Application {
 
     public static void main(String[] args) {
 
-        Predmet x = new Predmet(new Student[]{}, "test", 5, 10);
+        Predmet x = new Predmet(new Student[]{}, "test", 5, 5, 1);
         Student w = new Student("Neko", "Neko", 555);
         upisStudentaNaPredmet(kreiranjeNovogStudenta(), x);
         upisStudentaNaPredmet(kreiranjeNovogStudenta(), x);
@@ -81,6 +81,11 @@ public class Application {
 
         ispisStudentaSaPredmeta(w, x);
         System.out.println(spisakStudentaNaPredmetu(x));
+
+        Odsijek test = new Odsijek("Pikachu");
+
+
+        System.out.println(test.getMaxBrojStudenataZaGodinu(1));
     }
 }
 
@@ -132,14 +137,18 @@ class Predmet {
     private String nazivPredmeta;
     private int sifraPredmeta;
     private int maxBrojStudenata;
+    private int godina;
 
 
-    public Predmet(Student[] students, String nazivPredmeta, int sifraPredmeta, int maxBrojStudenata) {
+
+    public Predmet(Student[] students, String nazivPredmeta, int sifraPredmeta, int maxBrojStudenata, int godina) {
         this.students = students;
         this.nazivPredmeta = nazivPredmeta;
         this.sifraPredmeta = sifraPredmeta;
         this.maxBrojStudenata = maxBrojStudenata;
+        this.godina = godina;
     }
+
 
     public Student[] getStudents() {
         return students;
@@ -165,6 +174,9 @@ class Predmet {
         return maxBrojStudenata;
     }
 
+    public int getGodina() {
+        return godina;
+    }
 
     public void upisi(Student student) {
 
@@ -216,4 +228,54 @@ class Predmet {
     }
 }
 
+class Odsijek{
+    private String nazivOdsijeka;
+    private Predmet[] predmets = new Predmet[0];
+
+
+    public Odsijek(String nazivOdsijeka) {
+        this.nazivOdsijeka = nazivOdsijeka;
+
+    }
+
+    public String getNazivOdsijeka() {
+        return nazivOdsijeka;
+    }
+
+
+
+    public int getMaxBrojStudenataZaGodinu(int godina){
+
+        int result = -1;
+
+        for(int i = 0; i < predmets.length; i++){
+
+           if (godina == predmets[i].getGodina()) {
+               int min = predmets[i].getMaxBrojStudenata();
+               if (result == -1) {
+                   result = min;
+                }
+               if (result > min) {
+                   result = min;
+               }
+           }
+        }
+        return result;
+    }
+
+}
+
+class Fakultet{
+    String nazivFakulteta;
+    Student[] students = new Student[0];
+    Odsijek[] odsijeks = new Odsijek[0];
+
+    public Fakultet(String nazivFakulteta) {
+        this.nazivFakulteta = nazivFakulteta;
+    }
+
+    public String getNazivFakulteta() {
+        return nazivFakulteta;
+    }
+}
 
