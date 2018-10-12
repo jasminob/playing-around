@@ -66,7 +66,6 @@ public class Application {
         System.out.println(spisakStudentaNaPredmetu(x));
 
         ispisStudentaSaPredmeta(w, x);
-
         System.out.println(spisakStudentaNaPredmetu(x));
     }
 }
