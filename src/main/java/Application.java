@@ -16,6 +16,9 @@ u sljedecem formatu:
 
  */
 
+import java.util.Arrays;
+import java.util.OptionalDouble;
+
 public class Application {
 
     public static Predmet kreiranjeNovogPredmeta() {
@@ -263,6 +266,7 @@ class Odsijek{
 }
 
 class Fakultet{
+
     String nazivFakulteta;
     Student[] students = new Student[0];
     Odsijek[] odsijeks = new Odsijek[0];
@@ -274,5 +278,52 @@ class Fakultet{
     public String getNazivFakulteta() {
         return nazivFakulteta;
     }
+
+    public void registrujOdsijek(Odsijek o){
+        boolean check = false;
+        Odsijek[] noviNiz = new Odsijek[odsijeks.length+1];
+
+        for(int i = 0; i < odsijeks.length; i++){
+            if(odsijeks[i] == o){
+                check = true;
+            }
+        }
+
+        if(!check){
+            noviNiz[odsijeks.length] = o;
+            odsijeks = noviNiz;
+        }
+
+
+    }
+
+    public void upisiStudent(Student s, String nazivOdsijeka){
+
+        int j = 0;
+
+        for(int i = 0; i < odsijeks.length; i++){
+            if(odsijeks[i].getNazivOdsijeka().equals(nazivOdsijeka)){
+                students[j] = s;
+                j++;
+            }
+        }
+    }
+
+
+    @Override
+    public String toString() {
+
+        String buffer = new String();
+
+        for (int i = 0; i < students.length; i++) {
+            buffer += (i + 1) + ". " + students[i].toString() + "je student " + [INSERT_YEAR] + " godine na odsijeku "
+                    + odsijeks[i].getNazivOdsijeka() + "\n";
+        }
+        return buffer;
+
+
+    }
 }
+
+
 
