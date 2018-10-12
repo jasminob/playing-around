@@ -1,22 +1,19 @@
 /*
 Prosiriti program ispod sa sljedecim:
 
-Napraviti klasu Odsijek koja ce imati sljedece fields:
-- naziv odsijeka (sa getterom, postavlja se pri constructoru i ne moze se kasnije izmjeniti)
-- niz predmeta koji se drze na ovom odsijeku
-- metoda int getMaxBrojStudenataZaGodinu(int godina) koja ce dati maksimalan broj studenata koji bi se mogao upisati
-  u nekoj godini. Taj podatak nece cuvati u varijabli nego ce ga racunati svaki put ispocetka tako sto prodjes
-  kroz niz predmeta i vidis koliko maksimalno mozes upisati studenata da slusaju SVE predmete na odredjenoj godini
-  (npr ako na prvoj godini ima 10 predmeta, i od toga 9 predmeta prima 100 studenata, a deseti prima 50, onda je
-  max broj studenata na prvoj godini 50, jer svi moraju slusati svih 10 predmeta)
+U klasu Fakultet dodati metode:
+  - void registrujOdsijek(Odsijek o) - registruje dati odsijek u fakultet, s tim da prvo provjeri da li ima odsijek sa
+    tim imenom. Ako ima, ne radi nista
+  - void upisiStudent(Student s, String nazivOdsijeka) - upisuje datog studenta u odsijek sa datim imenom.
+    Kada se student upise u neki odsijek, on se upisuje u sve predmete sa prve godine tog odsijeka
 
-Napraviti klasu Fakultet koja ce imati sljedece fields:
-- naziv fakulteta (samo getter, postavlja se pri constructoru i ne moze se kasnije izmjeniti)
-- niz studenata koji su upisani na fakultet (bez get i set, pri kreiranju objekta se kreira kao prazan niz)
-- niz odsijeka koji se realizuju na fakultetu (isto kao niz studenata)
+Treba jos podrzati ispis objekta Fakultet preko System.out.println(fakultet); tako da se ispisu podaci o svim studentima
+u sljedecem formatu:
 
-U klasi Predmet dodati fields:
-- godina, predstavlja godinu na kojoj se ovaj predmet drzi, postavlja se preko constructora i ima samo getter
+1. Ime Prezime (indeks) je student N. godine na odsijeku NAZIV_ODSIJEKA
+2. ....
+3. ....
+
  */
 
 public class Application {
