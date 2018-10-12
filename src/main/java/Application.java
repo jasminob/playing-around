@@ -1,8 +1,22 @@
 /*
-Koristeći IntelliJ IDEA napraviti projekat pod nazivom "rpr-t1-z2".
-Napravite program koji naekranu ispisuje sve brojeve između 1 i n koji su djeljivi sa sumom svojih cifara, pri čemu se ​nunosi sa tastature.
-U programu se obavezno treba nalaziti funkcija ​sumaCifara​​.
-Po završetkuzadatak treba postaviti na GitHub koristeći isključivo funkcionalnosti IntelliJ IDEA okruženja
+Prosiriti program ispod sa sljedecim:
+
+Napraviti klasu Odsijek koja ce imati sljedece fields:
+- naziv odsijeka (sa getterom, postavlja se pri constructoru i ne moze se kasnije izmjeniti)
+- niz predmeta koji se drze na ovom odsijeku
+- metoda int getMaxBrojStudenataZaGodinu(int godina) koja ce dati maksimalan broj studenata koji bi se mogao upisati
+  u nekoj godini. Taj podatak nece cuvati u varijabli nego ce ga racunati svaki put ispocetka tako sto prodjes
+  kroz niz predmeta i vidis koliko maksimalno mozes upisati studenata da slusaju SVE predmete na odredjenoj godini
+  (npr ako na prvoj godini ima 10 predmeta, i od toga 9 predmeta prima 100 studenata, a deseti prima 50, onda je
+  max broj studenata na prvoj godini 50, jer svi moraju slusati svih 10 predmeta)
+
+Napraviti klasu Fakultet koja ce imati sljedece fields:
+- naziv fakulteta (samo getter, postavlja se pri constructoru i ne moze se kasnije izmjeniti)
+- niz studenata koji su upisani na fakultet (bez get i set, pri kreiranju objekta se kreira kao prazan niz)
+- niz odsijeka koji se realizuju na fakultetu (isto kao niz studenata)
+
+U klasi Predmet dodati fields:
+- godina, predstavlja godinu na kojoj se ovaj predmet drzi, postavlja se preko constructora i ima samo getter
  */
 
 public class Application {
