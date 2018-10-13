@@ -1,0 +1,14 @@
+Prosiriti program sa sljedecim:
+
+Napraviti klasu StudentFactory sa jednom jedinom metodom:
+  - public static Student createStudent(String ime, String prezime, int index); koja vraca novog studenta sa datim podacima
+
+Napraviti klasu OdsijekFactory analogno kao StudentFactory (metoda createOdsijek sa analognim osobinama kao createStudent)
+
+Rewrite main tako da koristi ove metode i napuni fakultet odsijecima i studentima.
+
+
+Uraditi dekompoziciju klasa. Dekompozicija podrazumjeva da se svaka klasa nalazi u svom fajlu
+(kao sto je klasa Application unutar fajla Application.java treba da bude klasa Student unutar Student.java fajla)
+
+
