@@ -51,20 +51,20 @@ class Odsijek {
         return result;
     }
 
-    public void upisiStudent(Student s){
+    public void upisiStudent(Student s) {
 
-        for(int i = 0; i<predmets.length; i++){
-            if(predmets[i].getGodina() == 1){
+        for (int i = 0; i < predmets.length; i++) {
+            if (predmets[i].getGodina() == 1) {
                 predmets[i].upisi(s);
             }
         }
     }
 
-    public int brojPotrebnihStudenata(int godina){
+    public int brojPotrebnihStudenata(int godina) {
 
         int result = -1;
-        for(int i = 0; i < predmets.length; i++){
-            if(godina == predmets[i].getGodina()) {
+        for (int i = 0; i < predmets.length; i++) {
+            if (godina == predmets[i].getGodina()) {
                 int min = predmets[i].getMinBrojStudenata();
                 if (result == -1) {
                     result = min;
