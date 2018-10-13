@@ -71,15 +71,11 @@ public class Application {
 
         Predmet x = new Predmet(new Student[]{}, "test", 5, 5, 1);
         Student w = new Student("Neko", "Neko", 555);
-        upisStudentaNaPredmet(kreiranjeNovogStudenta(), x);
-        upisStudentaNaPredmet(kreiranjeNovogStudenta(), x);
-        upisStudentaNaPredmet(kreiranjeNovogStudenta(), x);
-        upisStudentaNaPredmet(w, x);
+        Fakultet f = new Fakultet("ETF");
 
+        OdsijekFactory.createOdsijek("IT").upisiStudent(w);
+        x.upisi(StudentFactory.createStudent("La", "La", 2));
 
-        System.out.println(spisakStudentaNaPredmetu(x));
-
-        ispisStudentaSaPredmeta(w, x);
         System.out.println(spisakStudentaNaPredmetu(x));
 
         Odsijek test = new Odsijek("Pikachu");
@@ -89,261 +85,16 @@ public class Application {
     }
 }
 
-class Student {
-    private String firstName;
-    private String lastName;
-    private int indexNumber;
 
-    public Student(String firstName, String lastName, int indexNumber) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.indexNumber = indexNumber;
-    }
 
-    public String getFirstName() {
-        return firstName;
-    }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
 
-    public String getLastName() {
-        return lastName;
-    }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
 
-    public int getIndexNumber() {
-        return indexNumber;
-    }
 
-    public void setIndexNumber(int indexNumber) {
-        this.indexNumber = indexNumber;
-    }
 
-    @Override
-    public String toString() {
-        return String.format("%s %s (%d)", lastName, firstName, indexNumber);
-    }
 
-}
 
-
-class Predmet {
-    private Student[] students;
-    private String nazivPredmeta;
-    private int sifraPredmeta;
-    private int maxBrojStudenata;
-    private int godina;
-
-
-    public Predmet(Student[] students, String nazivPredmeta, int sifraPredmeta, int maxBrojStudenata, int godina) {
-        this.students = students;
-        this.nazivPredmeta = nazivPredmeta;
-        this.sifraPredmeta = sifraPredmeta;
-        this.maxBrojStudenata = maxBrojStudenata;
-        this.godina = godina;
-    }
-
-
-    public Student[] getStudents() {
-        return students;
-    }
-
-    public String getNazivPredmeta() {
-        return nazivPredmeta;
-    }
-
-    public void setNazivPredmeta(String nazivPredmeta) {
-        this.nazivPredmeta = nazivPredmeta;
-    }
-
-    public int getSifraPredmeta() {
-        return sifraPredmeta;
-    }
-
-    public void setSifraPredmeta(int sifraPredmeta) {
-        this.sifraPredmeta = sifraPredmeta;
-    }
-
-    public int getMaxBrojStudenata() {
-        return maxBrojStudenata;
-    }
-
-    public int getGodina() {
-        return godina;
-    }
-
-    public void upisi(Student student) {
-
-        Student[] noviNiz = new Student[students.length + 1];
-
-        if (students.length == maxBrojStudenata) {
-            return;
-        }
-
-        for (int i = 0; i < students.length; i++) {
-            noviNiz[i] = students[i];
-        }
-
-        noviNiz[students.length] = student;
-        students = noviNiz;
-    }
-
-
-    public void ispisi(Student student) {
-        Student[] noviNiz = new Student[students.length - 1];
-        int index = -1;
-
-        for (int i = 0; i < students.length; i++) {
-            if (students[i] == student) {
-                index = i;
-            }
-        }
-        int j = 0;
-        if (index == -1) {
-            return;
-        }
-        for (int i = 0; i < students.length; i++) {
-            if (index != i) {
-                noviNiz[j] = students[i];
-                j++;
-            }
-        }
-        students = noviNiz;
-    }
-
-    @Override
-    public String toString() {
-        String buffer = new String();
-
-        for (int i = 0; i < students.length; i++) {
-            buffer += (i + 1) + ". " + students[i].toString() + "\n";
-        }
-        return buffer;
-    }
-}
-
-class Odsijek {
-    private String nazivOdsijeka;
-    private Predmet[] predmets = new Predmet[0];
-
-
-    public Odsijek(String nazivOdsijeka) {
-        this.nazivOdsijeka = nazivOdsijeka;
-
-    }
-
-    public String getNazivOdsijeka() {
-        return nazivOdsijeka;
-    }
-
-
-    public int getMaxBrojStudenataZaGodinu(int godina) {
-
-        int result = -1;
-
-        for (int i = 0; i < predmets.length; i++) {
-
-            if (godina == predmets[i].getGodina()) {
-                int min = predmets[i].getMaxBrojStudenata();
-                if (result == -1) {
-                    result = min;
-                }
-                if (result > min) {
-                    result = min;
-                }
-            }
-        }
-        return result;
-    }
-
-    public void upisiStudent(Student s){
-
-        for(int i = 0; i<predmets.length; i++){
-            if(predmets[i].getGodina() == 1){
-                predmets[i].upisi(s);
-            }
-        }
-    }
-
-
-
-}
-
-class Fakultet {
-
-    String nazivFakulteta;
-    Student[] students = new Student[0];
-    Odsijek[] odsijeks = new Odsijek[0];
-
-    public Fakultet(String nazivFakulteta) {
-        this.nazivFakulteta = nazivFakulteta;
-    }
-
-    public String getNazivFakulteta() {
-        return nazivFakulteta;
-    }
-
-    public void registrujOdsijek(Odsijek o) {
-        boolean check = false;
-        Odsijek[] noviNiz = new Odsijek[odsijeks.length + 1];
-
-        for (int i = 0; i < odsijeks.length; i++) {
-            if (odsijeks[i] == o) {
-                check = true;
-            }
-            noviNiz[i] = odsijeks[i];
-        }
-
-        if (!check) {
-            noviNiz[odsijeks.length] = o;
-            odsijeks = noviNiz;
-        }
-
-
-    }
-
-    public void upisiStudent(Student s, String nazivOdsijeka) {
-
-        Student[] noviNiz = new Student[students.length+1];
-        boolean check = false;
-
-        for (int i = 0; i < odsijeks.length; i++) {
-            if (odsijeks[i].getNazivOdsijeka().equals(nazivOdsijeka)) {
-                 check = true;
-                 odsijeks[i].upisiStudent(s);
-            }
-
-        }
-
-        for(int i = 0; i < students.length; i++){
-            noviNiz[i] = students[i];
-        }
-        if(check){
-            noviNiz[students.length] = s;
-        }
-        students = noviNiz;
-    }
-
-
- /*   @Override
-    public String toString() {
-
-        String buffer = new String();
-
-        for (int i = 0; i < students.length; i++) {
-            buffer += (i + 1) + ". " + students[i].toString() + "je student " + [INSERT_YEAR]+" godine na odsijeku "
-                    + odsijeks[i].getNazivOdsijeka() + "\n";
-        }
-        return buffer;
-        }
-
-        */
-}
 
 
 
