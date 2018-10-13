@@ -140,7 +140,6 @@ class Predmet {
     private int godina;
 
 
-
     public Predmet(Student[] students, String nazivPredmeta, int sifraPredmeta, int maxBrojStudenata, int godina) {
         this.students = students;
         this.nazivPredmeta = nazivPredmeta;
@@ -228,7 +227,7 @@ class Predmet {
     }
 }
 
-class Odsijek{
+class Odsijek {
     private String nazivOdsijeka;
     private Predmet[] predmets = new Predmet[0];
 
@@ -243,29 +242,39 @@ class Odsijek{
     }
 
 
-
-    public int getMaxBrojStudenataZaGodinu(int godina){
+    public int getMaxBrojStudenataZaGodinu(int godina) {
 
         int result = -1;
 
-        for(int i = 0; i < predmets.length; i++){
+        for (int i = 0; i < predmets.length; i++) {
 
-           if (godina == predmets[i].getGodina()) {
-               int min = predmets[i].getMaxBrojStudenata();
-               if (result == -1) {
-                   result = min;
+            if (godina == predmets[i].getGodina()) {
+                int min = predmets[i].getMaxBrojStudenata();
+                if (result == -1) {
+                    result = min;
                 }
-               if (result > min) {
-                   result = min;
-               }
-           }
+                if (result > min) {
+                    result = min;
+                }
+            }
         }
         return result;
     }
 
+    public void upisiStudent(Student s){
+
+        for(int i = 0; i<predmets.length; i++){
+            if(predmets[i].getGodina() == 1){
+                predmets[i].upisi(s);
+            }
+        }
+    }
+
+
+
 }
 
-class Fakultet{
+class Fakultet {
 
     String nazivFakulteta;
     Student[] students = new Student[0];
@@ -279,17 +288,18 @@ class Fakultet{
         return nazivFakulteta;
     }
 
-    public void registrujOdsijek(Odsijek o){
+    public void registrujOdsijek(Odsijek o) {
         boolean check = false;
-        Odsijek[] noviNiz = new Odsijek[odsijeks.length+1];
+        Odsijek[] noviNiz = new Odsijek[odsijeks.length + 1];
 
-        for(int i = 0; i < odsijeks.length; i++){
-            if(odsijeks[i] == o){
+        for (int i = 0; i < odsijeks.length; i++) {
+            if (odsijeks[i] == o) {
                 check = true;
             }
+            noviNiz[i] = odsijeks[i];
         }
 
-        if(!check){
+        if (!check) {
             noviNiz[odsijeks.length] = o;
             odsijeks = noviNiz;
         }
@@ -297,32 +307,42 @@ class Fakultet{
 
     }
 
-    public void upisiStudent(Student s, String nazivOdsijeka){
+    public void upisiStudent(Student s, String nazivOdsijeka) {
 
-        int j = 0;
+        Student[] noviNiz = new Student[students.length+1];
+        boolean check = false;
 
-        for(int i = 0; i < odsijeks.length; i++){
-            if(odsijeks[i].getNazivOdsijeka().equals(nazivOdsijeka)){
-                students[j] = s;
-                j++;
+        for (int i = 0; i < odsijeks.length; i++) {
+            if (odsijeks[i].getNazivOdsijeka().equals(nazivOdsijeka)) {
+                 check = true;
+                 odsijeks[i].upisiStudent(s);
             }
+
         }
+
+        for(int i = 0; i < students.length; i++){
+            noviNiz[i] = students[i];
+        }
+        if(check){
+            noviNiz[students.length] = s;
+        }
+        students = noviNiz;
     }
 
 
-    @Override
+ /*   @Override
     public String toString() {
 
         String buffer = new String();
 
         for (int i = 0; i < students.length; i++) {
-            buffer += (i + 1) + ". " + students[i].toString() + "je student " + [INSERT_YEAR] + " godine na odsijeku "
+            buffer += (i + 1) + ". " + students[i].toString() + "je student " + [INSERT_YEAR]+" godine na odsijeku "
                     + odsijeks[i].getNazivOdsijeka() + "\n";
         }
         return buffer;
+        }
 
-
-    }
+        */
 }
 
 
