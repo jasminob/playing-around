@@ -1,20 +1,49 @@
 Prosiriti program sa sljedecim:
 
-Napraviti klasu StudentFactory sa jednom jedinom metodom:
-  - public static Student createStudent(String ime, String prezime, int index); koja vraca novog studenta sa datim podacima
-
-Napraviti klasu OdsijekFactory analogno kao StudentFactory (metoda createOdsijek sa analognim osobinama kao createStudent)
-
 Rewrite main tako da koristi ove metode i napuni fakultet odsijecima i studentima.
 
-Uraditi dekompoziciju klasa. Dekompozicija podrazumjeva da se svaka klasa nalazi u svom fajlu
-(kao sto je klasa Application unutar fajla Application.java treba da bude klasa Student unutar Student.java fajla)
+Popraviti toString() od Fakulteta
 
-U klasi Predmet dodati polje int minBrojStudenata koji je po defaultu 0 (ne zadaje se kroz konstruktor, nula je)
-Ako treba da bude druga vrijednost ona ce se postaviti kroz setter.
+Prosiriti funkciju brojPotrebnihStudenata da vraca 0 ako je ispunjen minimalni broj studenata za taj predmet
 
-U klasi Predmet dodati metodu int brojPotrebnihStudenata() koja vraca broj studenata koji se jos moraju upisati u ovaj
-Predmet da bi se mogao drzati.
+Napraviti glavni menu:
 
-U klasi Odsijek takodjer dodati metodu int brojPotrebnihStudenata(int godina) koja vraca broj studenata koji se jos moraju
-upisati u ovaj Odsijek na datu godinu da bi se svi predmeti mogli realizovati (ona radi slicno kao metoda maxBrojStudenata)
+1. Kreiranje novog Fakulteta
+   - pita za potrebne informacije, pa kreira i ubaci u globalni niz fakulteta
+2. Kreiranje novog odsijeka
+   - prije svega trazi odabir fakulteta od vec unesenih, pa onda trazi informacije odsijeka, pa onda ubaci odsijek u odabrani fakultet
+3. Kreiranje novog studenta
+   - prije svega trazi odabir fakulteta od vec unesenih, pa pita za potrebne informacije, pa kreira i ubaci u fakultet
+4. Kreiranje novog predmeta
+   - prije svega trazi odabir fakulteta od vec unesenih, pa pita za potrebne informacije, pa kreira i ubaci u fakultet
+5. Upis studenta na predmet
+   - prije svega trazi odabir fakulteta od vec unesenih, pa onda trazi indeks studenta koji se upisuje
+     pa ukoliko student sa unesenim indeksom ne postoji, prekida i vraca na glavni meni
+     ukoliko postoji, trazi odabir predmeta koje student nije do sada slusao, i upisuje student na odabrani predmet
+6. Brisanje studenta
+   - trazi izbor fakulteta, ispisuje sve studente, pa brise odabranog studenta (ne unosi indeks, nego unosi redni broj, kao glavni meni ispisuje sve studente)
+7. Brisanje odsijeka
+   - trazi izbor fakulteta, ispisuje svaki odsijek kao glavni meni, pa korisnik odabere koji ce se brisati
+8. Brisanje predmeta
+   - trazi izbor fakulteta, izbor odsijeka, izbor predmeta na odsijeku, pa obrise odabrani
+9. Brisanje fakulteta
+   - trazi izbor fakulteta, i brise ga
+10. Ispis svih fakulteta
+   - samo ispise listu fakulteta ( N. Fakultet )
+11. Ispis detalja jednog fakulteta
+   - ispise kao pod (10), ali ispod svakog fakulteta ispise svaki odsijek, npr:
+        1. Elektrotehnicki Fakultet Sarajevo
+            - Racunarstvo i Informatika
+            - Telekomunikacije
+            - Automatika i Elektronika
+            - Energetika
+        2. Saobracajni Fakultet Sarajevo
+            - Neki odsijek
+12. Ispis svih studenata na odsijeku
+    - trazi izbor fakulteta, izbor odsijeka, pa ispisuje sve studente na tom odsijeku (bez duplikata, s tim da se kao duplikat smatra isti broj indeksa)
+13. Ispis svih predmeta na odsijeku
+    - trazi izbor fakulteta, izbor odsijeka, pa ispisuje sve predmete na tom odsijeku
+14. Ispis svih studenata na predmetu
+    - trazi izbor fakulteta, izbor odsijeka, izbor predmeta, pa ispisuje sve studente na tom predmetu (bez duplikata, s tim da se kao duplikat smatra isti broj indeksa)
+15. Izlaz
+    - zatvara aplikaciju
