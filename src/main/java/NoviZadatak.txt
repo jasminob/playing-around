@@ -4,6 +4,19 @@ Rewrite main tako da koristi ove metode i napuni fakultet odsijecima i studentim
 
 Popraviti toString() od Fakulteta
 
+Zadaca:
+- U odsijeku popraviti funkciju getGodinaStudenta tako da prima argument Studenta, implementirati uz
+pomocnu funkciju Odsijek.getPredmeteKojeStudentSlusa(Student s) koja vraca niz predmeta koje student slusa
+Funkcija getGodinaStudenta treba da se svede na nalazenje max elementa niza (po godini) koji vraca pomenuta funkcija.
+- popraviti deleteFakultet i sve slicne funkcije
+
+- meni se treba realizovati ovako:
+    - funkcije koje ispisuju na ekran (user interaction) treba da imaju prefix ui, npr uiDodajFakultet
+      Ove funkcije ne treba da imaju ikakvu pamet, tj one samo rade user interaction, i na osnovu ulaza
+      pozivaju core funkcije (funkcije bez prefiksa ui)
+
+      Kao primjer uzeti kreiranje novog fakulteta sto je vec uradjeno
+
 
 Napraviti glavni menu:
 
@@ -31,13 +44,11 @@ Napraviti glavni menu:
    - samo ispise listu fakulteta ( N. Fakultet )
 11. Ispis detalja jednog fakulteta
    - ispise kao pod (10), ali ispod svakog fakulteta ispise svaki odsijek, npr:
-        1. Elektrotehnicki Fakultet Sarajevo
+        Elektrotehnicki Fakultet Sarajevo
             - Racunarstvo i Informatika
             - Telekomunikacije
             - Automatika i Elektronika
             - Energetika
-        2. Saobracajni Fakultet Sarajevo
-            - Neki odsijek
 12. Ispis svih studenata na odsijeku
     - trazi izbor fakulteta, izbor odsijeka, pa ispisuje sve studente na tom odsijeku (bez duplikata, s tim da se kao duplikat smatra isti broj indeksa)
 13. Ispis svih predmeta na odsijeku

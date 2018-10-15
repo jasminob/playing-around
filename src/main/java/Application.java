@@ -17,6 +17,8 @@ u sljedecem formatu:
  */
 
 import java.io.OutputStream;
+import java.io.PrintStream;
+import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.OptionalDouble;
 import java.util.Scanner;
@@ -118,6 +120,14 @@ public class Application {
         return "";
     }
 
+    private static void uiAddFakultet(PrintStream out, Scanner in) {
+        out.println("Unesite trazene podatke za unos fakulteta");
+        out.println("Naziv? ");
+        String name = in.nextLine();
+        addFakultet(new Fakultet(name));
+    }
+
+
     private static String ispisOdsijeka(String nazivFakulteta) {
 
         /*Odsijek[] result = new Odsijek[5];
@@ -163,7 +173,8 @@ public class Application {
     }
 
     public static void main(String[] args) {
-
+        Scanner in = new Scanner(System.in);
+        PrintStream out = System.out;
 
         Student student = new Student("Test", "What", 5);
       /*
@@ -200,8 +211,7 @@ public class Application {
             int choice = g.nextInt();
             switch (choice) {
                 case 1:
-                    addFakultet(fakultet);
-                    addFakultet(fakultet1);
+                    uiAddFakultet(out, in);
                     break;
                 case 2:
                     System.out.println(ispisFakulteta());
