@@ -4,7 +4,6 @@ Rewrite main tako da koristi ove metode i napuni fakultet odsijecima i studentim
 
 Popraviti toString() od Fakulteta
 
-Prosiriti funkciju brojPotrebnihStudenata da vraca 0 ako je ispunjen minimalni broj studenata za taj predmet
 
 Napraviti glavni menu:
 

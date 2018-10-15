@@ -16,10 +16,14 @@ u sljedecem formatu:
 
  */
 
+import java.io.OutputStream;
 import java.util.Arrays;
 import java.util.OptionalDouble;
+import java.util.Scanner;
 
 public class Application {
+
+    private static Fakultet[] fakultet = new Fakultet[0];
 
     public static Predmet kreiranjeNovogPredmeta() {
 
@@ -63,25 +67,182 @@ public class Application {
         return predmetArr;
     }
 
+
+    private static void uiOdsijek(OutputStream out, Scanner in) {
+
+    }
+
+    private static void uiFakultet(OutputStream out, Scanner in) {
+
+    }
+
+    private static String ispisFakulteta() {
+        //  return fakultet.toString();
+        String buffer = new String();
+        for (int i = 0; i < fakultet.length; i++) {
+            buffer += (i + 1) + ". " + fakultet[i].getNazivFakulteta() + "\n";
+        }
+        return buffer;
+    }
+
+    private static void addFakultet(Fakultet f) {
+        Fakultet[] newFak = new Fakultet[fakultet.length + 1];
+
+
+        for (int i = 0; i < fakultet.length; i++) {
+            newFak[i] = fakultet[i];
+        }
+        newFak[fakultet.length] = f;
+        fakultet = newFak;
+
+    }
+
+    private static void deleteFakultet(Fakultet f) {
+        Fakultet[] newFak = new Fakultet[fakultet.length - 1];
+
+        int counter = 0;
+        for (int i = 0; i < fakultet.length; i++) {
+            if (!fakultet[i].equals(f)) {
+                newFak[counter] = fakultet[i];
+                counter++;
+            }
+        }
+        fakultet = newFak;
+    }
+
     public static String spisakStudentaNaPredmetu(Predmet predmet) {
         return predmet.toString();
     }
 
+    private static String ispisStudenata(String nazivFakulteta, String nazivOdsijeka) {
+        return "";
+    }
+
+    private static String ispisOdsijeka(String nazivFakulteta) {
+
+        /*Odsijek[] result = new Odsijek[5];
+        for(int i = 0; i < fakultet.length; i++){
+            if(fakultet[i].getNazivFakulteta().equals(nazivFakulteta)){
+                for(int j = 0; j<fakultet[i].odsijeks.length; j++){
+                    fakultet[i].odsijeks[j].getNazivOdsijeka();
+                }
+            }
+            result = fakultet[i].odsijeks;
+        }
+        return result.toString();
+        */
+
+
+        String buffer = new String();
+        for (int i = 0; i < fakultet.length; i++) {
+            if (fakultet[i].getNazivFakulteta().equals(nazivFakulteta)) {
+                for (int j = 0; j < fakultet[i].odsijeks.length; j++) {
+
+                    buffer += (i + 1) + ". " + fakultet[i].odsijeks[j].getNazivOdsijeka() + "\n";
+                }
+            }
+
+        }
+        return buffer;
+
+    }
+
+    private static void addOdsijek(String nazivFakulteta, Odsijek odsijek) {
+
+
+        for (int i = 0; i < fakultet.length; i++) {
+            if (fakultet[i].getNazivFakulteta().equals(nazivFakulteta)) {
+                Odsijek[] newOd = new Odsijek[fakultet[i].odsijeks.length + 1];
+                for (int j = 0; j < fakultet[i].odsijeks.length; j++) {
+                    newOd[j] = fakultet[i].odsijeks[j];
+                }
+                newOd[fakultet[i].odsijeks.length] = odsijek;
+                fakultet[i].odsijeks = newOd;
+            }
+        }
+    }
+
     public static void main(String[] args) {
 
-        Predmet x = new Predmet(new Student[]{}, "test", 5, 5, 1);
-        Student w = new Student("Neko", "Neko", 555);
-        Fakultet f = new Fakultet("ETF");
 
-        OdsijekFactory.createOdsijek("IT").upisiStudent(w);
-        x.upisi(StudentFactory.createStudent("La", "La", 2));
+        Student student = new Student("Test", "What", 5);
+      /*
+        fakultet.upisiStudent(x, "IT");
+        fakultet.registrujOdsijek(odsijek);
+        fakultet.upisiStudent(student, "IT");
+       */
+        Student x = StudentFactory.createStudent("Neko", "Nesto", 555);
 
-        System.out.println(spisakStudentaNaPredmetu(x));
+        Fakultet fakultet = new Fakultet("NL");
+        Fakultet fakultet1 = new Fakultet("RT");
+        Odsijek odsijek = OdsijekFactory.createOdsijek("IT");
 
-        Odsijek test = new Odsijek("Pikachu");
+        Scanner g = new Scanner(System.in);
+
+        while (true) {
+            System.out.println(
+                    "1. Kreiranje novog Fakulteta\n" +
+                            "2. Kreiranje novog odsijeka\n" +
+                            "3. Kreiranje novog studenta\n" +
+                            "4. Kreiranje novog predmeta\n" +
+                            "5. Upis studenta na predmet\n" +
+                            "6. Brisanje studenta\n" +
+                            "7. Brisanje odsijeka\n" +
+                            "8. Brisanje predmeta\n" +
+                            "9. Brisanje fakulteta\n" +
+                            "10. Ispis svih fakulteta\n" +
+                            "11. Ispis detalja jednog fakulteta\n" +
+                            "12. Ispis svih studenata na odsijeku\n" +
+                            "13. Ispis svih predmeta na odsijeku\n" +
+                            "14. Ispis svih studenata na predmetu\n" +
+                            "15. Izlaz\n");
+
+            int choice = g.nextInt();
+            switch (choice) {
+                case 1:
+                    addFakultet(fakultet);
+                    addFakultet(fakultet1);
+                    break;
+                case 2:
+                    System.out.println(ispisFakulteta());
+                    addOdsijek("NL", odsijek);
+                case 3:
+                    break;
+                case 4:
+                    break;
+                case 5:
+                    break;
+                case 6:
+                    //    brisanjeStudenta();
+                    break;
+                case 7:
+                    break;
+                case 8:
+                    //   brisanjePredmeta();
+                    break;
+                case 9:
+                    deleteFakultet(fakultet1);
+                    break;
+                case 10:
+                    System.out.println(ispisFakulteta());
+                    break;
+                case 11:
+                    System.out.println(ispisOdsijeka("NL"));
+                    break;
+                case 12:
+                    break;
+                case 13:
+                    break;
+                case 14:
+                    break;
+                case 15:
+                    return;
+
+            }
+
+        }
 
 
-        System.out.println(test.getMaxBrojStudenataZaGodinu(1));
     }
 }
 

@@ -109,12 +109,12 @@ class Predmet {
         students = noviNiz;
     }
 
-    public int brojPotrebnihStudenata(){
+    public int minPreostalihMjesta(){
 
         int preostalaMjesta = getMinBrojStudenata()-students.length;
 
         if(preostalaMjesta < 0){
-            //Exception
+            return 0;
         }
         return preostalaMjesta;
     }

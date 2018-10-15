@@ -31,6 +31,9 @@ class Fakultet {
         return nazivFakulteta;
     }
 
+
+
+
     public void registrujOdsijek(Odsijek o) {
         boolean check = false;
         Odsijek[] noviNiz = new Odsijek[odsijeks.length + 1];
@@ -72,19 +75,19 @@ class Fakultet {
         students = noviNiz;
     }
 
- /*   @Override
+    @Override
     public String toString() {
 
         String buffer = new String();
 
         for (int i = 0; i < students.length; i++) {
-            buffer += (i + 1) + ". " + students[i].toString() + "je student " + [INSERT_YEAR]+" godine na odsijeku "
+            buffer += (i + 1) + ". " + students[i].toString() + "je student " + odsijeks[i].getGodinaStudenta()+" godine na odsijeku "
                     + odsijeks[i].getNazivOdsijeka() + "\n";
         }
         return buffer;
         }
 
-        */
+
 }
 
 

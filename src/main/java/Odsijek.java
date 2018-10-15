@@ -65,13 +65,29 @@ class Odsijek {
         int result = -1;
         for (int i = 0; i < predmets.length; i++) {
             if (godina == predmets[i].getGodina()) {
-                int min = predmets[i].getMinBrojStudenata();
+                int min = predmets[i].minPreostalihMjesta();
                 if (result == -1) {
                     result = min;
                 }
                 if (result > min) {
                     result = min;
                 }
+            }
+        }
+        return result;
+    }
+
+    public int getGodinaStudenta(){
+
+         int result = 0;
+
+        for(int i = 0; i < predmets.length; i++){
+            int maxGodina = predmets[i].getGodina();
+            if(result == 0){
+                result = maxGodina;
+            }
+            if(result < maxGodina){
+                result = maxGodina;
             }
         }
         return result;
