@@ -16,6 +16,8 @@ u sljedecem formatu:
 
  */
 
+import io.vertx.core.streams.WriteStream;
+
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.io.PrintWriter;
@@ -70,16 +72,11 @@ public class Application {
     }
 
 
-    private static void uiOdsijek(OutputStream out, Scanner in) {
-
+    private static void uiIspisFakulteta(PrintStream out){
+        out.println(ispisFakulteta());
     }
-
-    private static void uiFakultet(OutputStream out, Scanner in) {
-
-    }
-
     private static String ispisFakulteta() {
-        //  return fakultet.toString();
+
         String buffer = new String();
         for (int i = 0; i < fakultet.length; i++) {
             buffer += (i + 1) + ". " + fakultet[i].getNazivFakulteta() + "\n";
@@ -101,10 +98,17 @@ public class Application {
 
     private static void deleteFakultet(Fakultet f) {
         Fakultet[] newFak = new Fakultet[fakultet.length - 1];
+        int index = -1;
 
-        int counter = 0;
+
         for (int i = 0; i < fakultet.length; i++) {
-            if (!fakultet[i].equals(f)) {
+            if (fakultet[i].equals(f)) {
+                index = i;
+            }
+        }
+        int counter = 0;
+        for(int i = 0; i < fakultet.length; i++){
+            if(index != i){
                 newFak[counter] = fakultet[i];
                 counter++;
             }
@@ -112,12 +116,21 @@ public class Application {
         fakultet = newFak;
     }
 
+
+
     public static String spisakStudentaNaPredmetu(Predmet predmet) {
-        return predmet.toString();
+  return "";
     }
 
     private static String ispisStudenata(String nazivFakulteta, String nazivOdsijeka) {
         return "";
+    }
+
+
+    private static void uiDeleteFakultet(PrintStream out, Scanner in){
+        uiIspisFakulteta(out);
+        String name = in.nextLine();
+        deleteFakultet(new Fakultet(name));
     }
 
     private static void uiAddFakultet(PrintStream out, Scanner in) {
@@ -128,35 +141,43 @@ public class Application {
     }
 
 
+    private static void uiIspisOdsijeka(PrintStream out, Scanner in){
+        uiIspisFakulteta(out);
+        out.println("Unesite trazene podatke za ispis Odsijeka");
+        out.println("Naziv fakuteta? ");
+        String nameFakultet = in.nextLine();
+        out.println(ispisOdsijeka(nameFakultet));
+
+
+    }
+
     private static String ispisOdsijeka(String nazivFakulteta) {
-
-        /*Odsijek[] result = new Odsijek[5];
-        for(int i = 0; i < fakultet.length; i++){
-            if(fakultet[i].getNazivFakulteta().equals(nazivFakulteta)){
-                for(int j = 0; j<fakultet[i].odsijeks.length; j++){
-                    fakultet[i].odsijeks[j].getNazivOdsijeka();
-                }
-            }
-            result = fakultet[i].odsijeks;
-        }
-        return result.toString();
-        */
-
 
         String buffer = new String();
         for (int i = 0; i < fakultet.length; i++) {
             if (fakultet[i].getNazivFakulteta().equals(nazivFakulteta)) {
                 for (int j = 0; j < fakultet[i].odsijeks.length; j++) {
 
-                    buffer += (i + 1) + ". " + fakultet[i].odsijeks[j].getNazivOdsijeka() + "\n";
+                    buffer += (i + 1) + "- " + fakultet[i].odsijeks[j].getNazivOdsijeka() + "\n";
                 }
             }
 
         }
         return buffer;
-
     }
 
+    private static void uiAddOdsijek(PrintStream out, Scanner in){
+
+        uiIspisFakulteta(out);
+        out.println("Odaberite fakultet");
+        String fakultetName = in.nextLine();
+        in.nextLine();
+        out.println("Unesite trazene podatke za unos Odsijeka");
+        out.println("Naziv?");
+        String name = in.nextLine();
+        addOdsijek(fakultetName, new Odsijek(name));
+
+    }
     private static void addOdsijek(String nazivFakulteta, Odsijek odsijek) {
 
 
@@ -172,21 +193,81 @@ public class Application {
         }
     }
 
+
+
+    private static void uiAddStudent(PrintStream out, Scanner in){
+        uiIspisFakulteta(out);
+        String nameFakultet = in.nextLine();
+        out.println("Unesite trazene podatke za unos Studenta");
+        out.println("Ime?");
+        String name = in.nextLine();
+        out.println("Prezime?");
+        String lastName = in.nextLine();
+        out.println("Index?");
+        int index = in.nextInt();
+        addStudent(nameFakultet, new Student(name, lastName, index));
+
+    }
+
+    private static void addStudent(String nameFakultet, Student student){
+
+        for(int i = 0; i < fakultet.length; i++){
+            if(fakultet[i].equals(nameFakultet)){
+
+                Student[] newStud = new Student[fakultet[i].students.length + 1];
+                for (int j = 0; j < fakultet[i].students.length; j++) {
+                    newStud[j] = fakultet[i].students[j];
+                }
+                newStud[fakultet[i].students.length] = student;
+                fakultet[i].students = newStud;
+            }
+        }
+    }
+
+
+
+    private static void uiAddPredmet(PrintStream out, Scanner in){
+        uiIspisFakulteta(out);
+        String nameFakultet = in.nextLine();
+        out.println("Unesite trazene podatke za unos Predmeta");
+        out.println("Naziv?");
+        String name = in.nextLine();
+        out.println("Sifra?");
+        int sifra = in.nextInt();
+        out.println("Max Broj Studenata?");
+        int maxBrojStudenata = in.nextInt();
+        out.println("Godina?");
+        int godina = in.nextInt();
+
+        addPredmet();
+    }
+
+    private static void addPredmet(){
+
+
+    }
+
+    private static void ispisStudenataNaOdsijeku(Odsijek odsijek){
+
+
+    }
+
+
+    private static void uiIspisStudenataNaOdsijeku(PrintStream out, Scanner in){
+        uiIspisOdsijeka(out, in);
+        out.println("Izaberite Odsijek");
+        String nameOdsijek = in.nextLine();
+    }
+
+
+
+
+
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         PrintStream out = System.out;
 
-        Student student = new Student("Test", "What", 5);
-      /*
-        fakultet.upisiStudent(x, "IT");
-        fakultet.registrujOdsijek(odsijek);
-        fakultet.upisiStudent(student, "IT");
-       */
-        Student x = StudentFactory.createStudent("Neko", "Nesto", 555);
 
-        Fakultet fakultet = new Fakultet("NL");
-        Fakultet fakultet1 = new Fakultet("RT");
-        Odsijek odsijek = OdsijekFactory.createOdsijek("IT");
 
         Scanner g = new Scanner(System.in);
 
@@ -209,35 +290,38 @@ public class Application {
                             "15. Izlaz\n");
 
             int choice = g.nextInt();
+            g.nextLine();
             switch (choice) {
                 case 1:
-                    uiAddFakultet(out, in);
+                   uiAddFakultet(out, in);
                     break;
                 case 2:
-                    System.out.println(ispisFakulteta());
-                    addOdsijek("NL", odsijek);
+                    uiAddOdsijek(out, in);
+                    break;
                 case 3:
+                    uiAddStudent(out, in);
                     break;
                 case 4:
+                    uiAddPredmet(out, in);
                     break;
                 case 5:
                     break;
                 case 6:
-                    //    brisanjeStudenta();
+
                     break;
                 case 7:
                     break;
                 case 8:
-                    //   brisanjePredmeta();
+
                     break;
                 case 9:
-                    deleteFakultet(fakultet1);
+                    uiDeleteFakultet(out, in);
                     break;
                 case 10:
-                    System.out.println(ispisFakulteta());
+                    uiIspisFakulteta(out);
                     break;
                 case 11:
-                    System.out.println(ispisOdsijeka("NL"));
+                    uiIspisOdsijeka(out, in);
                     break;
                 case 12:
                     break;

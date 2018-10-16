@@ -16,6 +16,8 @@ u sljedecem formatu:
 
  */
 
+import java.util.Objects;
+
 class Student {
     private String firstName;
     private String lastName;
@@ -56,6 +58,18 @@ class Student {
         return String.format("%s %s (%d)", lastName, firstName, indexNumber);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Student)) return false;
+        Student student = (Student) o;
+        return indexNumber == student.indexNumber;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(indexNumber);
+    }
 }
 
 

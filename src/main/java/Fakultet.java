@@ -17,6 +17,8 @@ u sljedecem formatu:
  */
 
 
+import java.util.Objects;
+
 class Fakultet {
 
     String nazivFakulteta;
@@ -81,13 +83,24 @@ class Fakultet {
         String buffer = new String();
 
         for (int i = 0; i < students.length; i++) {
-            buffer += (i + 1) + ". " + students[i].toString() + "je student " + odsijeks[i].getGodinaStudenta()+" godine na odsijeku "
+            buffer += (i + 1) + ". " + students[i].toString() + "je student " + odsijeks[i].getGodinaStudenta(students[i])+" godine na odsijeku "
                     + odsijeks[i].getNazivOdsijeka() + "\n";
         }
         return buffer;
         }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Fakultet)) return false;
+        Fakultet fakultet = (Fakultet) o;
+        return Objects.equals(nazivFakulteta, fakultet.nazivFakulteta);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(nazivFakulteta);
+    }
 }
 
 

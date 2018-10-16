@@ -77,12 +77,12 @@ class Odsijek {
         return result;
     }
 
-    public int getGodinaStudenta(){
+    public int getGodinaStudenta(Student student){
 
          int result = 0;
 
-        for(int i = 0; i < predmets.length; i++){
-            int maxGodina = predmets[i].getGodina();
+        for(int i = 0; i < getPredmetKojeStudentSlusa(student).length; i++){
+            int maxGodina = getPredmetKojeStudentSlusa(student)[i].getGodina();
             if(result == 0){
                 result = maxGodina;
             }
@@ -93,12 +93,43 @@ class Odsijek {
         return result;
     }
 
+
+
+   public Predmet[] getPredmetKojeStudentSlusa(Student student){
+       int counter = 0;
+
+
+       for(int i = 0; i < predmets.length; i++) {
+           for (int j = 0; j < predmets[i].getStudents().length; j++) {
+               if (predmets[i].getStudents()[j].equals(student)) {
+                   counter++;
+               }
+           }
+           Predmet[] noviNiz = new Predmet[counter];
+           int k = 0;
+           for (int j = 0; j < predmets[i].getStudents().length; j++) {
+               if (predmets[i].getStudents()[j].equals(student)) {
+                   noviNiz[k] = predmets[i];
+                   k++;
+               }
+           }
+           predmets = noviNiz;
+       }
+       return predmets;
+   }
+
+
+
 }
 
 
 
 
-
+/*
+U odsijeku popraviti funkciju getGodinaStudenta tako da prima argument Studenta, implementirati uz
+pomocnu funkciju Odsijek.getPredmeteKojeStudentSlusa(Student s) koja vraca niz predmeta koje student slusa
+Funkcija getGodinaStudenta treba da se svede na nalazenje max elementa niza (po godini) koji vraca pomenuta funkcija.
+ */
 
 
 

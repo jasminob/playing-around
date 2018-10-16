@@ -2,7 +2,6 @@ Prosiriti program sa sljedecim:
 
 Rewrite main tako da koristi ove metode i napuni fakultet odsijecima i studentima.
 
-Popraviti toString() od Fakulteta
 
 Zadaca:
 - U odsijeku popraviti funkciju getGodinaStudenta tako da prima argument Studenta, implementirati uz
