@@ -4,10 +4,16 @@ Rewrite main tako da koristi ove metode i napuni fakultet odsijecima i studentim
 
 
 Zadaca:
-- U odsijeku popraviti funkciju getGodinaStudenta tako da prima argument Studenta, implementirati uz
-pomocnu funkciju Odsijek.getPredmeteKojeStudentSlusa(Student s) koja vraca niz predmeta koje student slusa
-Funkcija getGodinaStudenta treba da se svede na nalazenje max elementa niza (po godini) koji vraca pomenuta funkcija.
-- popraviti deleteFakultet i sve slicne funkcije
+- u odsijeku popraviti funkciju getPredmetKojeStudentSlusa
+- popravti brisanje iz niza, alociraj samo kad si siguran da je broj >= 0, i provjeri da li je element pronadjen
+- napraviti interfejs Arhivar koji prati sljedece dogadjaje:
+  - dodao/obrisao fakultet
+  - dodao/obrisao studenta
+  - dodao/obrisao predmet
+  - dodao/obrisao odsijek
+- napraviti implementaciju navedenog interfejsa koji sve ove dogadjaje ispisuje na ekran
+- koristiti navedenu implementaciju u klasi Application kao staticni atribut.
+
 
 - meni se treba realizovati ovako:
     - funkcije koje ispisuju na ekran (user interaction) treba da imaju prefix ui, npr uiDodajFakultet
@@ -26,7 +32,7 @@ Napraviti glavni menu:
 3. Kreiranje novog studenta
    - prije svega trazi odabir fakulteta od vec unesenih, pa pita za potrebne informacije, pa kreira i ubaci u fakultet
 4. Kreiranje novog predmeta
-   - prije svega trazi odabir fakulteta od vec unesenih, pa pita za potrebne informacije, pa kreira i ubaci u fakultet
+   - prije svega trazi odabir fakulteta od vec unesenih, pa pita za odabir odsjeka, pa pita za potrebne informacije, pa kreira i ubaci u odsijek
 5. Upis studenta na predmet
    - prije svega trazi odabir fakulteta od vec unesenih, pa onda trazi indeks studenta koji se upisuje
      pa ukoliko student sa unesenim indeksom ne postoji, prekida i vraca na glavni meni
