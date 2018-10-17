@@ -5,7 +5,10 @@ Rewrite main tako da koristi ove metode i napuni fakultet odsijecima i studentim
 
 Zadaca:
 - u odsijeku popraviti funkciju getPredmetKojeStudentSlusa
-- popravti brisanje iz niza, alociraj samo kad si siguran da je broj >= 0, i provjeri da li je element pronadjen
+
+\\ popravti brisanje iz niza, alociraj samo kad si siguran da je broj >= 0, i provjeri da li je element pronadjen
+
+
 - napraviti interfejs Arhivar koji prati sljedece dogadjaje:
   - dodao/obrisao fakultet
   - dodao/obrisao studenta

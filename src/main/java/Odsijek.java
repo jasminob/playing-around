@@ -17,6 +17,8 @@ u sljedecem formatu:
  */
 
 
+import java.util.Objects;
+
 class Odsijek {
     private String nazivOdsijeka;
     private Predmet[] predmets = new Predmet[0];
@@ -25,6 +27,14 @@ class Odsijek {
     public Odsijek(String nazivOdsijeka) {
         this.nazivOdsijeka = nazivOdsijeka;
 
+    }
+
+    public Predmet[] getPredmets() {
+        return predmets;
+    }
+
+    public void setPredmets(Predmet[] predmets) {
+        this.predmets = predmets;
     }
 
     public String getNazivOdsijeka() {
@@ -60,6 +70,19 @@ class Odsijek {
         }
     }
 
+    public void registrujPredmet(Predmet p) {
+
+        Predmet[] noviNiz = new Predmet[predmets.length + 1];
+
+        for (int i = 0; i < predmets.length; i++) {
+            noviNiz[i] = predmets[i];
+        }
+
+        noviNiz[predmets.length] = p;
+        predmets = noviNiz;
+
+    }
+
     public int brojPotrebnihStudenata(int godina) {
 
         int result = -1;
@@ -80,9 +103,10 @@ class Odsijek {
     public int getGodinaStudenta(Student student){
 
          int result = 0;
+         Predmet[] predmeteKojeSlusa = getPredmetKojeStudentSlusa(student);
 
-        for(int i = 0; i < getPredmetKojeStudentSlusa(student).length; i++){
-            int maxGodina = getPredmetKojeStudentSlusa(student)[i].getGodina();
+        for(int i = 0; i < predmeteKojeSlusa.length; i++){
+            int maxGodina = predmeteKojeSlusa[i].getGodina();
             if(result == 0){
                 result = maxGodina;
             }
@@ -95,31 +119,44 @@ class Odsijek {
 
 
 
+
    public Predmet[] getPredmetKojeStudentSlusa(Student student){
+
+
+
+       Predmet[] result = new Predmet[0];
        int counter = 0;
 
 
        for(int i = 0; i < predmets.length; i++) {
            for (int j = 0; j < predmets[i].getStudents().length; j++) {
+               Predmet[] tempNiz = new Predmet[result.length+1];
                if (predmets[i].getStudents()[j].equals(student)) {
+
+                   tempNiz[counter] = predmets[i];
                    counter++;
+                   result = tempNiz;
                }
+
            }
-           Predmet[] noviNiz = new Predmet[counter];
-           int k = 0;
-           for (int j = 0; j < predmets[i].getStudents().length; j++) {
-               if (predmets[i].getStudents()[j].equals(student)) {
-                   noviNiz[k] = predmets[i];
-                   k++;
-               }
-           }
-           predmets = noviNiz;
+
        }
-       return predmets;
+       return result;
    }
 
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Odsijek)) return false;
+        Odsijek odsijek = (Odsijek) o;
+        return Objects.equals(nazivOdsijeka, odsijek.nazivOdsijeka);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(nazivOdsijeka);
+    }
 }
 
 

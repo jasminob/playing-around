@@ -17,17 +17,30 @@ u sljedecem formatu:
  */
 
 
+import java.util.Objects;
+
 class Predmet {
-    private Student[] students;
+    private Student[] students = new Student[0];
     private String nazivPredmeta;
     private int sifraPredmeta;
     private int maxBrojStudenata;
     private int godina;
     private int minBrojStudenata = 0;
 
+    public Predmet(int sifraPredmeta) {
+        this.sifraPredmeta = sifraPredmeta;
+    }
 
     public Predmet(Student[] students, String nazivPredmeta, int sifraPredmeta, int maxBrojStudenata, int godina) {
         this.students = students;
+        this.nazivPredmeta = nazivPredmeta;
+        this.sifraPredmeta = sifraPredmeta;
+        this.maxBrojStudenata = maxBrojStudenata;
+        this.godina = godina;
+    }
+
+    public Predmet(String nazivPredmeta, int sifraPredmeta, int maxBrojStudenata, int godina) {
+        Student[] student = new Student[0];
         this.nazivPredmeta = nazivPredmeta;
         this.sifraPredmeta = sifraPredmeta;
         this.maxBrojStudenata = maxBrojStudenata;
@@ -73,7 +86,6 @@ class Predmet {
     public void upisi(Student student) {
 
         Student[] noviNiz = new Student[students.length + 1];
-
         if (students.length == maxBrojStudenata) {
             return;
         }
@@ -127,6 +139,22 @@ class Predmet {
             buffer += (i + 1) + ". " + students[i].toString() + "\n";
         }
         return buffer;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Predmet)) return false;
+        Predmet predmet = (Predmet) o;
+        return sifraPredmeta == predmet.sifraPredmeta &&
+                maxBrojStudenata == predmet.maxBrojStudenata &&
+                godina == predmet.godina &&
+                Objects.equals(nazivPredmeta, predmet.nazivPredmeta);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nazivPredmeta, sifraPredmeta, maxBrojStudenata, godina);
     }
 }
 
