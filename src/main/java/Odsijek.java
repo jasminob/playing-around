@@ -129,9 +129,9 @@ class Odsijek {
 
 
        for(int i = 0; i < predmets.length; i++) {
-           for (int j = 0; j < predmets[i].getStudents().length; j++) {
+           for (int j = 0; j < predmets[i].getStudents().brojElemenata(); j++) {
                Predmet[] tempNiz = new Predmet[result.length+1];
-               if (predmets[i].getStudents()[j].equals(student)) {
+               if (predmets[i].getStudents().get(j).equals(student)) {
 
                    tempNiz[counter] = predmets[i];
                    counter++;

@@ -3,40 +3,21 @@ Prosiriti program sa sljedecim:
 
 - Zadaca:
  * handle sve slucajeve kada treba korisnik da izabere, da li je izbor ispravan.
+
  * za sve slucajeve kada treba korisnik da izabere, napraviti funkciju UI koja odradi ispis i odabir
+
  * za sve funkcije koje rade odabir, paziti prije njihovog poziva da li ima ista izabrati (npr ne treba traziti obavezni unos fakulteta ako nema ni jednog fakulteta)
+
  * ne alocirati nove objekte pri odabiru postojecih, vec koristiti odabrane objekte
+
  * ispisi sve odsijeke kada trazis da izaberem odsijek
+
  * popraviti upis studenta na predmet
+
  * popraviti ispis svih studenata na odsijeku (trenutno ispise sviju na fakultetu)
 
 
 
-
-Rewrite main tako da koristi ove metode i napuni fakultet odsijecima i studentima.
-
-
-Zadaca:
-- u odsijeku popraviti funkciju getPredmetKojeStudentSlusa
-
-\\ popravti brisanje iz niza, alociraj samo kad si siguran da je broj >= 0, i provjeri da li je element pronadjen
-
-
-- napraviti interfejs Arhivar koji prati sljedece dogadjaje:
-  - dodao/obrisao fakultet
-  - dodao/obrisao studenta
-  - dodao/obrisao predmet
-  - dodao/obrisao odsijek
-- napraviti implementaciju navedenog interfejsa koji sve ove dogadjaje ispisuje na ekran
-- koristiti navedenu implementaciju u klasi Application kao staticni atribut.
-
-
-- meni se treba realizovati ovako:
-    - funkcije koje ispisuju na ekran (user interaction) treba da imaju prefix ui, npr uiDodajFakultet
-      Ove funkcije ne treba da imaju ikakvu pamet, tj one samo rade user interaction, i na osnovu ulaza
-      pozivaju core funkcije (funkcije bez prefiksa ui)
-
-      Kao primjer uzeti kreiranje novog fakulteta sto je vec uradjeno
 
 
 Napraviti glavni menu:

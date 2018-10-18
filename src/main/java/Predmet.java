@@ -20,7 +20,7 @@ u sljedecem formatu:
 import java.util.Objects;
 
 class Predmet {
-    private Student[] students = new Student[0];
+    private Kolekcija students = new Kolekcija();
     private String nazivPredmeta;
     private int sifraPredmeta;
     private int maxBrojStudenata;
@@ -31,16 +31,8 @@ class Predmet {
         this.sifraPredmeta = sifraPredmeta;
     }
 
-    public Predmet(Student[] students, String nazivPredmeta, int sifraPredmeta, int maxBrojStudenata, int godina) {
-        this.students = students;
-        this.nazivPredmeta = nazivPredmeta;
-        this.sifraPredmeta = sifraPredmeta;
-        this.maxBrojStudenata = maxBrojStudenata;
-        this.godina = godina;
-    }
-
+   
     public Predmet(String nazivPredmeta, int sifraPredmeta, int maxBrojStudenata, int godina) {
-        Student[] student = new Student[0];
         this.nazivPredmeta = nazivPredmeta;
         this.sifraPredmeta = sifraPredmeta;
         this.maxBrojStudenata = maxBrojStudenata;
@@ -55,7 +47,7 @@ class Predmet {
         this.minBrojStudenata = minBrojStudenata;
     }
 
-    public Student[] getStudents() {
+    public Kolekcija getStudents() {
         return students;
     }
 
@@ -85,45 +77,18 @@ class Predmet {
 
     public void upisi(Student student) {
 
-        Student[] noviNiz = new Student[students.length + 1];
-        if (students.length == maxBrojStudenata) {
-            return;
-        }
-
-        for (int i = 0; i < students.length; i++) {
-            noviNiz[i] = students[i];
-        }
-
-        noviNiz[students.length] = student;
-        students = noviNiz;
+        students.dodaj(student);
     }
 
 
     public void ispisi(Student student) {
-        Student[] noviNiz = new Student[students.length - 1];
-        int index = -1;
 
-        for (int i = 0; i < students.length; i++) {
-            if (students[i] == student) {
-                index = i;
-            }
-        }
-        int j = 0;
-        if (index == -1) {
-            return;
-        }
-        for (int i = 0; i < students.length; i++) {
-            if (index != i) {
-                noviNiz[j] = students[i];
-                j++;
-            }
-        }
-        students = noviNiz;
+        students.obrisi(student);
     }
 
     public int minPreostalihMjesta(){
 
-        int preostalaMjesta = getMinBrojStudenata()-students.length;
+        int preostalaMjesta = getMinBrojStudenata()-students.brojElemenata();
 
         if(preostalaMjesta < 0){
             return 0;
@@ -135,8 +100,8 @@ class Predmet {
     public String toString() {
         String buffer = new String();
 
-        for (int i = 0; i < students.length; i++) {
-            buffer += (i + 1) + ". " + students[i].toString() + "\n";
+        for (int i = 0; i < students.brojElemenata(); i++) {
+            buffer += (i + 1) + ". " + students.get(i).toString() + "\n";
         }
         return buffer;
     }
