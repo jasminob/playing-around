@@ -17,6 +17,7 @@ u sljedecem formatu:
  */
 
 import java.io.PrintStream;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Application {
@@ -311,7 +312,7 @@ public class Application {
                         for (int k = 0; k < fakultet[i].odsijeks[j].getPredmets()[z].getStudents().brojElemenata(); k++) {
 
                             Student sub = (Student) fakultet[i].odsijeks[j].getPredmets()[z].getStudents().get(k);
-                            buffer += " - Ime: " + sub.getFirstName() + ", Prezime: " + sub.getLastName() + "\n";
+                            buffer += " - " + sub.getFirstName() + " " + sub.getLastName() + " " + sub.getIndexNumber() + "\n";
                         }
                     }
                 }
@@ -359,7 +360,6 @@ public class Application {
                             "13. Ispis svih predmeta na odsijeku\n" +
                             "14. Ispis svih studenata na predmetu\n" +
                             "15. Izlaz\n");
-
 
             int choice = g.nextInt();
             g.nextLine();
@@ -409,7 +409,6 @@ public class Application {
                     break;
                 case 15:
                     return;
-
             }
         }
     }
