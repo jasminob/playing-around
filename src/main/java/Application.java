@@ -36,6 +36,13 @@ public class Application {
 
     }
 
+    public static void inputStringCheck(String name, PrintStream out, Scanner in){
+        while(!name.matches("[a-zA-Z]+")){
+            out.println("Samo slova. Try again.");
+            name = in.nextLine();
+        }
+    }
+
     public static void addFakultet(Fakultet f) {
 
         arhivar.dodaoFakultet(f);
@@ -244,6 +251,7 @@ public class Application {
         UiUtility.uiIspisFakulteta(out);
 
         String ime = in.nextLine();
+
         for (Fakultet f : fakultet) {
             if (ime.equals(f.getNazivFakulteta())) {
                 return f;
@@ -361,54 +369,60 @@ public class Application {
                             "14. Ispis svih studenata na predmetu\n" +
                             "15. Izlaz\n");
 
-            int choice = g.nextInt();
-            g.nextLine();
+            try {
+                int choice = g.nextInt();
+                g.nextLine();
 
-            switch (choice) {
-                case 1:
-                    UiUtility.uiAddFakultet(out, in);
-                    break;
-                case 2:
-                    UiUtility.uiAddOdsijek(out, in);
-                    break;
-                case 3:
-                    UiUtility.uiAddStudent(out, in);
-                    break;
-                case 4:
-                    UiUtility.uiAddPredmet(out, in);
-                    break;
-                case 5:
-                    UiUtility.uiUpisiStudentaNaPredmet(out, in);
-                    break;
-                case 6:
+                switch (choice) {
+                    case 1:
+                        UiUtility.uiAddFakultet(out, in);
+                        break;
+                    case 2:
+                        UiUtility.uiAddOdsijek(out, in);
+                        break;
+                    case 3:
+                        UiUtility.uiAddStudent(out, in);
+                        break;
+                    case 4:
+                        UiUtility.uiAddPredmet(out, in);
+                        break;
+                    case 5:
+                        UiUtility.uiUpisiStudentaNaPredmet(out, in);
+                        break;
+                    case 6:
 
-                    break;
-                case 7:
-                    UiUtility.uiDeleteOdsijek(out, in);
-                    break;
-                case 8:
-                    UiUtility.uiDeletePredmet(out, in);
-                    break;
-                case 9:
-                    UiUtility.uiDeleteFakultet(out, in);
-                    break;
-                case 10:
-                    UiUtility.uiIspisFakulteta(out);
-                    break;
-                case 11:
-                    UiUtility.uiIspisOdsijeka(out, in);
-                    break;
-                case 12:
-                    UiUtility.uiIspisStudenataNaOdsijeku(out, in);
-                    break;
-                case 13:
-                    UiUtility.uiIspisPredmetaNaOdsijeku(out, in);
-                    break;
-                case 14:
-                    UiUtility.uiIspisiStudenteNaPredmetu(out, in);
-                    break;
-                case 15:
-                    return;
+                        break;
+                    case 7:
+                        UiUtility.uiDeleteOdsijek(out, in);
+                        break;
+                    case 8:
+                        UiUtility.uiDeletePredmet(out, in);
+                        break;
+                    case 9:
+                        UiUtility.uiDeleteFakultet(out, in);
+                        break;
+                    case 10:
+                        UiUtility.uiIspisFakulteta(out);
+                        break;
+                    case 11:
+                        UiUtility.uiIspisOdsijeka(out, in);
+                        break;
+                    case 12:
+                        UiUtility.uiIspisStudenataNaOdsijeku(out, in);
+                        break;
+                    case 13:
+                        UiUtility.uiIspisPredmetaNaOdsijeku(out, in);
+                        break;
+                    case 14:
+                        UiUtility.uiIspisiStudenteNaPredmetu(out, in);
+                        break;
+                    case 15:
+                        return;
+                }
+            }
+            catch(InputMismatchException e){
+                g.skip(".*");
+                System.out.println("Unesi neki integer izmedju 1 i 15 \n");
             }
         }
     }

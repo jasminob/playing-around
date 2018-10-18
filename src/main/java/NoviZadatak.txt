@@ -3,26 +3,11 @@ Prosiriti program sa sljedecim:
 
 - Zadaca:
  * handle sve slucajeve kada treba korisnik da izabere, da li je izbor ispravan.
-
-
  * za sve slucajeve kada treba korisnik da izabere, napraviti funkciju UI koja odradi ispis i odabir
-
  * za sve funkcije koje rade odabir, paziti prije njihovog poziva da li ima ista izabrati (npr ne treba traziti obavezni unos fakulteta ako nema ni jednog fakulteta)
-
-
-
-
  * ne alocirati nove objekte pri odabiru postojecih, vec koristiti odabrane objekte
-
-
-
-
  * ispisi sve odsijeke kada trazis da izaberem odsijek
-
-
-
  * popraviti upis studenta na predmet
-
  * popraviti ispis svih studenata na odsijeku (trenutno ispise sviju na fakultetu)
 
 

@@ -1,4 +1,5 @@
 import java.io.PrintStream;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class UiUtility {
@@ -21,6 +22,7 @@ public class UiUtility {
         out.println("Unesite trazene podatke za unos fakulteta");
         out.println("Naziv? ");
         String name = in.nextLine();
+        Application.inputStringCheck(name, out, in);
         Application.addFakultet(new Fakultet(name));
     }
 
@@ -49,6 +51,7 @@ public class UiUtility {
         out.println("Unesite trazene podatke za unos Odsijeka");
         out.println("Naziv?");
         String name = in.nextLine();
+        Application.inputStringCheck(name, out, in);
         Application.addOdsijek(fakultetName, new Odsijek(name));
     }
 
@@ -71,41 +74,62 @@ public class UiUtility {
 
     public static void uiAddStudent(PrintStream out, Scanner in) {
 
+        boolean checker = true;
 
         uiIspisFakulteta(out);
         out.println("Odaberite fakultet ");
         String nameFakultet = in.nextLine();
-        out.println("Unesite trazene podatke za unos Studenta");
-        out.println("Ime?");
-        String name = in.nextLine();
-        out.println("Prezime?");
-        String lastName = in.nextLine();
-        out.println("Index?");
-        int index = in.nextInt();
-        in.nextLine();
-        Application.addStudent(nameFakultet, new Student(name, lastName, index));
+
+        do {
+            try {
+                out.println("Unesite trazene podatke za unos Studenta");
+                out.println("Ime?");
+                String name = in.nextLine();
+                out.println("Prezime?");
+                String lastName = in.nextLine();
+                out.println("Index?");
+                int index = in.nextInt();
+                in.nextLine();
+                Application.addStudent(nameFakultet, new Student(name, lastName, index));
+                break;
+            } catch (InputMismatchException e) {
+                in.skip(".*");
+                System.out.println("Student nije kreiran, unesite validne podatke \n");
+                in.nextLine();
+            }
+        }while(true);
 
     }
 
     public static void uiAddPredmet(PrintStream out, Scanner in) {
+
         Odsijek odsijek = Application.izabraniOdsijek(out, in);
         if (odsijek == null) {
             out.println("Nema trazenog odsijeka");
             return;
         }
-
-        out.println("Naziv predmeta?");
-        String name = in.nextLine();
-        out.println("Sifra predmeta?");
-        int sifra = in.nextInt();
-        in.nextLine();
-        out.println("Max Broj Studenata?");
-        int maxBrojStudenata = in.nextInt();
-        in.nextLine();
-        out.println("Godina?");
-        int godina = in.nextInt();
-        in.nextLine();
-        Application.addPredmet(new Predmet(name, sifra, maxBrojStudenata, godina), odsijek);
+        do {
+            try {
+                out.println("Naziv predmeta?");
+                String name = in.nextLine();
+                Application.inputStringCheck(name, out, in);
+                out.println("Sifra predmeta?");
+                int sifra = in.nextInt();
+                in.nextLine();
+                out.println("Max Broj Studenata?");
+                int maxBrojStudenata = in.nextInt();
+                in.nextLine();
+                out.println("Godina?");
+                int godina = in.nextInt();
+                in.nextLine();
+                Application.addPredmet(new Predmet(name, sifra, maxBrojStudenata, godina), odsijek);
+                break;
+            } catch (InputMismatchException e) {
+                in.skip(".*");
+                System.out.println("Predmet nije kreiran, unesite validne podatke \n");
+                in.nextLine();
+            }
+        }while(true);
     }
 
     public static void uiDeletePredmet(PrintStream out, Scanner in) {
