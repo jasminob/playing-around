@@ -18,10 +18,23 @@ u sljedecem formatu:
 
 import java.util.Objects;
 
-class Student {
+abstract class Student {
     private String firstName;
     private String lastName;
     private int indexNumber;
+
+
+    public static Student studentFactory(String firstName, String lastName, int indexNumber, int ciklus) {
+
+        if(ciklus == 1){
+            new StudentBachelor(firstName, lastName, indexNumber);
+        }
+        else if(ciklus == 2){
+            new StudentMaster(firstName, lastName, indexNumber);
+        }
+        return null;
+    }
+
 
     public Student(String firstName, String lastName, int indexNumber) {
         this.firstName = firstName;
@@ -70,6 +83,8 @@ class Student {
     public int hashCode() {
         return Objects.hash(indexNumber);
     }
+
+    abstract int getCiklus();
 }
 
 

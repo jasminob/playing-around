@@ -90,7 +90,11 @@ public class UiUtility {
                 out.println("Index?");
                 int index = in.nextInt();
                 in.nextLine();
-                Application.addStudent(nameFakultet, new Student(name, lastName, index));
+                out.println("Ciklus?");
+                int ciklus = in.nextInt();
+                in.nextLine();
+
+                Application.addStudent(nameFakultet, Student.studentFactory(name, lastName, index, ciklus));
                 break;
             } catch (InputMismatchException e) {
                 in.skip(".*");

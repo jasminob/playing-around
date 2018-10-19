@@ -2,18 +2,28 @@ Prosiriti program sa sljedecim:
 
 
 - Zadaca 18.10.2018.
- * Student postaje abstract class
- * Student dobiva abstract metodu getCiklus(), vraca int
- * StudentBachelor nasljedjuje Studenta, ciklus 1
- * StudentMaster nasljedjuje Studenta, ciklus 2
- * svugdje gdje instanciras Studenta, uradi selekciju ciklusa i instanciraj odgovarajucu podklasu
- * pri ispisu Studenta, treba dodati podatak (kao string, odnosno tekstualna informacija "master" ili "bachelor")
- * obrisati student factory
- * u klasi Student, napraviti factory method koja instancira studenta datog ciklusa
- * napraviti interfejs Saveable, sa metodama:
-   - String save();
-   - void load(String saved);
+ * Student postaje abstract class o/
+ * Student dobiva abstract metodu getCiklus(), vraca int o/
+ * StudentBachelor nasljedjuje Studenta, ciklus 1   o/
+ * StudentMaster nasljedjuje Studenta, ciklus 2 o/
+
+ * svugdje gdje instanciras Studenta, uradi selekciju ciklusa i instanciraj odgovarajucu podklasu o/
+
+ * pri ispisu Studenta, treba dodati podatak (kao string, odnosno tekstualna informacija "master" ili "bachelor") o/
+
+ * obrisati student factory  o/
+
+ * u klasi Student, napraviti factory method koja instancira studenta datog ciklusa o/
+
+
+ * napraviti interfejs Saveable, sa metodama: o/
+   - String save();                             o/
+   - void load(String saved);                   o/
  
+
+
+
+
 
 - Zadaca:
  * handle sve slucajeve kada treba korisnik da izabere, da li je izbor ispravan.
