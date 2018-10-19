@@ -5,7 +5,7 @@ public class StudentMaster extends Student {
 
     @Override
     public String toString() {
-        return String.format("%s %s (%d) Master",  getLastName(), getFirstName(), getIndexNumber());
+        return String.format("%s %s (%d) Master", getLastName(), getFirstName(), getIndexNumber());
     }
 
     @Override

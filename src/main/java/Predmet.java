@@ -31,7 +31,7 @@ class Predmet {
         this.sifraPredmeta = sifraPredmeta;
     }
 
-   
+
     public Predmet(String nazivPredmeta, int sifraPredmeta, int maxBrojStudenata, int godina) {
         this.nazivPredmeta = nazivPredmeta;
         this.sifraPredmeta = sifraPredmeta;
@@ -86,11 +86,11 @@ class Predmet {
         students.obrisi(student);
     }
 
-    public int minPreostalihMjesta(){
+    public int minPreostalihMjesta() {
 
-        int preostalaMjesta = getMinBrojStudenata()-students.brojElemenata();
+        int preostalaMjesta = getMinBrojStudenata() - students.brojElemenata();
 
-        if(preostalaMjesta < 0){
+        if (preostalaMjesta < 0) {
             return 0;
         }
         return preostalaMjesta;

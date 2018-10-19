@@ -26,10 +26,9 @@ abstract class Student {
 
     public static Student studentFactory(String firstName, String lastName, int indexNumber, int ciklus) {
 
-        if(ciklus == 1){
+        if (ciklus == 1) {
             new StudentBachelor(firstName, lastName, indexNumber);
-        }
-        else if(ciklus == 2){
+        } else if (ciklus == 2) {
             new StudentMaster(firstName, lastName, indexNumber);
         }
         return null;

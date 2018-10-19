@@ -36,8 +36,8 @@ public class Application {
 
     }
 
-    public static void inputStringCheck(String name, PrintStream out, Scanner in){
-        while(!name.matches("[a-zA-Z]+")){
+    public static void inputStringCheck(String name, PrintStream out, Scanner in) {
+        while (!name.matches("[a-zA-Z]+")) {
             out.println("Samo slova. Try again.");
             name = in.nextLine();
         }
@@ -419,8 +419,7 @@ public class Application {
                     case 15:
                         return;
                 }
-            }
-            catch(InputMismatchException e){
+            } catch (InputMismatchException e) {
                 g.skip(".*");
                 System.out.println("Unesi neki integer izmedju 1 i 15 \n");
             }

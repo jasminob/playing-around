@@ -101,7 +101,7 @@ public class UiUtility {
                 System.out.println("Student nije kreiran, unesite validne podatke \n");
                 in.nextLine();
             }
-        }while(true);
+        } while (true);
 
     }
 
@@ -133,7 +133,7 @@ public class UiUtility {
                 System.out.println("Predmet nije kreiran, unesite validne podatke \n");
                 in.nextLine();
             }
-        }while(true);
+        } while (true);
     }
 
     public static void uiDeletePredmet(PrintStream out, Scanner in) {
