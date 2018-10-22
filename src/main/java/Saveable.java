@@ -1,6 +1,6 @@
 public interface Saveable {
 
-    String Save();
+    String save();
 
     void load(String saved);
 

@@ -9,7 +9,7 @@ public class ArhivarOut implements Arhivar {
         System.out.println(String.format("Izbrisao fakultet: %s", f.getNazivFakulteta()));
     }
 
-    @Override
+  @Override
     public void dodaoStudent(Student s) {
         System.out.println(String.format("Dodao studenta: %s %s", s.getFirstName(), s.getLastName()));
     }
