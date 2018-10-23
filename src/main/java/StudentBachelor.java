@@ -20,8 +20,8 @@ public class StudentBachelor extends Student implements Saveable {
     }
 
 
-    public static String removeBracket (String s){
-       return s = s.replace("(", "").replace(")", "");
+    public static String removeBracket(String s) {
+        return s = s.replace("(", "").replace(")", "");
     }
 
     @Override
@@ -33,5 +33,5 @@ public class StudentBachelor extends Student implements Saveable {
 
 
         this.setIndexNumber(Integer.parseInt(removeBracket(tempStudent[2])));
-        }
+    }
 }
