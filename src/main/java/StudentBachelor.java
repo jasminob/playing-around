@@ -4,6 +4,12 @@ public class StudentBachelor extends Student implements Saveable {
         super(firstName, lastName, indexNumber);
     }
 
+    public StudentBachelor(String saveData) {
+        super(saveData);
+    }
+
+
+
     @Override
     public String toString() {
         return String.format("%s, %s, (%d), Bachelor", getFirstName(), getLastName(), getIndexNumber());

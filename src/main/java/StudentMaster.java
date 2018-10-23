@@ -8,6 +8,10 @@ public class StudentMaster extends Student implements Saveable {
         return String.format("%s, %s, (%d), Master", getFirstName(), getLastName(), getIndexNumber());
     }
 
+    public StudentMaster(String saveData) {
+        super(saveData);
+    }
+
     @Override
     int getCiklus() {
         return 2;

@@ -347,6 +347,25 @@ public class Application {
     }
 
 
+    public static Student ucitaj(PrintStream out, Scanner in){
+
+
+        out.println("Ime?");
+        String name = in.nextLine();
+        out.println("Prezime?");
+        String lastName = in.nextLine();
+        out.println("Index?");
+        int index = in.nextInt();
+        in.nextLine();
+        out.println("Ciklus?");
+        int ciklus = in.nextInt();
+        in.nextLine();
+
+        String studentString = String.format("%s,%s,%d,%d", name, lastName, index, ciklus);
+        return new StudentMaster(studentString);
+    }
+
+
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         PrintStream out = System.out;
@@ -358,11 +377,11 @@ public class Application {
        StudentBachelor s = new StudentBachelor("J", "O", 100);
 
         System.out.println(String.format("Saving s, save file - %s", s));
-
-
         s.load(s.save());
 
        System.out.println(String.format("%s", s));
+
+       ucitaj(out, in).save();
 
 /*
         while (true) {

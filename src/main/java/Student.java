@@ -18,7 +18,9 @@ u sljedecem formatu:
 
 import java.util.Objects;
 
-abstract class Student {
+
+
+abstract class Student implements Saveable {
     private String firstName;
     private String lastName;
     private int indexNumber;
@@ -36,6 +38,10 @@ abstract class Student {
         }
     }
 
+
+    public Student(String saveData) {
+        load(saveData);
+    }
 
     public Student(String firstName, String lastName, int indexNumber) {
         this.firstName = firstName;
@@ -66,6 +72,8 @@ abstract class Student {
     public void setIndexNumber(int indexNumber) {
         this.indexNumber = indexNumber;
     }
+
+
 
     @Override
     public String toString() {
