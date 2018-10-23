@@ -14,7 +14,7 @@ public class StudentMaster extends Student implements Saveable {
     }
 
     public static String removeBracket(String s) {
-        return s = s.replace("(", "").replace(")", "");
+        return s = s.replaceAll("([(-)])", "").replace(")", "");
     }
 
     @Override
@@ -27,6 +27,7 @@ public class StudentMaster extends Student implements Saveable {
         String[] tempStudent = saved.split(", ");
         this.setFirstName(tempStudent[0]);
         this.setLastName(tempStudent[1]);
+
         tempStudent[2] = removeBracket(tempStudent[2]);
         this.setIndexNumber(Integer.parseInt(tempStudent[2]));
     }

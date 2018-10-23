@@ -359,9 +359,10 @@ public class Application {
 
         System.out.println(String.format("Saving s, save file - %s", s));
 
+
         s.load(s.save());
 
-       System.out.println(String.format("%s", s.save()));
+       System.out.println(String.format("%s", s));
 
 /*
         while (true) {

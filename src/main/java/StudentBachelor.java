@@ -21,7 +21,7 @@ public class StudentBachelor extends Student implements Saveable {
 
 
     public static String removeBracket(String s) {
-        return s = s.replace("(", "").replace(")", "");
+        return s = s.replaceAll("([(-)])", "");
     }
 
     @Override
