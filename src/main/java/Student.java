@@ -69,7 +69,7 @@ abstract class Student {
 
     @Override
     public String toString() {
-        return String.format("%s %s (%d)", lastName, firstName, indexNumber);
+        return String.format("%s %s (%d)", firstName, lastName, indexNumber);
     }
 
     @Override
