@@ -16,22 +16,16 @@ public class StudentBachelor extends Student implements Saveable {
 
     @Override
     public String save() {
-        return this.toString();
+        return String.format("%s,%s,%d", getFirstName(), getLastName(), getIndexNumber());
     }
 
-
-    public static String removeBracket(String s) {
-        return s = s.replaceAll("([(-)])", "");
-    }
 
     @Override
     public void load(String saved) {
 
-        String[] tempStudent = saved.split(", ");
+        String[] tempStudent = saved.split(",");
         this.setFirstName(tempStudent[0]);
         this.setLastName(tempStudent[1]);
-
-
-        this.setIndexNumber(Integer.parseInt(removeBracket(tempStudent[2])));
+        this.setIndexNumber(Integer.parseInt(tempStudent[2]));
     }
 }
