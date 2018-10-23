@@ -363,6 +363,88 @@ public class Application {
 
        System.out.println(String.format("%s", s.save()));
 
+/*
+        while (true) {
+            System.out.println(
+                    "1. Kreiranje novog Fakulteta\n" +
+                            "2. Kreiranje novog odsijeka\n" +
+                            "3. Kreiranje novog studenta\n" +
+                            "4. Kreiranje novog predmeta\n" +
+                            "5. Upis studenta na predmet\n" +
+                            "6. Brisanje studenta\n" +
+                            "7. Brisanje odsijeka\n" +
+                            "8. Brisanje predmeta\n" +
+                            "9. Brisanje fakulteta\n" +
+                            "10. Ispis svih fakulteta\n" +
+                            "11. Ispis detalja jednog fakulteta\n" +
+                            "12. Ispis svih studenata na odsijeku\n" +
+                            "13. Ispis svih predmeta na odsijeku\n" +
+                            "14. Ispis svih studenata na predmetu\n" +
+                            "15. Izlaz\n");
+
+            try {
+                int choice = g.nextInt();
+                g.nextLine();
+
+                switch (choice) {
+                    case 1:
+                        UiUtility.uiAddFakultet(out, in);
+                        break;
+                    case 2:
+                        UiUtility.uiAddOdsijek(out, in);
+                        break;
+                    case 3:
+                        UiUtility.uiAddStudent(out, in);
+                        break;
+                    case 4:
+                        UiUtility.uiAddPredmet(out, in);
+                        break;
+                    case 5:
+                        UiUtility.uiUpisiStudentaNaPredmet(out, in);
+                        break;
+                    case 6:
+
+                        break;
+                    case 7:
+                        UiUtility.uiDeleteOdsijek(out, in);
+                        break;
+                    case 8:
+                        UiUtility.uiDeletePredmet(out, in);
+                        break;
+                    case 9:
+                        UiUtility.uiDeleteFakultet(out, in);
+                        break;
+                    case 10:
+                        UiUtility.uiIspisFakulteta(out);
+                        break;
+                    case 11:
+                        UiUtility.uiIspisOdsijeka(out, in);
+                        break;
+                    case 12:
+                        UiUtility.uiIspisStudenataNaOdsijeku(out, in);
+                        break;
+                    case 13:
+                        UiUtility.uiIspisPredmetaNaOdsijeku(out, in);
+                        break;
+                    case 14:
+                        UiUtility.uiIspisiStudenteNaPredmetu(out, in);
+                        break;
+                    case 15:
+                        return;
+                }
+            } catch (InputMismatchException e) {
+                g.skip(".*");
+                System.out.println("Unesi neki integer izmedju 1 i 15 \n");
+            }
+        }
+
+        */
+
+
+
+
+
+
     }
 }
 
