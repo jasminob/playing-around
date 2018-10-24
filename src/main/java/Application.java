@@ -403,7 +403,7 @@ public class Application {
 
                     PrintStream stream = null;
                     try {
-                        stream = new PrintStream("studentMaster" + fakultet[i].nazivFakulteta.toUpperCase() + ".txt");
+                        stream = new PrintStream("studentBachelor" + fakultet[i].nazivFakulteta.toUpperCase() + ".txt");
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                         return;
@@ -469,7 +469,7 @@ public class Application {
                             "13. Ispis svih predmeta na odsijeku\n" +
                             "14. Ispis svih studenata na predmetu\n" +
                             "15. Sacuvaj podatke\n" +
-                            "16. Ucitaj sve studente iz datoteke\n" +
+                            "16. PLACEHOLDER\n" +
                             "17. Izlaz\n");
             try {
                 int choice = g.nextInt();
