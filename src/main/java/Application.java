@@ -16,8 +16,12 @@ u sljedecem formatu:
 
  */
 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -403,7 +407,7 @@ public class Application {
 
                     PrintStream stream = null;
                     try {
-                        stream = new PrintStream("studentBachelor" + fakultet[i].nazivFakulteta.toUpperCase() + ".txt");
+                        stream = new PrintStream("studentBachelor   " + fakultet[i].nazivFakulteta.toUpperCase() + ".txt");
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                         return;
@@ -444,6 +448,26 @@ public class Application {
         saveAllFakultet();
     }
 
+    public static void loadFile() {
+        fakultet = new Fakultet[0];
+
+
+        try {
+            FileInputStream stream = new FileInputStream("fakultet.txt");
+            Scanner in = new Scanner(stream);
+
+            while (in.hasNextLine()) {
+                addFakultet(new Fakultet(in.nextLine()));
+            }
+
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return;
+        }
+
+    }
+
     public static void main(String[] args) {
 
 
@@ -469,7 +493,7 @@ public class Application {
                             "13. Ispis svih predmeta na odsijeku\n" +
                             "14. Ispis svih studenata na predmetu\n" +
                             "15. Sacuvaj podatke\n" +
-                            "16. PLACEHOLDER\n" +
+                            "16. Ucitaj podatke\n" +
                             "17. Izlaz\n");
             try {
                 int choice = g.nextInt();
@@ -520,6 +544,7 @@ public class Application {
                         saveFiles();
                         break;
                     case 16:
+                        loadFile();
                         break;
                     case 17:
                         return;
