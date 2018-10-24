@@ -537,7 +537,8 @@ public class Application {
                             "14. Ispis svih studenata na predmetu\n" +
                             "15. Sacuvaj podatke\n" +
                             "16. Ucitaj podatke\n" +
-                            "17. Izlaz\n");
+                            "17. Testing\n" +
+                            "18. Izlaz\n");
             try {
                 int choice = g.nextInt();
                 g.nextLine();
@@ -590,6 +591,10 @@ public class Application {
                         loadFakultet();
                         break;
                     case 17:
+                        Fakultet f = new Fakultet("etf");
+                        System.out.println(ispisiStudenteNaFak(f));
+                        break;
+                    case 18:
                         return;
                 }
             } catch (InputMismatchException e) {
