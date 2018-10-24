@@ -16,6 +16,7 @@ u sljedecem formatu:
 
  */
 
+import java.io.FileNotFoundException;
 import java.io.PrintStream;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -373,15 +374,50 @@ public class Application {
         out.println(saveData);
     }
 
+    public static void saveAllBachelorStudents() {
+        PrintStream stream = null;
+        try {
+            stream = new PrintStream("studentsBachelor.txt");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        for (int i = 0; i < fakultet.length; i++) {
+            for (int j = 0; j < fakultet[i].students.length; j++) {
+                if (fakultet[i].students[j].getCiklus() == 1) {
+                    saveStudent(stream, fakultet[i].students[j]);
+                }
+            }
+        }
+
+    }
+
+    public static void saveAllMasterStudents() {
+        PrintStream stream = null;
+        try {
+            stream = new PrintStream("studentsMaster.txt");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        for (int i = 0; i < fakultet.length; i++) {
+            for (int j = 0; j < fakultet[i].students.length; j++) {
+                if (fakultet[i].students[j].getCiklus() == 2) {
+                    saveStudent(stream, fakultet[i].students[j]);
+                }
+            }
+        }
+
+    }
 
     public static void main(String[] args) {
+
+
         Scanner in = new Scanner(System.in);
         PrintStream out = System.out;
-
         Scanner g = new Scanner(System.in);
 
 
-        /*
         while (true) {
             System.out.println(
                     "1. Kreiranje novog Fakulteta\n" +
@@ -398,12 +434,12 @@ public class Application {
                             "12. Ispis svih studenata na odsijeku\n" +
                             "13. Ispis svih predmeta na odsijeku\n" +
                             "14. Ispis svih studenata na predmetu\n" +
-                            "15. Izlaz\n");
-
+                            "15. Spasi sve Bachelor studente\n" +
+                            "16. Spasi sve Master studente\n" +
+                            "17. Izlaz\n");
             try {
                 int choice = g.nextInt();
                 g.nextLine();
-
                 switch (choice) {
                     case 1:
                         UiUtility.uiAddFakultet(out, in);
@@ -421,7 +457,6 @@ public class Application {
                         UiUtility.uiUpisiStudentaNaPredmet(out, in);
                         break;
                     case 6:
-
                         break;
                     case 7:
                         UiUtility.uiDeleteOdsijek(out, in);
@@ -448,6 +483,12 @@ public class Application {
                         UiUtility.uiIspisiStudenteNaPredmetu(out, in);
                         break;
                     case 15:
+                        saveAllBachelorStudents();
+                        break;
+                    case 16:
+                        saveAllMasterStudents();
+                        break;
+                    case 17:
                         return;
                 }
             } catch (InputMismatchException e) {
@@ -455,9 +496,6 @@ public class Application {
                 System.out.println("Unesi neki integer izmedju 1 i 15 \n");
             }
         }
-
-        */
-
 
     }
 }
