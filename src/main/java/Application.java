@@ -475,8 +475,8 @@ public class Application {
             Scanner in = new Scanner(stream);
 
             while (in.hasNextLine()) {
-                String[] student = in.nextLine().split(",");
-                addStudent(f.nazivFakulteta, Student.studentFactory(student[0], student[1], Integer.parseInt(student[2]), 1));
+                Student student = new StudentBachelor(in.nextLine());
+                addStudent(f.nazivFakulteta, student);
 
             }
         } catch (FileNotFoundException e) {
@@ -489,8 +489,8 @@ public class Application {
             Scanner in = new Scanner(stream);
 
             while (in.hasNextLine()) {
-                String[] student = in.nextLine().split(",");
-                addStudent(f.nazivFakulteta, Student.studentFactory(student[0], student[1], Integer.parseInt(student[2]), 2));
+                Student student = new StudentMaster(in.nextLine());
+                addStudent(f.nazivFakulteta, student);
             }
 
         } catch (FileNotFoundException e) {
