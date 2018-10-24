@@ -347,9 +347,8 @@ public class Application {
     }
 
 
-    public static Student ucitaj(PrintStream out, Scanner in){
-
-
+    public static Student ucitajMaster(PrintStream out, Scanner in) {
+        out.println("Master: ");
         out.println("Ime?");
         String name = in.nextLine();
         out.println("Prezime?");
@@ -357,12 +356,23 @@ public class Application {
         out.println("Index?");
         int index = in.nextInt();
         in.nextLine();
-        out.println("Ciklus?");
-        int ciklus = in.nextInt();
+
+        String studentString = String.format("%s,%s,%d", name, lastName, index);
+        return new StudentMaster(studentString);
+    }
+
+    public static Student ucitajBachelor(PrintStream out, Scanner in) {
+        out.println("Bachelor: ");
+        out.println("Ime?");
+        String name = in.nextLine();
+        out.println("Prezime?");
+        String lastName = in.nextLine();
+        out.println("Index?");
+        int index = in.nextInt();
         in.nextLine();
 
-        String studentString = String.format("%s,%s,%d,%d", name, lastName, index, ciklus);
-        return new StudentMaster(studentString);
+        String studentString = String.format("%s,%s,%d", name, lastName, index);
+        return new StudentBachelor(studentString);
     }
 
 
@@ -373,15 +383,16 @@ public class Application {
         Scanner g = new Scanner(System.in);
 
 
-
-       StudentBachelor s = new StudentBachelor("J", "O", 100);
+        StudentBachelor s = new StudentBachelor("J", "O", 100);
 
         System.out.println(String.format("Saving s, save file - %s", s));
         s.load(s.save());
 
-       System.out.println(String.format("%s", s));
+        System.out.println(String.format("%s", s));
 
-       ucitaj(out, in).save();
+        ucitajMaster(out, in).save();
+
+        ucitajBachelor(out, in).save();
 
 /*
         while (true) {
@@ -459,10 +470,6 @@ public class Application {
         }
 
         */
-
-
-
-
 
 
     }
