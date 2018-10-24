@@ -380,6 +380,7 @@ public class Application {
             stream = new PrintStream("studentsBachelor.txt");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+            return;
         }
 
         for (int i = 0; i < fakultet.length; i++) {
@@ -398,6 +399,7 @@ public class Application {
             stream = new PrintStream("studentsMaster.txt");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+            return;
         }
 
         for (int i = 0; i < fakultet.length; i++) {
@@ -408,6 +410,12 @@ public class Application {
             }
         }
 
+    }
+
+
+    public static void  saveAllStudents(){
+        saveAllBachelorStudents();
+        saveAllMasterStudents();
     }
 
     public static void main(String[] args) {
@@ -435,8 +443,7 @@ public class Application {
                             "13. Ispis svih predmeta na odsijeku\n" +
                             "14. Ispis svih studenata na predmetu\n" +
                             "15. Spasi sve Bachelor studente\n" +
-                            "16. Spasi sve Master studente\n" +
-                            "17. Izlaz\n");
+                            "16. Izlaz\n");
             try {
                 int choice = g.nextInt();
                 g.nextLine();
@@ -483,12 +490,9 @@ public class Application {
                         UiUtility.uiIspisiStudenteNaPredmetu(out, in);
                         break;
                     case 15:
-                        saveAllBachelorStudents();
+                        saveAllStudents();
                         break;
                     case 16:
-                        saveAllMasterStudents();
-                        break;
-                    case 17:
                         return;
                 }
             } catch (InputMismatchException e) {
