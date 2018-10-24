@@ -19,7 +19,7 @@ u sljedecem formatu:
 
 import java.util.Objects;
 
-class Fakultet {
+class Fakultet implements Saveable{
 
     String nazivFakulteta;
     Student[] students = new Student[0];
@@ -100,6 +100,16 @@ class Fakultet {
     @Override
     public int hashCode() {
         return Objects.hash(nazivFakulteta);
+    }
+
+    @Override
+    public String save() {
+        return getNazivFakulteta();
+    }
+
+    @Override
+    public void load(String saved) {
+        this.nazivFakulteta = saved;
     }
 }
 

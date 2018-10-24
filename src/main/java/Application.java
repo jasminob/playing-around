@@ -374,18 +374,41 @@ public class Application {
         out.println(saveData);
     }
 
-    public static void saveAllBachelorStudents() {
+    public static void saveFakultet(PrintStream out, Fakultet f) {
+        String saveData = f.save();
+        out.println(saveData);
+    }
+
+    public static void saveAllFakultet() {
+
         PrintStream stream = null;
         try {
-            stream = new PrintStream("studentsBachelor.txt");
+            stream = new PrintStream("fakultet.txt");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             return;
         }
 
         for (int i = 0; i < fakultet.length; i++) {
+            saveFakultet(stream, fakultet[i]);
+        }
+    }
+
+
+    public static void saveAllBachelorStudents() {
+
+        for (int i = 0; i < fakultet.length; i++) {
             for (int j = 0; j < fakultet[i].students.length; j++) {
                 if (fakultet[i].students[j].getCiklus() == 1) {
+
+                    PrintStream stream = null;
+                    try {
+                        stream = new PrintStream("studentMaster" + fakultet[i].nazivFakulteta.toUpperCase() + ".txt");
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                        return;
+                    }
+
                     saveStudent(stream, fakultet[i].students[j]);
                 }
             }
@@ -394,16 +417,18 @@ public class Application {
     }
 
     public static void saveAllMasterStudents() {
-        PrintStream stream = null;
-        try {
-            stream = new PrintStream("studentsMaster.txt");
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            return;
-        }
+
 
         for (int i = 0; i < fakultet.length; i++) {
             for (int j = 0; j < fakultet[i].students.length; j++) {
+
+                PrintStream stream = null;
+                try {
+                    stream = new PrintStream("studentMaster" + fakultet[i].nazivFakulteta.toUpperCase() + ".txt");
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                    return;
+                }
                 if (fakultet[i].students[j].getCiklus() == 2) {
                     saveStudent(stream, fakultet[i].students[j]);
                 }
@@ -413,9 +438,10 @@ public class Application {
     }
 
 
-    public static void  saveAllStudents(){
+    public static void saveFiles() {
         saveAllBachelorStudents();
         saveAllMasterStudents();
+        saveAllFakultet();
     }
 
     public static void main(String[] args) {
@@ -442,8 +468,9 @@ public class Application {
                             "12. Ispis svih studenata na odsijeku\n" +
                             "13. Ispis svih predmeta na odsijeku\n" +
                             "14. Ispis svih studenata na predmetu\n" +
-                            "15. Spasi sve Bachelor studente\n" +
-                            "16. Izlaz\n");
+                            "15. Sacuvaj podatke\n" +
+                            "16. Ucitaj sve studente iz datoteke\n" +
+                            "17. Izlaz\n");
             try {
                 int choice = g.nextInt();
                 g.nextLine();
@@ -490,9 +517,11 @@ public class Application {
                         UiUtility.uiIspisiStudenteNaPredmetu(out, in);
                         break;
                     case 15:
-                        saveAllStudents();
+                        saveFiles();
                         break;
                     case 16:
+                        break;
+                    case 17:
                         return;
                 }
             } catch (InputMismatchException e) {
