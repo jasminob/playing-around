@@ -18,10 +18,7 @@ u sljedecem formatu:
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.PrintStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -407,7 +404,7 @@ public class Application {
 
                     PrintStream stream = null;
                     try {
-                        stream = new PrintStream("studentBachelor   " + fakultet[i].nazivFakulteta.toUpperCase() + ".txt");
+                        stream = new PrintStream("studentBachelor" + fakultet[i].nazivFakulteta.toUpperCase() + ".txt");
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                         return;
@@ -448,7 +445,7 @@ public class Application {
         saveAllFakultet();
     }
 
-    public static void loadFile() {
+    public static void loadFakultet() {
         fakultet = new Fakultet[0];
 
 
@@ -457,7 +454,9 @@ public class Application {
             Scanner in = new Scanner(stream);
 
             while (in.hasNextLine()) {
-                addFakultet(new Fakultet(in.nextLine()));
+                Fakultet fakultet = new Fakultet(in.nextLine());
+                addFakultet(fakultet);
+                ucitajStudente(fakultet);
             }
 
 
@@ -468,8 +467,52 @@ public class Application {
 
     }
 
-    public static void main(String[] args) {
+    public static void ucitajStudente(Fakultet f) {
 
+
+        try {
+            FileInputStream stream = new FileInputStream("studentBachelor" + f.nazivFakulteta.toUpperCase() + ".txt");
+            Scanner in = new Scanner(stream);
+
+            while (in.hasNextLine()) {
+                String[] student = in.nextLine().split(",");
+                addStudent(f.nazivFakulteta, Student.studentFactory(student[0], student[1], Integer.parseInt(student[2]), 1));
+
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return;
+        }
+
+        try {
+            FileInputStream stream = new FileInputStream("studentMaster" + f.nazivFakulteta.toUpperCase() + ".txt");
+            Scanner in = new Scanner(stream);
+
+            while (in.hasNextLine()) {
+                String[] student = in.nextLine().split(",");
+                addStudent(f.nazivFakulteta, Student.studentFactory(student[0], student[1], Integer.parseInt(student[2]), 2));
+            }
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return;
+        }
+    }
+
+
+    public static String ispisiStudenteNaFak(Fakultet f) {
+
+        String buffer = new String();
+        for (int i = 0; i < fakultet.length; i++) {
+            for (int j = 0; j < fakultet[i].students.length; j++) {
+                buffer += "Student: " + fakultet[i].students[j].getFirstName() + "\n";
+            }
+        }
+        return buffer;
+    }
+
+
+    public static void main(String[] args) {
 
         Scanner in = new Scanner(System.in);
         PrintStream out = System.out;
@@ -544,7 +587,7 @@ public class Application {
                         saveFiles();
                         break;
                     case 16:
-                        loadFile();
+                        loadFakultet();
                         break;
                     case 17:
                         return;
